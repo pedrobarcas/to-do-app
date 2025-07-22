@@ -1,0 +1,200 @@
+:root{
+    --main-background: #080808;
+    --task-background: #212121;
+    --button-background: #767676;
+    --main-color: #778CDD;
+    --setup-background-color: black;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+body{
+    display: flex;
+    background-color: var(--main-background);
+    color: white;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-content{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--task-background);
+    row-gap: 10px;
+    width: 80vw;
+    max-width: 540px;
+    border-radius: 10px;
+
+}
+
+.main-header{
+    display: flex;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-family: 'Arial', sans-serif;
+    color: var(--main-color);
+}
+
+.main-header h1{
+    color: white;
+    align-items: flex-start;
+    justify-content: start;
+}
+
+.main-tasks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    max-height: 60vh; /* Limita a altura para caber várias tasks */
+    overflow-y: auto; /* Scroll interno */
+    width: 100%;
+    padding-bottom: 5rem; /* Espaço para o botão de adicionar tarefa */
+}
+
+.tasks {
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    background-color: var(--task-background);
+    align-items: center;
+    font-family: 'Arial', sans-serif;
+    padding: 0.5rem 0.8rem;
+    color: #CCCCCC;
+    width: 95%;
+    gap: 10px;
+    min-height: 3rem;
+    border-radius: 5px;
+    margin-bottom: 0.5rem; /* Espaço entre tasks */
+    word-break: break-word; /* Quebra texto longo */
+}
+
+.task-checkbox{
+    width: 1rem;
+    height: 1rem;
+    border: 3px solid;
+}
+
+.main-form{
+    display: flex;
+    justify-content: center;
+}
+
+.content-form{
+    display: flex;
+    gap: 1rem;
+}
+
+.main-form input{
+    background-color: transparent;
+    border: solid 1px;
+    border-radius: 1px;
+    color: white;
+    width: 18rem;
+    height: 2rem;
+}
+
+.main-form button{
+    background-color: #778CDD;
+    color: white;
+    width: 2rem;
+    border-radius: 10px;
+    border: none;
+
+}
+
+
+.main-form input:focus{
+    outline-color: #778CDD;
+}
+
+.add-task{
+    display: none;
+}
+
+
+@media (max-width: 480px){
+    .main-header h1{
+        color: var(--main-color);
+        font-size: 1.6rem;
+    }
+
+    .main-content{
+        background-color: transparent;
+        height: 100vh;
+        width: 100vw;
+        padding: 0.5rem;
+        border-radius: 0;
+    }
+
+    .main-tasks{
+        height: 100vh;           /* Ocupa toda a altura da tela */
+        max-height: none;        /* Remove limite */
+        padding-bottom: 6rem;    /* Espaço para o botão */
+        width: 100vw;
+        overflow-y: auto;        /* Scroll interno */
+    }
+
+    .tasks{
+        width: 98vw;
+        min-height: 2.5rem;
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+        padding: 0.5rem 0.5rem;
+    }
+
+    .main-form{
+        display: none;
+        position: fixed;
+        width: 100vw;
+        bottom: 0;
+        left: 0;
+        justify-content: center;
+        background-color: var(--task-background);
+        z-index: 10;
+        padding: 0.5rem 0;
+    }
+
+    .content-form{
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        height: 2rem;
+        background-color: var(--task-background);
+        padding: 0 10px;
+        display: flex;
+    }
+
+    .content-form button{
+        width: 2rem;
+        height: 2rem;
+        background-color: var(--button-background);
+    }
+
+    .add-task{
+        display: flex;
+        position: fixed;
+        bottom: 6rem;
+        right: 5vw;
+        display: flex;
+        z-index: 20;       
+    }
+
+    .add-task button{
+        font-family: 'Arial', sans-serif;
+        width: 2.5rem;
+        height: 2.5rem;
+        border: none;
+        border-radius: 50%;
+        font-size: 2rem;
+        background-color: var(--main-color);
+    }
+}
