@@ -8,27 +8,43 @@
     <meta name="author" content="Pedro Barcas (GitHub: github.com/pedrobarcas)">
     <meta name="keywords" content="to-do, list, application, javascript, web development">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style-mobile.css">
+    <link rel="stylesheet" href="themes.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>To-do list</title>
 </head>
 <body>
-    <div class="main-content">
+    <section class="main-content">
         <header class="main-header">
             <h1>Tarefas</h1>
         </header>
         
-        <footer class="main-form">
+        <div class="main-form">
             <div class="content-form">
                 <input type="text" placeholder="Your task" id="task">
                 <button onclick="addTask()"><span class="fa-solid fa-arrow-up"></span></button>
             </div>
 
-        </footer>
+        </div>
+        
+        <div class="main-tasks">
+        </div>
 
-        <section class="main-tasks">
-        </section>
+        <div class="main-drop-down-task">
+            <button onclick="showCompletedTasks()" id="button-completed-tasks">
+                Concluidas <span class="fa-solid fa-chevron-right"></span>
+            </button>
+    
+            <div class="drop-down-task main-tasks">
+            </div>
+    
+        </div>
 
-    </div>
+    </section>
+    
+
+    
+</div>
     <div class="add-task">
         <button onclick="showForm()">+</button>
     </div>
