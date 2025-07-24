@@ -71,6 +71,7 @@ body{
     color: #CCCCCC;
     width: 95%;
     gap: 10px;
+    height: auto;
     min-height: 3rem;
     border-radius: 5px;
     margin-bottom: 0.5rem; /* Espaço entre tasks */
@@ -81,6 +82,29 @@ body{
     width: 1rem;
     height: 1rem;
     border: 3px solid;
+}
+
+.main-tool-bar{
+    display: none;
+    width: auto;
+    height: auto;
+    padding-left: 2rem;
+}
+
+.tool-bar{
+    width: auto;
+    height: auto;
+    display: flex;
+    gap: 10px;
+}
+
+.tool-bar button{
+    background-color: transparent;
+    border: none;
+}
+
+.tasks:hover .main-tool-bar{
+    display: flex;
 }
 
 .main-form{
@@ -122,6 +146,11 @@ body{
 
 
 @media (max-width: 480px){
+
+    .main-header{
+        justify-content: flex-start;
+    }
+
     .main-header h1{
         color: var(--main-color);
         font-size: 1.6rem;
