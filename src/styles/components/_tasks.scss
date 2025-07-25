@@ -1,0 +1,97 @@
+.main-tasks,
+.drop-down-task.main-tasks {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.7rem;
+    width: 95%;
+    padding-right: 0.3rem;
+    margin-bottom: 0.5rem;
+    /* Removido: max-height, min-height, overflow-y */
+}
+
+.drop-down-task.main-tasks {
+    background: var(--task-background);
+    border-radius: 0 0 10px 10px;
+    margin-bottom: 0.5rem;
+    display: none; /* Mostra via JS */
+    /* Removido: max-height, min-height, overflow-y */
+}
+
+.tasks {
+    display: flex;
+    align-items: center;
+    background: var(--task-background);
+    border-radius: 5px;
+    padding: 0.7rem 1rem;
+    color: #ccc;
+    width: 95%;
+    min-height: 3rem;
+    gap: 10px;
+    word-break: break-word;
+    box-shadow: 0 1px 4px #0004;
+}
+
+.task-checkbox {
+    width: 1.1rem;
+    height: 1.1rem;
+    accent-color: var(--main-color);
+    margin-right: 0.7rem;
+}
+
+.task-name {
+    flex: 1;
+    font-size: 1rem;
+    color: white;
+    word-break: break-word;
+}
+
+.tasks:hover .main-tool-bar{
+    display: flex;
+}
+
+.main-tool-bar {
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+
+    button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.2rem;
+        font-size: 1.2rem;
+    }
+
+    &button:active {
+        transform: scale(0.95);
+}
+
+}
+
+.main-drop-down-task {
+    width: 100%;
+    margin-bottom: 1rem;
+
+    button {
+        background: transparent;
+        border: none;
+        font-size: 1.1rem;
+        color: var(--main-color);
+        width: 100%;
+        font-size: 0.8rem;
+        text-align: left;
+        padding: 0.8rem 1rem;
+        cursor: pointer;
+        outline: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: background 0.2s;
+    }
+
+    &button:hover {
+        background: #222;
+    }
+}

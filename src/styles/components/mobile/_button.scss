@@ -1,0 +1,18 @@
+.add-task {
+    position: fixed;
+    bottom: 1rem;
+    right: 1vw;
+    display: flex;
+    z-index: 20;
+
+    button {
+        font-family: 'Arial', sans-serif;
+        width: 3rem;
+        height: 3rem;
+        border: none;
+        border-radius: 50%;
+        font-size: 2rem;
+        background-color: var(--main-color);
+        color: white;
+    }
+}
