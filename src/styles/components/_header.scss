@@ -1,11 +1,6 @@
 .main-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    h1 {
-        color: var(--main-color);
-        font-size: 2rem;
-        font-weight: bold;
-    }
+  justify-content: flex-start;
+  h1 {
+    font-size: 1.5rem;
+  }
 }

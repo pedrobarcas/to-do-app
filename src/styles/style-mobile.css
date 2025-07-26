@@ -1,10 +1,3 @@
-.main-header {
-  justify-content: flex-start;
-}
-.main-header h1 {
-  font-size: 1.5rem;
-}
-
 .main-form {
   display: none;
   position: fixed;
@@ -49,12 +42,36 @@
     align-items: flex-start;
     justify-content: flex-start;
   }
+  .main-header {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    z-index: 1000;
+    transition: all 0.3s ease;
+  }
+  .main-header h1 {
+    color: var(--main-color);
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  header.shrink {
+    display: flex;
+    position: fixed;
+    width: 100%;
+    height: 3rem;
+    background-color: var(--task-background);
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2666666667);
+  }
   .main-content {
     width: 100vw;
     min-height: 100vh;
     max-width: 100vw;
     border-radius: 0;
-    padding: 0.5rem 0.2rem 0 0.2rem;
+    padding: 0;
     box-shadow: none;
     overflow-x: hidden;
   }

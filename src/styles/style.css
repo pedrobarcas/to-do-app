@@ -92,14 +92,10 @@
 }
 
 .main-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
 }
 .main-header h1 {
-  color: var(--main-color);
-  font-size: 2rem;
-  font-weight: bold;
+  font-size: 1.5rem;
 }
 
 .main-form {
