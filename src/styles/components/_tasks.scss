@@ -4,12 +4,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 0.7rem;
+    gap: 0.2rem;
     width: 95%;
     padding-right: 0.3rem;
     margin-bottom: 0.5rem;
     /* Removido: max-height, min-height, overflow-y */
 }
+
 
 .drop-down-task.main-tasks {
     background: var(--task-background);
