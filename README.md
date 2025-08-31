@@ -1,11 +1,13 @@
 # To-do List
 
-Uma aplicação web simples de lista de tarefas (to-do) feita em HTML, CSS e JavaScript puro.
+Uma aplicação web de lista de tarefas (to-do) inspirado (copiado) da Microsoft to-do feita em HTML, CSS e JavaScript puro, por mim mesmo.
 
 ## Funcionalidades
 
-- Adicione tarefas rapidamente
-- Marque tarefas como concluídas (checkbox)
+- Adicione blocos de tarefas
+- Adicione tarefas rapidamente e as edite logo após sua criação
+- Marque tarefas como concluídas
+- Diferentes temas para você escolher
 - Remova tarefas individualmente
 - Interface responsiva para desktop e mobile
 - As tarefas são salvas no navegador (localStorage)

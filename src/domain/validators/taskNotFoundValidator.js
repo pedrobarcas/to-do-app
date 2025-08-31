@@ -1,5 +1,5 @@
 import { Validator } from "./validator";
-import { TaskNotFound } from "../exceptions/taskNotFound";
+import { TaskNotFound } from "../../domain/exceptions/taskNotFound";
 
 export class TaskNotFoundValidator extends Validator{
     validate(task){

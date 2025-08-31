@@ -1,0 +1,11 @@
+src/
+ ├── domain/          # Regras de negócio (Entidades + Serviços)
+ │   ├── Task.js
+ │   └── TaskService.js
+ ├── infrastructure/  # Implementações técnicas (storage, api, etc.)
+ │   └── TaskLocalStorageRepository.js
+ ├── application/     # Orquestração (Repository)
+ │   └── TaskRepository.js
+ ├── ui/              # Interface (DOM)
+ │   └── TaskUI.js
+ └── index.js         # Composition Root (injeção de dependências e start da app)

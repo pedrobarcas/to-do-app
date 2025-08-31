@@ -1,5 +1,5 @@
 import { Validator } from "./validator";
-import { MaximumCharactersExceeded } from "../exceptions/";
+import { MaximumCharactersExceeded } from "../exceptions";
 
 export class DescriptionExceededValidator extends Validator {
     validate(task) {

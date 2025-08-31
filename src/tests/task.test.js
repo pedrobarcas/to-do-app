@@ -1,7 +1,10 @@
-import { TaskNotFoundValidator } from "../dist/validators/taskNotFoundValidator.js";
-import { Task, TaskFactory, TaskRepository, TaskService, TaskLocalStorageRepository} from "./../dist/task.js";
-import { NameExceededValidator, DescriptionExceededValidator, TaskDataValidator, TaskIDNotSend, TaskNotFound } from "./../dist/validators";
-
+import { Task } from "../domain/task.js";
+import { TaskFactory } from "../domain/taskFactory.js";
+import { TaskRepository } from "../application/taskRepository.js";
+import { TaskService } from "../domain/taskService.js";
+import { TaskLocalStorageRepository } from "../infrastructure/taskLocalStorageRepository.js";
+import { NameExceededValidator, DescriptionExceededValidator, TaskDataValidator, TaskNotFoundValidator} from "../domain/validators/index.js";
+import { TaskIDNotSend } from "../domain/exceptions/taskIDNotSend.js";
 describe("Testando Tasks", () => {
     let repository;
     let service;

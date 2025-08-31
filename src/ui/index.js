@@ -1,9 +1,8 @@
-import { Task } from "./task.js";
 import { TaskUi } from "./taskUi.js";
 import { FormUi } from "./taskUi.js";
 import { HeaderUi } from "./taskUi.js";
 import { MockupUi } from "./taskUi.js";
-import { UiElements, TaskElements } from "./uiElements.js";
+import { UiElements } from "./uiElements.js";
 
 
 const taskUi = new TaskUi()
@@ -40,17 +39,17 @@ window.addEventListener('scroll', () => {
 const completedDisplay = window.getComputedStyle(UiElements.completed_tasks).display;
 
 if (!UiElements.main_tasks.innerHTML && completedDisplay === 'none') {
-    MockupUi.showMockup();
-} else {
+    MockupUi.showMockup()}
+    
+else {
     MockupUi.hideMockup();
 }
 
 UiElements.button_completed_tasks.addEventListener('click', () => {
-    console.log(UiElements.main_tasks.innerHTML)
-    console.log(UiElements.completed_tasks.style.display)
     if (!UiElements.main_tasks.innerHTML && UiElements.completed_tasks.style.display == 'none' || !UiElements.completed_tasks.style.display){
         MockupUi.showMockup()
     }
+    
     else{
         MockupUi.hideMockup()
 }})

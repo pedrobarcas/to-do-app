@@ -139,6 +139,9 @@
   #settings{
     position: relative;
     font-size: 1.5rem;
+    width: 10px;
+    height: 10px;
+    background-color: white;
 
   }
 

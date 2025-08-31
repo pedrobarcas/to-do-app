@@ -1,6 +1,9 @@
 import { UiElements, MockupElements} from "./uiElements.js";
-import {NameExceededValidator} from './validators'
-import { TaskFactory, TaskService, TaskRepository, TaskLocalStorageRepository} from "./task.js";
+import {NameExceededValidator} from '../domain/validators/index.js';
+import { TaskService } from "../domain/taskService.js";
+import { TaskFactory } from "../domain/taskFactory.js";
+import { TaskRepository } from "../application/taskRepository.js";
+import { TaskLocalStorageRepository } from "../infrastructure/taskLocalStorageRepository.js";
 
 export class HeaderUi{
     static showDropDown(){
@@ -10,8 +13,9 @@ export class HeaderUi{
 
 export class MockupUi{
     static showMockup(){
-
+        console.log('aaaaaaaaaaaasavaa')
         if (MockupElements.mockup.innerHTML == ''){
+            console.log('dskl efnojmqwzhuer')
             const main_mockup_task = document.createElement('div');
             main_mockup_task.className = 'main-mockup-task';
     
@@ -87,7 +91,6 @@ export class TaskUi{
             this.createTemplateTask(task, task.completed)
         })
         
-      
     }
 
     completedTask(task){
