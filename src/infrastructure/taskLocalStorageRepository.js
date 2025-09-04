@@ -1,7 +1,8 @@
 export class TaskLocalStorageRepository {
     
     load(){
-        return Object.entries(localStorage)
+        const tasks = Object.entries(localStorage)
+        return tasks.map(task => JSON.parse(task[1]));
     }    
     save(task) {
         localStorage.setItem(task.id, JSON.stringify(task));

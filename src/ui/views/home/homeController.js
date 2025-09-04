@@ -1,9 +1,4 @@
-import { UiElements, MockupElements} from "./uiElements.js";
-import {NameExceededValidator} from '../domain/validators/index.js';
-import { TaskService } from "../domain/taskService.js";
-import { TaskFactory } from "../domain/taskFactory.js";
-import { TaskRepository } from "../application/taskRepository.js";
-import { TaskLocalStorageRepository } from "../infrastructure/taskLocalStorageRepository.js";
+import { UiElements, MockupElements} from "./elements";
 
 export class HeaderUi{
     static showDropDown(){
@@ -13,9 +8,7 @@ export class HeaderUi{
 
 export class MockupUi{
     static showMockup(){
-        console.log('aaaaaaaaaaaasavaa')
         if (MockupElements.mockup.innerHTML == ''){
-            console.log('dskl efnojmqwzhuer')
             const main_mockup_task = document.createElement('div');
             main_mockup_task.className = 'main-mockup-task';
     
@@ -25,6 +18,7 @@ export class MockupUi{
             const mockup_img = document.createElement('img');
             mockup_img.setAttribute('src', './public/to-do.png');
             mockup_img.style.width = '150%'
+            mockup_img.setAttribute('alt', 'imagem ilustrativa de conclusão de todas as tarefas')
     
             const text_task = document.createElement('p');
             text_task.textContent = 'As tarefas serão mostradas aqui se não fizerem parte de listas criadas por você';
@@ -55,53 +49,38 @@ export class FormUi{
 }
 
 export class TaskUi{
-    constructor(){
-        this.service = new TaskService([], [], [new NameExceededValidator()])
-        this.storage = new TaskLocalStorageRepository();
-        this.repository = new TaskRepository(this.service, this.storage);
+    constructor(viewModel){
+        this.viewModel = viewModel
     }
 
     showCompletedTasks(){
-        const completed_tasks = document.querySelector('.drop-down-task');
-        
-        if (completed_tasks.style.display == 'none' || completed_tasks.style.display == '') {
-            completed_tasks.style.display = 'flex';
+        if (UiElements.completed_tasks.style.display == 'none' || UiElements.completed_tasks.style.display == '') {
+            UiElements.completed_tasks.style.display = 'flex';
             UiElements.button_completed_tasks.innerHTML = `<span class="fa-solid fa-chevron-down"></span> Concluídas`;
         }
 
         else {
-            completed_tasks.style.display = 'none';
+            UiElements.completed_tasks.style.display = 'none';
             UiElements.button_completed_tasks.innerHTML = `<span class="fa-solid fa-chevron-right"></span> Concluídas`;
         }
     }
-    
-    createTask(){
-        const task = TaskFactory.createTask(UiElements.task.value)
-        return this.repository.save(task)
-    }
 
-    renderTasks(completed = false) {
+    renderTask(completed = false){
         if (!completed) UiElements.main_tasks.innerHTML = '';
-        else UiElements.completed_tasks.innerHTML = '';      
+        else UiElements.completed_tasks.innerHTML = '';
 
-        const tasks = this.repository.load()
-        const parsedTasks = tasks.map(task => JSON.parse(task[1]));
-
-        parsedTasks.forEach(task => {
+        this.viewModel.loadTasks().forEach(task => {
             this.createTemplateTask(task, task.completed)
         })
-        
-    }
-
-    completedTask(task){
-        this.repository.completed(task)
     }
 
     createTemplateTask(task, completed = false){
-        const task_class = document.createElement('div');
+        const task_class = document.createElement('ul');
         task_class.className = `tasks task${task.id}`;
+
         const completed_tasks = document.createElement('button');
         completed_tasks.className = 'task-checkbox';
+
         const task_name_class = document.createElement('a');
         task_name_class.className = 'task-name';
         task_name_class.textContent = task.name
@@ -109,21 +88,20 @@ export class TaskUi{
         if (task.completed)
             task_name_class.style.textDecoration = 'line-through';
 
-        const main_tool_bar = document.createElement('div');
         task_class.appendChild(completed_tasks);
         task_class.appendChild(task_name_class);
-        task_class.appendChild(main_tool_bar);
+
         if (!completed) UiElements.main_tasks.appendChild(task_class)
+
         else {
             UiElements.completed_tasks.appendChild(task_class);
             completed_tasks.style.backgroundColor = 'var(--main-color)'
             completed_tasks.innerHTML = `<span class="fa-solid fa-check"></span>`
-           
             completed_tasks.style.border = 'none'
         }
 
         completed_tasks.addEventListener('click', (event) => {
-            this.completedTask(task)
+            this.viewModel.completedTask(task)
             location.reload()
         })
     }

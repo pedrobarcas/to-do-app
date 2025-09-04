@@ -5,7 +5,7 @@ export class TaskRepository {
     }
     
     load(){
-        return this.repository.load();
+        return this.repository.load()
     }
 
     completed(task){

@@ -1,0 +1,23 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    overflow-x: hidden;
+    font-family: var(--main-font);
+}
+
+.hide{
+    display: none;
+}
+
+ul, ol{
+    list-style: none;
+    margin: 0;
+}
