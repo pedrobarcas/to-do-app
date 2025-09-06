@@ -1,7 +1,15 @@
 import { taskUi, taskViewModel} from "../../index.js";
-import { UiElements } from "./elements.js";
-import { FormUi, HeaderUi, MockupUi } from "./homeController.js";
+import { UiElements, MockupElements } from "./elements.js";
+import { FormUi, HeaderUi } from "./homeController.js";
+import { MockupUi } from "../../components/mockup.jsx";
 
+
+function Home(){
+    return (
+        <div>
+        </div>
+    )
+}
 taskUi.renderTask(false);
 
 UiElements.add_task.addEventListener('click', () => {
@@ -35,18 +43,21 @@ window.addEventListener('scroll', () => {
 
 const completedDisplay = window.getComputedStyle(UiElements.completed_tasks).display;
 
-if (!UiElements.main_tasks.innerHTML && completedDisplay === 'none') {
-    MockupUi.showMockup()}
-    
-else {
-    MockupUi.hideMockup();
-}
+window.addEventListener('load', () => {
+    if (!UiElements.main_tasks.innerHTML && completedDisplay === 'none') {
+        MockupElements.mockup.appendChild(
+        MockupUi.showMockup())
+    }
+        
+    else MockupUi.hideMockup();
+})
 
 UiElements.button_completed_tasks.addEventListener('click', () => {
     if (!UiElements.main_tasks.innerHTML && UiElements.completed_tasks.style.display == 'none' || !UiElements.completed_tasks.style.display){
-        MockupUi.showMockup()
+        MockupElements.mockup.appendChild(
+            MockupUi.showMockup()
+        )
     }
     
-    else{
-        MockupUi.hideMockup()
-}});
+    else MockupUi.hideMockup()
+});

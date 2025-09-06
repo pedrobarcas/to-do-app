@@ -1,0 +1,107 @@
+.main-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+  font-size: 1.2rem;
+  color: var(--main-color);
+  margin: 0;
+  z-index: 1000;
+  transition: all 0.8s ease;
+  margin-bottom: 1rem;
+}
+
+.main-header h1 {
+  color: var(--main-color);
+  font-size: 1.7rem;
+  font-weight: bold;
+  transition: all 0.8s ease;
+}
+
+header.shrink {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  height: 3rem;
+  background-color: var(--task-background);
+  align-items: center;
+  box-shadow: 0 1px 4px #0004;
+}
+
+.main-content {
+  background-color: var(--main-background);
+  width: 100vw;
+  min-height: 100vh;
+  max-width: 100vw;
+  border-radius: 0;
+  box-shadow: none;
+  overflow-x: hidden;
+}
+
+.main-tasks,
+.drop-down-task.main-tasks {
+  display: flex;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: var(--main-background);
+  width: 100vw;
+  row-gap: 5px;
+  margin-bottom: 30px;
+}
+
+
+.drop-down-task{
+  flex-direction: column;
+  row-gap: 5px;
+}
+
+.drop-down-task{
+  display: none;
+}
+
+
+.main-form {
+  display: none;
+  position: fixed;
+  width: 100vw;
+  bottom: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  background: var(--task-background);
+  z-index: 10;
+  padding: 0.5rem 0;
+  border-radius: 0;
+}
+
+.content-form {
+  display: flex;
+  height: inherit;
+  width: inherit;
+  justify-content: space-between;
+  width: 100vw;
+}
+
+.main-form input {
+  height: 2.5rem;
+  min-height: auto;
+  width: 70vw;
+  background-color: transparent;
+  border: none;
+  color: var(--secondary-color);
+}
+
+.main-form input:focus{
+  outline: none;
+}
+
+.main-form button{
+  background-color: var(--border-color);
+  border: none;
+  height: 2rem;
+  width: 10%;
+  color: var(--secondary-color);
+  border-radius: 10px;
+}

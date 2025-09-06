@@ -1,0 +1,108 @@
+.tasks{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  height: 4rem;
+  background-color: var(--task-background);
+  width: 100%;
+  min-height: 2.5rem;
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
+.task-name {
+  color: var(--secondary-color);
+  opacity: 70%;
+}
+
+.tasks button{
+  height: 1.5rem;
+  width: 1.5rem;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  background-color: transparent;
+}
+
+
+.tasks button:hover{
+  background-color: var(--main-color);
+}
+
+#button-completed-tasks{
+  margin-left: 1rem;
+  background-color: transparent;
+  color: var(--main-color);
+  border: none;
+  font-size: 1rem;
+  margin-bottom: 5rem;
+}
+
+.main-settings{
+  position: relative;
+}
+
+#settings{
+  position: relative;
+  font-size: 1.5rem;
+  width: 10px;
+  height: 10px;
+
+  
+}
+
+.settings-drop-down{
+  display: flex;
+  padding: 10px;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  color: var(--secondary-color);
+  width: 10rem;
+  height: auto;
+  font-size: 1rem;
+  border-radius: 5px;
+  background-color: var(--settings-background) ;
+}
+
+.main-mockup-task{
+  display: flex;
+  width: 100vw;
+  height: 50vh;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.mockup-task{
+  display: flex;
+  width: 30%;
+  height: 50%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: var(--main-color);
+}
+
+.add-task {
+  position: fixed;
+  bottom: 1rem;
+  right: 3vw;
+  display: flex;
+  z-index: 20;
+}
+
+.add-task button {
+  font-family: 'Arial', sans-serif;
+  width: 3.7rem;
+  height: 3.7rem;
+  border: none;
+  border-radius: 50%;
+  font-size: 2.5rem;
+  background-color: var(--main-color);
+  font-family: var(--font-playfair);
+  font-weight: bold;
+  color: var(--setup-background-color);
+}

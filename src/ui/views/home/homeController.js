@@ -2,7 +2,7 @@ import { UiElements, MockupElements} from "./elements";
 
 export class HeaderUi{
     static showDropDown(){
-        UiElements.settings_drop_down.classList.toggle('hide')
+        UiElements.settings_drop_down.classList.toggle('is-hidden')
     }
 }
 
