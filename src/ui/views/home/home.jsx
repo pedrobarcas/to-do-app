@@ -1,15 +1,8 @@
 import { taskUi, taskViewModel} from "../../index.js";
 import { UiElements, MockupElements } from "./elements.js";
-import { FormUi, HeaderUi } from "./homeController.js";
+import { FormUi, HeaderUi } from "./homeUI.jsx";
 import { MockupUi } from "../../components/mockup.jsx";
 
-
-function Home(){
-    return (
-        <div>
-        </div>
-    )
-}
 taskUi.renderTask(false);
 
 UiElements.add_task.addEventListener('click', () => {

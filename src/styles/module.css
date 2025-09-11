@@ -1,4 +1,4 @@
-.tasks{
+.tasks {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -6,7 +6,7 @@
   border-radius: 5px;
   height: 4rem;
   background-color: var(--task-background);
-  width: 100%;
+  width: 97%;
   min-height: 2.5rem;
   font-size: 1rem;
   margin-bottom: 0;
@@ -17,7 +17,7 @@
   opacity: 70%;
 }
 
-.tasks button{
+.tasks button {
   height: 1.5rem;
   width: 1.5rem;
   border: 2px solid #ccc;
@@ -25,12 +25,11 @@
   background-color: transparent;
 }
 
-
-.tasks button:hover{
+.tasks button:hover {
   background-color: var(--main-color);
 }
 
-#button-completed-tasks{
+#button-completed-tasks {
   margin-left: 1rem;
   background-color: transparent;
   color: var(--main-color);
@@ -39,21 +38,19 @@
   margin-bottom: 5rem;
 }
 
-.main-settings{
+.main-settings {
   position: relative;
 }
 
-#settings{
+#settings {
   position: relative;
   font-size: 1.5rem;
   width: 10px;
   height: 10px;
-
-  
 }
 
-.settings-drop-down{
-  display: flex;
+.settings-drop-down {
+  display: none;
   padding: 10px;
   position: absolute;
   top: 100%;
@@ -63,10 +60,10 @@
   height: auto;
   font-size: 1rem;
   border-radius: 5px;
-  background-color: var(--settings-background) ;
+  background-color: var(--settings-background);
 }
 
-.main-mockup-task{
+.main-mockup-task {
   display: flex;
   width: 100vw;
   height: 50vh;
@@ -75,7 +72,7 @@
   text-align: center;
 }
 
-.mockup-task{
+.mockup-task {
   display: flex;
   width: 30%;
   height: 50%;
@@ -95,7 +92,7 @@
 }
 
 .add-task button {
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   width: 3.7rem;
   height: 3.7rem;
   border: none;

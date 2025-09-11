@@ -1,8 +1,12 @@
 import { defineConfig } from "vite";
 
 export default defineConfig({
-    esbuild: {
-        jsxFactory: "h",
-        jsxFragment: "Fragment"
-    }
-})
+  esbuild: {
+    jsxFactory: "h",
+    jsxFragment: "Fragment",
+  },
+
+  server: {
+    host: true,
+  },
+});

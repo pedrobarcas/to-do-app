@@ -39,8 +39,10 @@ header.shrink {
 }
 
 .main-tasks,
-.drop-down-task.main-tasks {
+.drop-down-task.main-tasks,
+.drop-down-task {
   display: flex;
+  margin: 0.5rem;
   flex-direction: column;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
@@ -51,16 +53,14 @@ header.shrink {
   margin-bottom: 30px;
 }
 
-
-.drop-down-task{
+.drop-down-task {
   flex-direction: column;
   row-gap: 5px;
 }
 
-.drop-down-task{
+.drop-down-task {
   display: none;
 }
-
 
 .main-form {
   display: none;
@@ -93,11 +93,11 @@ header.shrink {
   color: var(--secondary-color);
 }
 
-.main-form input:focus{
+.main-form input:focus {
   outline: none;
 }
 
-.main-form button{
+.main-form button {
   background-color: var(--border-color);
   border: none;
   height: 2rem;
