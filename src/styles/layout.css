@@ -7,25 +7,10 @@
   color: var(--main-color);
   margin: 0;
   z-index: 1000;
-  transition: all 0.8s ease;
-  margin-bottom: 1rem;
-}
-
-.main-header h1 {
-  color: var(--main-color);
   font-size: 1.7rem;
   font-weight: bold;
   transition: all 0.8s ease;
-}
-
-header.shrink {
-  display: flex;
-  position: fixed;
-  width: 100%;
-  height: 3rem;
-  background-color: var(--task-background);
-  align-items: center;
-  box-shadow: 0 1px 4px #0004;
+  margin-bottom: 1rem;
 }
 
 .main-content {
@@ -44,8 +29,6 @@ header.shrink {
   display: flex;
   margin: 0.5rem;
   flex-direction: column;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
   justify-content: center;
   background-color: var(--main-background);
   width: 100vw;
@@ -54,12 +37,9 @@ header.shrink {
 }
 
 .drop-down-task {
+  display: none;
   flex-direction: column;
   row-gap: 5px;
-}
-
-.drop-down-task {
-  display: none;
 }
 
 .main-form {

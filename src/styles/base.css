@@ -50,6 +50,19 @@ textarea {
   font: inherit;
 }
 
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+
+input[type="file"] {
+  display: none;
+}
+
 button {
   cursor: pointer;
+}
+
+hr {
+  border: 1px solid var(--settings-background);
 }

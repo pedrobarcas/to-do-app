@@ -21,8 +21,9 @@ export class FormUi {
 }
 
 export class TaskUi {
-  constructor(viewModel) {
-    this.viewModel = viewModel;
+  constructor(listViewModel, detailViewModel) {
+    this.listViewModel = listViewModel
+    this.detailViewModel = detailViewModel
   }
 
   showCompletedTasks() {
@@ -42,7 +43,7 @@ export class TaskUi {
     if (!completed) UiElements.main_tasks.innerHTML = "";
     else UiElements.completed_tasks.innerHTML = "";
 
-    this.viewModel.loadTasks().forEach((task) => {
+    this.listViewModel.loadTasks().forEach((task) => {
       this.createTemplateTask(task, task.completed);
     });
   }
@@ -57,7 +58,7 @@ export class TaskUi {
     }
 
     taskButton.addEventListener("click", (event) => {
-      this.viewModel.completedTask(task);
+      this.detailViewModel.completedTask(task);
       location.reload();
     });
   }

@@ -103,3 +103,20 @@
   font-weight: bold;
   color: var(--setup-background-color);
 }
+
+.form-input-box {
+  padding: 0 1rem;
+  display: flex;
+  gap: 1rem;
+  color: #929292;
+}
+
+.form-input-box input:focus {
+  outline: none;
+}
+
+.form-input {
+  border: none;
+  background-color: transparent;
+  color: #7e7e7e;
+}

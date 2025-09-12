@@ -1,5 +1,5 @@
 import { h } from "../../h";
-import { MockupElements } from "../views/home/elements";
+import { MockupElements } from "../views/taskList/elements";
 
 export class MockupUi{
     static showMockup(){
@@ -11,7 +11,6 @@ export class MockupUi{
                 </div>
             </div>
         )
-    
     }
 
     static hideMockup() {

@@ -8,15 +8,6 @@ body {
   color: #929292;
 }
 
-.tasks {
-  margin-bottom: 2rem;
-  font-size: 1.2rem;
-}
-
-hr {
-  border: 1px solid var(--settings-background);
-}
-
 .main-header {
   padding: 1rem 0.4rem;
   display: flex;
@@ -42,38 +33,12 @@ hr {
   justify-content: space-between;
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator {
-  display: none;
-  -webkit-appearance: none;
-}
-
 .main-infos-task {
   display: flex;
   flex-direction: column;
   row-gap: 2rem;
   width: 100%;
   height: 100%;
-}
-
-.form-input-box {
-  padding: 0 1rem;
-  display: flex;
-  gap: 1rem;
-  color: #929292;
-}
-
-.form-input-box input:focus {
-  outline: none;
-}
-
-input[type="file"] {
-  display: none;
-}
-
-.form-input {
-  border: none;
-  background-color: transparent;
-  color: #7e7e7e;
 }
 
 textarea {
