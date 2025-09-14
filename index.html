@@ -15,10 +15,11 @@
     />
 
     <link rel="stylesheet" href="src/styles/base.css" />
+    <link rel="stylesheet" href="./src/styles/module.css" />
     <link rel="stylesheet" href="src/styles/layout.css" />
-    <link rel="stylesheet" href="src/styles/module.css" />
     <link rel="stylesheet" href="src/styles/state.css" />
     <link rel="stylesheet" href="src/styles/theme.css" />
+    <link rel="stylesheet" href="src/styles/pages/taskDetail.css" />
 
     <link
       rel="stylesheet"
@@ -28,60 +29,57 @@
       referrerpolicy="no-referrer"
     />
 
-    <title>To-do list</title>
+    <title>Tela inicial</title>
   </head>
 
-  <body>
-    <main class="main-content">
-      <header class="main-header">
-        <h1>Tarefas</h1>
-        <div class="main-settings">
-          <div id="settings" class="fa-solid fa-ellipsis-vertical"></div>
-          <div class="settings-drop-down hide">
-            <p>
-              <span
-                class="fa-solid fa-palette"
-                aria-label="imagem ilustrativa de uma palheta artística"
-              ></span>
-              Alterar tema
-            </p>
-          </div>
-        </div>
-      </header>
+  <main class="main-content">
+    <header class="home__header">
+      <h1>Suas tarefas</h1>
+      <span class="fa-solid fa-magnifying-glass"></span>
+    </header>
 
-      <section class="main-form">
-        <div class="content-form">
-          <input type="text" placeholder="Sua tarefa" id="task" />
-          <button id="send-task">
-            <span
-              class="fa-solid fa-arrow-up"
-              aria-label="imagem ilustrativa de inclusão de uma tarefa"
-            ></span>
-          </button>
-        </div>
-      </section>
+    <section class="home__main-groups">
+      <div class="content-box">
+        <span
+          class="fa-regular fa-sun"
+          aria-label="Imagem ilustrativa do Sol"
+          style="color: #929292"
+        ></span>
+        <p>Meu Dia</p>
+      </div>
 
-      <ul class="main-tasks"></ul>
+      <div class="content-box">
+        <span
+          class="fa-regular fa-star"
+          aria-label="Imagem ilustrativa de uma estrela"
+          style="color: var(--pink)"
+        ></span>
+        <p>Importante</p>
+      </div>
 
-      <section class="main-drop-down-task">
-        <button id="button-completed-tasks">
-          <span
-            class="fa-solid fa-chevron-right"
-            aria-label="imagem indicadora de abre e fecha de uma seção"
-          ></span>
-          Concluídas
-        </button>
-
-        <ul class="drop-down-task"></ul>
-
-        <div class="mockup"></div>
-      </section>
-    </main>
-
-    <section class="add-task">
-      <button>+</button>
+      <a class="content-box" href="listTask.html">
+        <span
+          class="fa-solid fa-home"
+          aria-label="Imagem ilustrativa de uma casa"
+          style="color: var(--main-color)"
+        ></span>
+        <p>Tarefas</p>
+      </a>
     </section>
 
-    <script src="./src/ui/views/taskList/main.jsx" type="module"></script>
+    <section class="home__group">
+      <hr />
+    </section>
+
+    <footer class="todo__footer">
+      <div class="todo__footer-content">
+        <span class="fa-solid fa-plus"></span>
+        <p>Nova lista</p>
+      </div>
+    </footer>
+  </main>
+
+  <body>
+    <script src="./src/ui/views/taskDetail/main.jsx" type="module"></script>
   </body>
 </html>

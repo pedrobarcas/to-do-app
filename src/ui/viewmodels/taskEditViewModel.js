@@ -1,9 +1,11 @@
 export class TaskEditViewModel {
-  constructor(repository) {
+  constructor(repository, service) {
     this.repository = repository;
+    this.service = service;
   }
 
-  editTask(task, name = "", description = "", date = "") {
-    return this.repository.edit(task, name, description, date);
+  editTask(task, updates = {}) {
+    const updatedTask = this.service.edit(task, updates);
+    return this.repository.edit(updatedTask);
   }
 }

@@ -49,6 +49,11 @@ export class ListTaskView{
 
     const completedDisplay = window.getComputedStyle(this.UiElements.completed_tasks).display;
 
+    document.getElementById("changeThemeButton").addEventListener('click', () => {
+        console.log("aaaa")
+        this.UiElements.main_content.classList.toggle("light-theme")
+    });
+
     window.addEventListener('load', () => {
         if (!this.UiElements.main_tasks.innerHTML && completedDisplay === 'none') {
             this.MockupElements.mockup.appendChild(

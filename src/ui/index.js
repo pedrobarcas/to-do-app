@@ -1,8 +1,8 @@
 import { TaskUi } from "./views/taskList/listTaskUI.jsx";
+import { LocalStorageRepository } from "../infrastructure/LocalStorage.js";
 
 import { TaskService } from "./../domain/taskService.js";
 import { TaskRepository } from "./../application/taskRepository.js";
-import { TaskLocalStorageRepository } from "./../infrastructure/taskLocalStorageRepository.js";
 import { TaskFactory } from "../domain/taskFactory.js";
 import { QueryParams } from "../utils/getQueryParams.js";
 
@@ -13,10 +13,9 @@ import { TaskListViewModel } from "./viewmodels/taskListViewModel.js";
 import { TaskRemoveViewModel } from "./viewmodels/taskRemoveViewModel.js";
 
 const taskService = new TaskService([], [], []);
-const taskLocalStorageRepository = new TaskLocalStorageRepository();
 const taskRepository = new TaskRepository(
   taskService,
-  taskLocalStorageRepository
+  new LocalStorageRepository("task")
 );
 const queryParams = new QueryParams();
 const taskFactory = TaskFactory;
@@ -29,7 +28,10 @@ export const taskDetailViewModel = new TaskDetailViewModel(
   taskRepository,
   queryParams
 );
-export const taskEditViewModel = new TaskEditViewModel(taskRepository);
+export const taskEditViewModel = new TaskEditViewModel(
+  taskRepository,
+  taskService
+);
 export const taskListViewModel = new TaskListViewModel(taskRepository);
 export const taskRemoveViewModel = new TaskRemoveViewModel(taskRepository);
 

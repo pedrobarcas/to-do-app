@@ -17,8 +17,13 @@ export class TaskDetailView{
         const button_completed_task = document.querySelector(".task-checkbox");
         
         window.addEventListener("input", () => {
-            this.taskEditVM.editTask(task, name.value, anotations.value, date.value);
-        })
+            this.taskEditVM.editTask(task, {
+            name: name.value,
+            description: anotations.value,
+            date: date.value
+           });
+        });
+
         
         document.querySelector(".fa-trash").addEventListener("click", () => {
             this.taskRemoveVM.removeTask(task);

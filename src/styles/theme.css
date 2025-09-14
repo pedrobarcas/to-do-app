@@ -3,13 +3,32 @@
 
 :root {
   --main-background: #080808;
+  --secondary-background: #212121;
   --task-background: #212121;
   --button-background: #767676;
   --main-color: #778cdd;
   --secondary-color: white;
+  --hr-color: #303030;
   --border-color: #ccc;
   --settings-background: #303030;
   --setup-background-color: black;
+  --pink: #f2b7c1;
+
+  --main-font: "Roboto", sans-serif;
+  --font-playfair: "Playfair Display", serif;
+}
+
+.light-theme {
+  --main-background: #f9f9f9;
+  --secondary-background: #f5f5f5;
+  --task-background: #ffffff;
+  --button-background: #e0e0e0;
+  --main-color: #4a63c8;
+  --secondary-color: #1c1c1c;
+  --hr-color: #1c1c1c;
+  --border-color: #d1d1d1;
+  --settings-background: #f0f0f0;
+  --setup-background-color: #ffffff;
 
   --main-font: "Roboto", sans-serif;
   --font-playfair: "Playfair Display", serif;

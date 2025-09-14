@@ -64,5 +64,5 @@ button {
 }
 
 hr {
-  border: 1px solid var(--settings-background);
+  border: 1px solid var(--hr-color);
 }

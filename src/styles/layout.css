@@ -1,3 +1,26 @@
+footer {
+  display: flex;
+  width: 100vw;
+  position: absolute;
+  row-gap: 1rem;
+  top: 95%;
+}
+
+header {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  height: 3rem;
+  background-color: var(--task-background);
+  box-shadow: 0 1px 4px #0004;
+}
+
+.todo__footer-content {
+  display: flex;
+  gap: 1rem;
+  font-size: 1.2rem;
+}
+
 .main-header {
   display: flex;
   flex-direction: row;
@@ -11,6 +34,8 @@
   font-weight: bold;
   transition: all 0.8s ease;
   margin-bottom: 1rem;
+  background-color: transparent;
+  position: relative;
 }
 
 .main-content {
@@ -21,6 +46,7 @@
   border-radius: 0;
   box-shadow: none;
   overflow-x: hidden;
+  transition: all 0.3s ease-in-out;
 }
 
 .main-tasks,
@@ -34,6 +60,7 @@
   width: 100vw;
   row-gap: 5px;
   margin-bottom: 30px;
+  transition: all 0.3s ease-in-out;
 }
 
 .drop-down-task {
@@ -84,4 +111,23 @@
   width: 10%;
   color: var(--secondary-color);
   border-radius: 10px;
+}
+
+.home__main-groups {
+  margin-top: 4rem;
+  display: flex;
+  font-size: 1.2rem;
+  flex-direction: column;
+  row-gap: 1rem;
+  padding: 0.5rem;
+  color: var(--secondary-color);
+  margin-bottom: 1rem;
+}
+
+.home__header {
+  display: flex;
+  font-size: 1.5rem;
+  padding: 1rem;
+  justify-content: space-between;
+  align-items: center;
 }

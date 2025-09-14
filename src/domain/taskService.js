@@ -1,35 +1,18 @@
-export class TaskService {
+import { Service } from "./Service";
+
+export class TaskService extends Service {
   constructor(validatorsEdit = [], validatorsRemove = [], validatorsSave = []) {
-    this.validatorsEdit = validatorsEdit;
-    this.validatorsRemove = validatorsRemove;
-    this.validatorsSave = validatorsSave;
+    super(validatorsEdit, validatorsRemove, validatorsSave);
   }
 
-  validate(task, strategy) {
-    if (!Array.isArray(strategy)) {
-      throw new Error("Estratégia de validação inválida.");
-    }
-    strategy.forEach((v) => v.validate(task));
-  }
-
-  save(task) {
-    this.validate(task, this.validatorsSave);
-    return task;
-  }
-
-  edit(task, name = "", description = "", date = "") {
-    console.log(date);
+  edit(task, updates = {}) {
     this.validate(task, this.validatorsEdit);
 
-    if (name != null) task.name = name.trim();
-    if (description != null) task.description = description.trim();
-    if (date) task.date = date.trim();
+    const updatedTask = {
+      ...task,
+      ...updates,
+    };
 
-    return task;
-  }
-
-  remove(task) {
-    this.validate(task, this.validatorsRemove);
-    return task;
+    return updatedTask;
   }
 }

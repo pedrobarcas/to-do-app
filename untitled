@@ -1,0 +1,29 @@
+Planejamo de integração OneToMany nas tarefas.
+
+priemeira ideia:
+    Uma instância de um grupo guardando na tarefa ou um ID
+
+    prós: uma facil busca e mais simples de ser aplicado
+    contras: Alto acoplamento e dificl manutenção
+    contras: Quebra do OCP pois vamos modificar task
+
+segunda: 
+    Uma composição, onde cada task fica dentro de uma abstração de um grupo e task
+
+    prós: Dá para mover facilmente tasks de um grupo para outro
+    prós: baixo acoplamento
+
+
+exemplo: 
+
+    classe Task:
+        ...
+
+    classe Group:
+        id,
+        name,
+        type = [Meu dia, importantes, tarefas normais]
+        date_created,
+    
+    classe GroupRelatedTask:
+        tasks = []
