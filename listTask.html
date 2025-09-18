@@ -2,7 +2,10 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta name="description" content="A simple to-do list application" />
     <meta
@@ -33,34 +36,6 @@
 
   <body>
     <main class="main-content">
-      <header class="main-header">
-        <h1>Tarefas</h1>
-        <div class="main-settings">
-          <div id="settings" class="fa-solid fa-ellipsis-vertical"></div>
-          <div class="settings-drop-down">
-            <p id="changeThemeButton">
-              <span
-                class="fa-solid fa-palette"
-                aria-label="imagem ilustrativa de uma palheta artística"
-              ></span>
-              Alterar tema
-            </p>
-          </div>
-        </div>
-      </header>
-
-      <section class="main-form">
-        <div class="content-form">
-          <input type="text" placeholder="Sua tarefa" id="task" />
-          <button id="send-task">
-            <span
-              class="fa-solid fa-arrow-up"
-              aria-label="imagem ilustrativa de inclusão de uma tarefa"
-            ></span>
-          </button>
-        </div>
-      </section>
-
       <ul class="main-tasks"></ul>
 
       <section class="main-drop-down-task">
@@ -77,10 +52,6 @@
         <div class="mockup"></div>
       </section>
     </main>
-
-    <section class="add-task">
-      <button>+</button>
-    </section>
 
     <script src="./src/ui/views/taskList/main.jsx" type="module"></script>
   </body>

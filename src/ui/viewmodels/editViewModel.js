@@ -1,11 +1,11 @@
-export class TaskEditViewModel {
+export class EditViewModel {
   constructor(repository, service) {
     this.repository = repository;
     this.service = service;
   }
 
-  editTask(task, updates = {}) {
-    const updatedTask = this.service.edit(task, updates);
+  edit(object, updates = {}) {
+    const updatedTask = this.service.edit(object, updates);
     return this.repository.edit(updatedTask);
   }
 }

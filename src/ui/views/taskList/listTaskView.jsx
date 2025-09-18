@@ -6,7 +6,10 @@ export class ListTaskView{
     MockupElements,
     FormUi,
     HeaderUi,
-    MockupUi){
+    MockupUi,
+    Header,
+    ButtonAddTask,
+    Form){
 
         this.taskCreateVM = taskCreateVM;
         this.taskUi = taskUI;
@@ -15,10 +18,20 @@ export class ListTaskView{
         this.FormUi = FormUi;
         this.HeaderUi = HeaderUi;
         this.MockupUi = MockupUi
+        this.Header = Header
+        this.ButtonAddTask = ButtonAddTask
+        this.Form = Form
     }
 
-  render(){
-    this.taskUi.renderTask(false);
+  render(key){
+    this.UiElements.main_content.appendChild(this.Header())
+    this.UiElements.main_content.appendChild(this.ButtonAddTask())
+    this.UiElements.main_content.appendChild(this.Form())
+
+    if (key == 'important'){
+        this.UiElements.main_content.classList.toggle("pink-theme")
+    }
+    this.taskUi.renderTask(false, key);
   
     this.UiElements.add_task.addEventListener('click', () => {
         this.UiElements.settings.setAttribute('disabled', 'true');
@@ -28,7 +41,7 @@ export class ListTaskView{
     this.UiElements.send_task.addEventListener('click', () => {
         this.UiElements.settings.setAttribute('disabled', 'false');
         
-        this.taskCreateVM.createTask(this.UiElements.task.value);
+        this.taskCreateVM.create(this.UiElements.task.value);
         this.FormUi.hideForm();
         location.reload();
     });

@@ -1,6 +1,6 @@
 export class Repository {
   constructor(service, repository) {
-    this.taskService = service;
+    this.service = service;
     this.repository = repository;
   }
 
@@ -9,13 +9,17 @@ export class Repository {
   }
 
   save(object) {
-    this.taskService.save(object);
+    this.service.save(object);
     return this.repository.save(object);
   }
 
   remove(object) {
-    const validatedTask = this.taskService.remove(object);
+    const validatedTask = this.service.remove(object);
     return this.repository.remove(validatedTask);
+  }
+
+  edit(task) {
+    return this.repository.edit(task);
   }
 
   find(id) {

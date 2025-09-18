@@ -1,10 +1,10 @@
 import { h } from "../../h"
 
-export function TaskCard({ task, forEdition = false }) {
+export function TaskCard({ task, forEdition = false, key}) {
   let button = <button className="task-checkbox"></button>
 
   let name = (
-    <a className="task-name" href={`./taskDetail.html?task_id=${task.id}`}>
+    <a className="task-name" href={`./taskDetail.html?task_id=${task.id}&key=${key}`}>
       {task.name}
     </a>
   )

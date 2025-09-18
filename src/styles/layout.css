@@ -35,7 +35,9 @@ header {
   transition: all 0.8s ease;
   margin-bottom: 1rem;
   background-color: transparent;
-  position: relative;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
 .main-content {
@@ -61,6 +63,10 @@ header {
   row-gap: 5px;
   margin-bottom: 30px;
   transition: all 0.3s ease-in-out;
+}
+
+.main-tasks {
+  margin-top: 4rem;
 }
 
 .drop-down-task {

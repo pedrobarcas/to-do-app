@@ -1,11 +1,11 @@
-export class TaskCreateViewModel {
+export class CreateViewModel {
   constructor(factory, repository) {
     this.factory = factory;
     this.repository = repository;
   }
 
-  createTask(name) {
-    const task = this.factory.createTask(name);
+  create(name) {
+    const task = this.factory.create(name);
     return this.repository.save(task);
   }
 }

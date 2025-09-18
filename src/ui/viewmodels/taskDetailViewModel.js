@@ -1,14 +1,11 @@
-export class TaskDetailViewModel {
+import { DetailViewModel } from "./detailViewModel";
+
+export class TaskDetailViewModel extends DetailViewModel {
   constructor(repository, queryParam) {
-    this.repository = repository;
-    this.queryParam = queryParam;
+    super(repository, queryParam);
   }
 
   completedTask(task) {
     return this.repository.completed(task);
-  }
-
-  get getTask() {
-    return this.repository.find(this.queryParam.getQueryParams("task_id"));
   }
 }

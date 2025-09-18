@@ -1,9 +1,9 @@
-export class TaskListViewModel {
+export class ListViewModel {
   constructor(repository) {
     this.repository = repository;
   }
 
-  loadTasks() {
+  load() {
     return this.repository.load();
   }
 }

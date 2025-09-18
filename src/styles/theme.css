@@ -12,7 +12,7 @@
   --border-color: #ccc;
   --settings-background: #303030;
   --setup-background-color: black;
-  --pink: #f2b7c1;
+  --color-pink: #f2b7c1;
 
   --main-font: "Roboto", sans-serif;
   --font-playfair: "Playfair Display", serif;
@@ -32,4 +32,8 @@
 
   --main-font: "Roboto", sans-serif;
   --font-playfair: "Playfair Display", serif;
+}
+
+.pink-theme {
+  --main-color: #f2b7c1;
 }

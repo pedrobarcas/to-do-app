@@ -1,29 +1,39 @@
-Planejamo de integração OneToMany nas tarefas.
+import { TaskDetailView } from "./taskDetailView";
 
-priemeira ideia:
-    Uma instância de um grupo guardando na tarefa ou um ID
+import { TaskService } from "../../domain/taskService.js";
+import { TaskRepository } from "../../application/taskRepository.js";
+import { TaskFactory } from "../../domain/factorys/taskFactory.js";
+import { LocalStorageRepository } from "../../infrastructure/LocalStorage.js";
+import { QueryParams } from "../../utils/getQueryParams.js";
 
-    prós: uma facil busca e mais simples de ser aplicado
-    contras: Alto acoplamento e dificl manutenção
-    contras: Quebra do OCP pois vamos modificar task
+import { TaskDetailViewModel } from "../viewmodels/taskDetailViewModel.js";
+import { EditViewModel } from "../viewmodels/EditViewModel.js";
+import { RemoveViewModel } from "../viewmodels/RemoveViewModel.js";
 
-segunda: 
-    Uma composição, onde cada task fica dentro de uma abstração de um grupo e task
+import { taskDetail } from "../../components/taskDetail";
 
-    prós: Dá para mover facilmente tasks de um grupo para outro
-    prós: baixo acoplamento
+// instâncias globais
+const taskService = new TaskService([], [], []);
+const queryParams = new QueryParams();
 
+const key = queryParams.getQueryParams("key");
 
-exemplo: 
+const taskRepository = new TaskRepository(
+taskService,
+new LocalStorageRepository(key)
+);
 
-    classe Task:
-        ...
+// viewmodels
+const taskDetailViewModel = new TaskDetailViewModel(taskRepository, queryParams);
+const taskEditViewModel = new EditViewModel(taskRepository, taskService);
+const taskRemoveViewModel = new RemoveViewModel(taskRepository);
 
-    classe Group:
-        id,
-        name,
-        type = [Meu dia, importantes, tarefas normais]
-        date_created,
-    
-    classe GroupRelatedTask:
-        tasks = []
+// view
+const taskDetailView = new TaskDetailView(
+taskDetailViewModel,
+taskEditViewModel,
+taskRemoveViewModel,
+taskDetail // function
+);
+
+export { taskDetailView };

@@ -7,7 +7,7 @@ export class TaskDetailView{
     }
 
     render(root){
-        const task = this.taskDetailVM.getTask;
+        const task = this.taskDetailVM.get("task_id");
         root.appendChild(this.taskDetailComponent(task));
         
         const name = document.getElementById("name");
@@ -17,7 +17,7 @@ export class TaskDetailView{
         const button_completed_task = document.querySelector(".task-checkbox");
         
         window.addEventListener("input", () => {
-            this.taskEditVM.editTask(task, {
+            this.taskEditVM.edit(task, {
             name: name.value,
             description: anotations.value,
             date: date.value
@@ -26,7 +26,7 @@ export class TaskDetailView{
 
         
         document.querySelector(".fa-trash").addEventListener("click", () => {
-            this.taskRemoveVM.removeTask(task);
+            this.taskRemoveVM.remove(task);
             window.location.href = "../../../index.html";
         
         })

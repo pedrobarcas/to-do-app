@@ -11,8 +11,4 @@ export class TaskRepository extends Repository {
 
     return this.repository.edit(task);
   }
-
-  edit(task) {
-    return this.repository.edit(task);
-  }
 }

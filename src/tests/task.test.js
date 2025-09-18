@@ -1,5 +1,5 @@
-import { Task } from "../domain/task.js";
-import { TaskFactory } from "../domain/taskFactory.js";
+import { Task } from "../domain/entities/task.js";
+import { TaskFactory } from "../domain/factorys/taskFactory.js";
 import { TaskRepository } from "../application/taskRepository.js";
 import { TaskService } from "../domain/taskService.js";
 import { LocalStorageRepository } from "../infrastructure/LocalStorage.js";
@@ -34,7 +34,7 @@ describe("Testando Tasks", () => {
   });
 
   test("Instância da Task via Factory", () => {
-    const task = TaskFactory.createTask(
+    const task = TaskFactory.create(
       "Ir para a academia.",
       "Treinar peito e bíceps."
     );
@@ -44,7 +44,7 @@ describe("Testando Tasks", () => {
   });
 
   test("Salvar Task no localStorage", () => {
-    const task = TaskFactory.createTask(
+    const task = TaskFactory.create(
       "Ir para a academia.",
       "Treinar peito e bíceps."
     );
@@ -53,7 +53,7 @@ describe("Testando Tasks", () => {
   });
 
   test("Carregamento das Tasks", () => {
-    const task = TaskFactory.createTask(
+    const task = TaskFactory.create(
       "Ir para a academia.",
       "Treinar peito e bíceps."
     );
@@ -63,7 +63,7 @@ describe("Testando Tasks", () => {
   });
 
   test("Completamento de uma Task", () => {
-    const task = TaskFactory.createTask(
+    const task = TaskFactory.create(
       "Ir para a academia.",
       "Treinar peito e bíceps."
     );
@@ -96,7 +96,7 @@ describe("Testando TaskService", () => {
   });
 
   test("Editar uma Task existente", () => {
-    const task = TaskFactory.createTask("Correr", "10km");
+    const task = TaskFactory.create("Correr", "10km");
     repository.save(task);
 
     const updatedTask = service.edit(task, { name: "Malhar" });
@@ -105,7 +105,7 @@ describe("Testando TaskService", () => {
 
   test("Validação de máximo de caracteres no nome", () => {
     const longName = "A".repeat(31);
-    const task = TaskFactory.createTask(longName, "Descrição válida");
+    const task = TaskFactory.create(longName, "Descrição válida");
 
     expect(() => {
       service.validate(task, service.validatorsEdit);
@@ -114,7 +114,7 @@ describe("Testando TaskService", () => {
 
   test("Validação de máximo de caracteres na descrição", () => {
     const longDesc = "D".repeat(151);
-    const task = TaskFactory.createTask("Nome válido", longDesc);
+    const task = TaskFactory.create("Nome válido", longDesc);
 
     expect(() => {
       service.validate(task, service.validatorsEdit);
@@ -122,7 +122,7 @@ describe("Testando TaskService", () => {
   });
 
   test("Validação de task sem nome nem descrição", () => {
-    const task = TaskFactory.createTask("", "");
+    const task = TaskFactory.create("", "");
 
     expect(() => {
       service.validate(task, service.validatorsEdit);

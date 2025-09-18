@@ -2,7 +2,10 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0maximum-scale=1.0, user-scalable=no"
+    />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta name="description" content="A simple to-do list application" />
     <meta
@@ -39,25 +42,25 @@
     </header>
 
     <section class="home__main-groups">
-      <div class="content-box">
+      <a class="content-box" href="listTask.html?key=my_day">
         <span
           class="fa-regular fa-sun"
           aria-label="Imagem ilustrativa do Sol"
           style="color: #929292"
         ></span>
         <p>Meu Dia</p>
-      </div>
+      </a>
 
-      <div class="content-box">
+      <a class="content-box" href="listTask.html?key=important">
         <span
           class="fa-regular fa-star"
           aria-label="Imagem ilustrativa de uma estrela"
-          style="color: var(--pink)"
+          style="color: var(--color-pink)"
         ></span>
         <p>Importante</p>
-      </div>
+      </a>
 
-      <a class="content-box" href="listTask.html">
+      <a class="content-box" href="listTask.html?key=task">
         <span
           class="fa-solid fa-home"
           aria-label="Imagem ilustrativa de uma casa"
@@ -66,6 +69,8 @@
         <p>Tarefas</p>
       </a>
     </section>
+
+    <section class="todo__form--content"></section>
 
     <section class="home__group">
       <hr />

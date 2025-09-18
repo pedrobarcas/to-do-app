@@ -39,17 +39,17 @@ export class TaskUi {
     }
   }
 
-  renderTask(completed = false) {
+  renderTask(completed = false, key) {
     if (!completed) UiElements.main_tasks.innerHTML = "";
     else UiElements.completed_tasks.innerHTML = "";
 
-    this.listViewModel.loadTasks().forEach((task) => {
-      this.createTemplateTask(task, task.completed);
+    this.listViewModel.load().forEach((task) => {
+      this.createTemplateTask(task, task.completed, key);
     });
   }
 
-  createTemplateTask(task, completed = false) {
-    const taskCard = <TaskCard task={task}/>
+  createTemplateTask(task, completed = false, key) {
+    const taskCard = <TaskCard task={task} key={key}/>
     const taskButton = taskCard.querySelector(".task-checkbox")
     if (!completed) UiElements.main_tasks.appendChild(taskCard);
     else {
