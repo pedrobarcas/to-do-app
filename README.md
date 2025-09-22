@@ -1,37 +1,73 @@
-# To-do List
+# To-Do App
 
-Uma aplicação web de lista de tarefas (to-do) inspirado (copiado) da Microsoft to-do feita em HTML, CSS e JavaScript puro, por mim mesmo.
-
-## Funcionalidades
-
-- Adicione blocos de tarefas
-- Adicione tarefas rapidamente e as edite logo após sua criação
-- Marque tarefas como concluídas
-- Diferentes temas para você escolher
-- Remova tarefas individualmente
-- Interface responsiva para desktop e mobile
-- As tarefas são salvas no navegador (localStorage)
-
-## Como usar
-
-1. **Clone o repositório:**
-   ```bash
-   git clone https://github.com/pedrobarcas/to-do-app.git
-   ```
-2. **Abra o arquivo `index.html` no seu navegador.**
-3. **Adicione, conclua e remova tarefas à vontade!**
-
-## Estrutura dos arquivos
-
-- `src/index.html` — Página principal da aplicação
-- `src/style.css` — Estilos da interface
-- `src/script.js` — Lógica da aplicação
-- `LICENSE` — Licença MIT
-
-## Licença
-
-Este projeto está licenciado sob a Licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+Um gerenciador de tarefas moderno, construído com **Vanilla JS**, **JSX (Hiperscript)** e estruturado com **Clean Architecture** e **princípios SOLID**.  
+O projeto utiliza **MVVM** para separar claramente **UI, ViewModel e Domain**, facilitando manutenção e escalabilidade.
 
 ---
 
-Desenvolvido por Pedro Barcas 🚀
+## 🌟 Funcionalidades
+
+- Criar, editar, concluir e remover tarefas.
+- Agrupar tarefas por listas (ex.: "Importante", "Meu Dia").
+- Visualizar tarefas ativas e concluídas.
+- Tema claro/escuro e temas customizados por grupo.
+- Upload de arquivos e adição de anotações nas tarefas.
+- UI moderna, responsiva e fluida.
+
+---
+
+## 🏗️ Arquitetura
+
+O projeto segue **Clean Architecture**:
+
+- **Domain**
+
+  - `Task` e `Group` → entidades.
+  - `TaskFactory` e `GroupFactory` → factories para criação de objetos.
+  - `TaskService` → regras de negócio e validações.
+
+- **Application**
+
+  - `Repository` e `TaskRepository` → abstração de persistência.
+  - `ViewModels` → `CreateViewModel`, `ListViewModel`, `DetailViewModel`, `EditViewModel`, `RemoveViewModel`.
+
+- **Infrastructure**
+
+  - `LocalStorageRepository` → persistência no `localStorage`.
+
+- **UI**
+  - Componentes reutilizáveis (`TaskCard`, `GroupCard`, `Form`, `MainForm`, `AddTask`, etc.)
+  - Classes de UI (`TaskUi`, `FormUi`, `HeaderUi`, `MockupUi`) para renderização e interação.
+
+---
+
+## 🛠️ Boas práticas aplicadas
+
+- **SOLID**
+
+  - **SRP**: cada classe cumpre apenas uma responsabilidade.
+  - **OCP**: classes extensíveis sem alterar código existente.
+  - **LSP**: subclasses substituem classes base sem quebrar lógica.
+  - **ISP**: cada classe/interface expõe apenas métodos relevantes.
+  - **DIP**: dependências injetadas via construtor, desacopladas de implementações concretas.
+
+- **Modularidade**
+
+  - Código dividido em módulos claros: componentes, ViewModels, serviços, repositórios e factories.
+
+- **Reutilização e manutenção**
+  - Components e UI são reutilizáveis.
+  - Separação clara entre lógica de negócio, persistência e interface.
+
+---
+
+## ⚙️ Setup
+
+1. Clone o repositório:
+
+```bash
+git clone https://github.com/pedrobarcas/todo-app.git
+cd todo-app
+npm install
+npm run dev
+```

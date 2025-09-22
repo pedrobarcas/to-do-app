@@ -1,3 +1,27 @@
+/**
+ * Setup da ListTaskView
+ * ---------------------
+ * Responsável por configurar dependências e inicializar a tela de tarefas de uma lista específica.
+ *
+ * Fluxo:
+ * 1. Recupera a key da lista via `queryParams.getQueryParams("key")`.
+ * 2. Resolve o repository da lista usando `packingDependecyTask(key)`.
+ * 3. Cria os ViewModels:
+ *    - `taskListViewModel` (listar tarefas da lista).
+ *    - `taskDetailViewModel` (detalhes e conclusão de tarefas).
+ *    - `taskCreateViewModel` (criar novas tarefas na lista).
+ * 4. Cria a camada de UI `TaskUi` (renderização e interação com tasks).
+ * 5. Instancia a `ListTaskView` ligando:
+ *    - ViewModels (listagem, detalhe, criação)
+ *    - UI (TaskUi, FormUi, HeaderUi, MockupUi)
+ *    - Componentes visuais (MainHeader, AddTask, MainForm)
+ *    - Seletores do DOM (UiElements, MockupElements)
+ * 6. Executa `listTaskView.render(key)` para carregar e renderizar a tela.
+ *
+ * Este arquivo é o ponto de entrada da página de tarefas de uma lista específica.
+ */
+
+
 import { UiElements } from "./elements";
 import { MockupElements } from "./elements";
 import { FormUi } from "./listTaskUI";
