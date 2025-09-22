@@ -12,7 +12,6 @@ ol {
 html {
   line-height: 1.15;
   scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -41,6 +40,16 @@ img {
   border-style: none;
   max-width: 100%;
   height: auto;
+}
+
+input {
+  background-color: transparent;
+  border: none;
+  color: white;
+}
+
+input:focus {
+  outline: none;
 }
 
 button,

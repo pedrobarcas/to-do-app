@@ -2,6 +2,10 @@
   display: flex;
 }
 
+.is-hidden {
+  display: none;
+}
+
 .is-shrink {
   display: flex;
   position: fixed;
@@ -9,5 +13,5 @@
   height: 3rem;
   background-color: var(--task-background);
   align-items: center;
-  box-shadow: 0 1px 4px #0004;
+  box-shadow: var(--box-shadow);
 }

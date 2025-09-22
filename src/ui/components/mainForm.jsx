@@ -1,5 +1,21 @@
 import { h } from "../../h"
 
+/**
+ * Componente MainForm
+ * -------------------
+ * Responsável por renderizar o formulário principal para criação de novas tarefas.
+ * 
+ * Estrutura:
+ * - Input de texto (`#task`) onde o usuário digita a descrição da tarefa.
+ * - Botão (`#send-task`) para enviar a nova tarefa, representado por um ícone de seta para cima.
+ * 
+ * Parâmetros:
+ * - Nenhum (componente independente, mas interage com lógica externa via eventos).
+ * 
+ * Retorno:
+ * - JSX representando o formulário de criação de tarefas.
+ */
+
 export function MainForm(){
     return (
         <section className="main-form">

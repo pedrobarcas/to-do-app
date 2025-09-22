@@ -15,10 +15,10 @@ header {
   box-shadow: 0 1px 4px #0004;
 }
 
-.todo__footer-content {
+.todo__footer--content {
   display: flex;
   gap: 1rem;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
 }
 
 .main-header {
@@ -30,7 +30,7 @@ header {
   color: var(--main-color);
   margin: 0;
   z-index: 1000;
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   font-weight: bold;
   transition: all 0.8s ease;
   margin-bottom: 1rem;
@@ -78,23 +78,29 @@ header {
 .main-form {
   display: none;
   position: fixed;
-  width: 100vw;
-  bottom: 0;
+  top: 0;
   left: 0;
-  justify-content: center;
-  align-items: center;
-  background: var(--task-background);
-  z-index: 10;
-  padding: 0.5rem 0;
-  border-radius: 0;
+  height: 100%;
+  width: 100vw;
+  background: var(--form-background);
+  z-index: 9999;
 }
 
 .content-form {
   display: flex;
-  height: inherit;
+  bottom: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 3.5rem;
+  padding: 0.5rem 0;
+  border-radius: 0;
   width: inherit;
+  background-color: var(--task-background);
   justify-content: space-between;
-  width: 100vw;
+  position: fixed;
+  padding: 1rem;
 }
 
 .main-form input {
@@ -136,4 +142,74 @@ header {
   padding: 1rem;
   justify-content: space-between;
   align-items: center;
+  background-color: transparent;
+}
+
+.todo__form--container {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--form-background);
+}
+
+#group {
+  display: flex;
+  justify-self: flex-end;
+  border-bottom: 2px solid var(--main-color);
+}
+
+.todo__form--personalization-content {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.todo__form--personalization {
+  background-color: var(--main-color);
+  border-radius: 25%;
+  padding: 0.25rem;
+}
+
+.todo__form--content {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  min-width: auto;
+  min-height: auto;
+  color: var(--secondary-color);
+  background-color: var(--task-background);
+  padding: 2rem;
+}
+
+.todo__form--title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.todo__form--input {
+  display: flex;
+  font-size: 1.25rem;
+  gap: 0.5rem;
+}
+
+.todo__form--select-color {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.todo__form--color-content {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background-color: var(--main-color);
+}
+
+.todo__form--actions {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  gap: 1rem;
 }

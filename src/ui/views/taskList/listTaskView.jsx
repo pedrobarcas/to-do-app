@@ -23,16 +23,21 @@ export class ListTaskView{
         this.Form = Form
     }
 
-  render(key){
-    this.UiElements.main_content.appendChild(this.Header())
-    this.UiElements.main_content.appendChild(this.ButtonAddTask())
-    this.UiElements.main_content.appendChild(this.Form())
+ 
+  theme(key) {
+    const themes = {
+      "Importante": "pink-theme",
+      "Meu Dia": "green-theme",
+    };
 
-    if (key == 'important'){
-        this.UiElements.main_content.classList.toggle("pink-theme")
-    }
-    this.taskUi.renderTask(false, key);
+    console.log(key)
+    const themeClass = themes[key];
+    if (themeClass) this.UiElements.main_content.classList.add(themeClass);
+  }
+
   
+
+  bindEvents(){
     this.UiElements.add_task.addEventListener('click', () => {
         this.UiElements.settings.setAttribute('disabled', 'true');
         this.FormUi.showForm();
@@ -79,5 +84,16 @@ export class ListTaskView{
         if (!this.UiElements.main_tasks.innerHTML && this.UiElements.completed_tasks.style.display == 'none' || !this.UiElements.completed_tasks.style.display){
             this.MockupElements.mockup.appendChild(this.MockupUi.showMockup())}
         
-        else this.MockupUi.hideMockup()
-})}}
+        else this.MockupUi.hideMockup()   
+  })}
+
+  render(key){
+    this.UiElements.main_content.appendChild(this.Form())
+    this.UiElements.main_content.appendChild(this.Header(key))
+    this.UiElements.main_content.appendChild(this.ButtonAddTask())
+
+    this.taskUi.renderTask(false, key);
+    this.theme(key)
+    this.bindEvents()
+    
+}}

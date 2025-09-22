@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0maximum-scale=1.0, user-scalable=no"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta name="description" content="A simple to-do list application" />
@@ -37,12 +37,63 @@
 
   <main class="main-content">
     <header class="home__header">
-      <h1>Suas tarefas</h1>
+      <img
+        src="https://www.svgrepo.com/show/303143/microsoft-logo.svg"
+        alt=""
+        width="100px"
+        height="100px"
+      />
       <span class="fa-solid fa-magnifying-glass"></span>
     </header>
+    <section class="todo__form--container">
+      <div class="todo__form--content">
+        <p class="todo__form--title">Nova lista</p>
+        <div class="todo__form--input">
+          <label for="group"
+            ><span
+              class="fa-regular fa-face-smile"
+              style="color: var(--main-color)"
+            ></span
+          ></label>
+          <input
+            type="text"
+            name="group"
+            id="group"
+            placeholder="Inserir o título da lista"
+          />
+        </div>
+
+        <div class="todo__form--personalization-content">
+          <div class="todo__form--personalization-content">
+            <div class="todo__form--personalization">Cor</div>
+          </div>
+        </div>
+        <div class="todo__form--select-color">
+          <div
+            class="todo__form--color-content"
+            style="background-color: var(--blue)"
+          ></div>
+
+          <div
+            class="todo__form--color-content"
+            style="background-color: var(--pink)"
+          ></div>
+
+          <div
+            class="todo__form--color-content"
+            style="background-color: var(--green)"
+          ></div>
+        </div>
+
+        <div class="todo__form--actions">
+          <p id="cancel">CANCELAR</p>
+          <p id="create">CRIAR LISTA</p>
+        </div>
+      </div>
+    </section>
 
     <section class="home__main-groups">
-      <a class="content-box" href="listTask.html?key=my_day">
+      <a class="content-box" href="listTask.html?key=Meu%20Dia">
         <span
           class="fa-regular fa-sun"
           aria-label="Imagem ilustrativa do Sol"
@@ -51,16 +102,16 @@
         <p>Meu Dia</p>
       </a>
 
-      <a class="content-box" href="listTask.html?key=important">
+      <a class="content-box" href="listTask.html?key=Importante">
         <span
           class="fa-regular fa-star"
           aria-label="Imagem ilustrativa de uma estrela"
-          style="color: var(--color-pink)"
+          style="color: var(--pink)"
         ></span>
         <p>Importante</p>
       </a>
 
-      <a class="content-box" href="listTask.html?key=task">
+      <a class="content-box" href="listTask.html?key=Tarefas">
         <span
           class="fa-solid fa-home"
           aria-label="Imagem ilustrativa de uma casa"
@@ -70,14 +121,12 @@
       </a>
     </section>
 
-    <section class="todo__form--content"></section>
-
-    <section class="home__group">
+    <section class="home__group home__main-groups">
       <hr />
     </section>
 
     <footer class="todo__footer">
-      <div class="todo__footer-content">
+      <div class="todo__footer--content">
         <span class="fa-solid fa-plus"></span>
         <p>Nova lista</p>
       </div>
@@ -85,6 +134,6 @@
   </main>
 
   <body>
-    <script src="./src/ui/views/taskDetail/main.jsx" type="module"></script>
+    <script src="./src/ui/views/home/main.jsx" type="module"></script>
   </body>
 </html>
