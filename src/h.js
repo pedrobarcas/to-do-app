@@ -1,17 +1,21 @@
 export function h(type, props, ...children) {
-  // Se for um componente (função), chama ele
   if (typeof type === "function") {
     return type({ ...(props || {}), children });
   }
 
-  // Caso contrário, cria elemento nativo
   const el = document.createElement(type);
 
   for (const key in props || {}) {
     if (key.startsWith("on") && typeof props[key] === "function") {
       el.addEventListener(key.slice(2).toLowerCase(), props[key]);
     } else if (key === "className") {
-      el.setAttribute("class", props[key]); // compatibilidade com JSX
+      el.setAttribute("class", props[key]);
+    } else if (key === "style" && typeof props[key] === "object") {
+      Object.assign(el.style, props[key]); // suporte a style={{...}}
+    } else if (key === "dataset" && typeof props[key] === "object") {
+      for (const dataKey in props[key]) {
+        el.dataset[dataKey] = props[key][dataKey]; // aqui sim
+      }
     } else {
       el[key] = props[key];
     }

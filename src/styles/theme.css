@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 
 :root {
   --main-background: #080808;
@@ -22,6 +23,7 @@
 
   --main-font: "Roboto", sans-serif;
   --font-playfair: "Playfair Display", serif;
+  --open-sans: "Open Sans", sans-serif;
 }
 
 .light-theme {
@@ -36,8 +38,8 @@
   --settings-background: #f0f0f0;
   --setup-background-color: #ffffff;
 
-  --main-font: "Roboto", sans-serif;
-  --font-playfair: "Playfair Display", serif;
+  /*--main-font: "Roboto", sans-serif;
+  --font-playfair: "Playfair Display", serif;*/
 }
 
 .pink-theme {

@@ -22,25 +22,30 @@
  */
 
 
+import { service } from "../../index.js";
 import { UiElements } from "./elements";
-import { MockupElements } from "./elements";
 import { FormUi } from "./listTaskUI";
 import { HeaderUi } from "./listTaskUI";
 
-import { MockupUi } from "../../components/mockup";
 import { MainHeader } from "../../components/mainHeader";
 import { AddTask } from "../../components/buttonAddTask";
 import { MainForm } from "../../components/mainForm";
+import { SettingsDropDown } from "../../components/settingsDropDown.jsx";
+import { GroupSettingsDropDown } from "../../components/groupSettingsDropDown.jsx";
+import { GroupForm } from "../../components/groupForm.jsx";
+
+
 import { ListTaskView } from "./listTaskView";
+import { GroupViewModel } from "../../viewmodels/groupViewModel.js";
 
 
 import { TaskUi } from "./listTaskUI";
 
 import { queryParams } from "../../index.js";
 import { packingDependecyTask } from "../../index.js";
-
 import { ListViewModel } from "../../viewmodels/ListViewModel.js";
 import { TaskDetailViewModel } from "../../viewmodels/taskDetailViewModel";
+import { RemoveViewModel } from "../../viewmodels/RemoveViewModel.js";
 import { CreateViewModel } from "../../viewmodels/createViewModel.js"; 
 
 import { TaskFactory } from "../../../domain/factorys/taskFactory.js";
@@ -52,6 +57,7 @@ export const taskRepository = packingDependecyTask(key);
 
 
 const taskListViewModel = new ListViewModel(taskRepository);
+const removeViewModel = new RemoveViewModel(taskRepository)
 
 const taskDetailViewModel = new TaskDetailViewModel(
   taskRepository,
@@ -61,19 +67,23 @@ const taskDetailViewModel = new TaskDetailViewModel(
 
 const taskCreateViewModel = new CreateViewModel(TaskFactory, taskRepository)
 
+const groupRepository = packingDependecyTask('group')
+const groupVM = new GroupViewModel(groupRepository, taskRepository, service)
+
 const taskUi = new TaskUi(taskListViewModel, taskDetailViewModel);
 
 const listTaskView = new ListTaskView(
+  groupVM,
   taskCreateViewModel,
   taskUi,
   UiElements,
-  MockupElements,
   FormUi,
   HeaderUi,
-  MockupUi,
   MainHeader,
   AddTask,
-  MainForm
+  MainForm,
+  GroupSettingsDropDown,
+  GroupForm
 );
 
 listTaskView.render(key)

@@ -7,9 +7,10 @@ export class Group {
    * @param {string} name - Nome do grupo.
    * @param {Date} create_date - Data de criação do grupo.
    */
-  constructor(id, name, create_date) {
+  constructor(id, name, create_date, color) {
     this.id = id;
     this.name = name;
     this.create_date = create_date;
+    this.color = color;
   }
 }

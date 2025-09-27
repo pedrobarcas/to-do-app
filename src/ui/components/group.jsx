@@ -21,11 +21,11 @@ import { h } from "../../h"
 
 export function GroupCard(group){
     return (
-        <a className="content-box" href={`listTask.html?key=${group.group.name}`}>
+        <a className="content-box" href={`listTask.html?key=${group.group.id}`}>
         <span
           className="fa-solid fa-list-ul"
           aria-label="Imagem ilustrativa de uma casa"
-          style="color: var(--main-color)"
+          style={`color: ${group.group.color}`}
         ></span>
         <p>{group.group.name}</p>
       </a>

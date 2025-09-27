@@ -42,7 +42,7 @@ export function taskDetail(task){
             <TaskCard task={task} forEdition={true} />
         </div>
         <Form task={task}/>
-        <Footer content={task.create_date} />
+        <Footer content={task.create_date}/>
     </main>
     )
 }

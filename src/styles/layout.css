@@ -146,8 +146,8 @@ header {
 }
 
 .todo__form--container {
-  display: none;
-  position: fixed;
+  display: flex;
+  position: absolute;
   z-index: 1000;
   align-items: center;
   justify-content: center;

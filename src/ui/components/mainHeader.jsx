@@ -1,5 +1,5 @@
 import { h } from "../../h";
-
+import { SettingsDropDown } from "./settingsDropDown";
 /**
  * Componente MainHeader
  * ---------------------
@@ -17,22 +17,14 @@ import { h } from "../../h";
  * - JSX representando o cabeçalho principal com configurações.
  */
 
-export function MainHeader(title = 'Tarefas'){
+export function MainHeader({title, dropDown}){
     return (
         <header className="main-header">
             <h1>{title}</h1>
             <div className="main-settings">
             <div id="settings" className="fa-solid fa-ellipsis-vertical"></div>
-            <div className="settings-drop-down">
-                <p id="changeThemeButton">
-                <span
-                    className="fa-solid fa-palette"
-                    aria-label="imagem ilustrativa de uma palheta artística"
-                ></span>
-                Alterar tema
-                </p>
             </div>
-            </div>
+            {dropDown}
         </header>
     )
 }

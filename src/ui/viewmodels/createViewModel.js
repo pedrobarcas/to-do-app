@@ -24,8 +24,9 @@ export class CreateViewModel {
     this.repository = repository;
   }
 
-  create(obj) {
-    const object = this.factory.create(obj);
+  create(obj, other = "") {
+    const object = this.factory.create(obj, other);
+    console.log(object);
     return this.repository.save(object);
   }
 }

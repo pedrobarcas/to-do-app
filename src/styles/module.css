@@ -53,10 +53,12 @@
 
 .settings-drop-down {
   display: none;
+  flex-direction: column;
   padding: 10px;
   position: absolute;
   top: 100%;
   right: 0;
+  row-gap: 1rem;
   color: var(--secondary-color);
   width: 10rem;
   height: auto;
@@ -127,4 +129,12 @@
   border: none;
   background-color: transparent;
   color: #7e7e7e;
+}
+
+.drop-down-content {
+  display: flex;
+  gap: 0.5rem;
+  opacity: 100%;
+  font-family: "Arial";
+  font-weight: lighter;
 }

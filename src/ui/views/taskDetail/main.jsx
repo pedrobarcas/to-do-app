@@ -18,7 +18,6 @@
 import { service } from "../../index.js";
 import { queryParams } from "../../index.js";
 import { packingDependecyTask } from "../../index.js";
-import { queryParams } from "../../index.js";
 
 import { TaskDetailViewModel } from "../../viewmodels/taskDetailViewModel.js";
 import { EditViewModel } from "../../viewmodels/EditViewModel.js";
@@ -26,6 +25,8 @@ import { RemoveViewModel } from "../../viewmodels/RemoveViewModel.js";
 
 import { taskDetail } from "../../components/taskDetail";
 import { TaskDetailView } from "./taskDetailView";
+
+import { h } from "../../../h.js";
 
 const taskRepository = packingDependecyTask(queryParams.getQueryParams("key"))
 

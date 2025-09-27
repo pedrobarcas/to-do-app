@@ -60,7 +60,7 @@ export class TaskDetailView{
         
         button_completed_task.addEventListener('click', () => {
               this.taskDetailVM.completedTask(task);
-              root.innerHTML = ""
+              location.reload()
         })
     }
 }

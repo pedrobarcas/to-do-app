@@ -61,4 +61,8 @@ export class Repository {
   find(id) {
     return this.repository.find(id);
   }
+
+  removeGroup(key) {
+    return this.repository.removeGroup(key);
+  }
 }

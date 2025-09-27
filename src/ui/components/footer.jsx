@@ -6,6 +6,8 @@
  * @param {{ content: string }} content - Dados recebidos (ex.: data da tarefa).
  * @returns {HTMLElement} Rodapé formatado.
  */
+
+import { h } from "../../h";
 export function Footer(content) {
 
   return (

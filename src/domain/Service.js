@@ -46,4 +46,15 @@ export class Service {
     this.validate(object, this.validatorsRemove);
     return object;
   }
+
+  edit(object, updates = {}) {
+    this.validate(object, this.validatorsEdit);
+
+    const updated = {
+      ...object,
+      ...updates,
+    };
+
+    return updated;
+  }
 }

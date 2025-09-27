@@ -57,7 +57,8 @@ export class LocalStorageRepository {
    * @returns {Object|null} Objeto encontrado ou null se não existir.
    */
   find(id) {
-    return this._loadAll().find((obj) => obj.id === id);
+    console.log(id);
+    return this._loadAll().find((obj) => obj.id == id);
   }
 
   /**
@@ -82,5 +83,13 @@ export class LocalStorageRepository {
   remove(object) {
     const data = this._loadAll().filter((obj) => obj.id !== object.id);
     this._saveAll(data);
+  }
+
+  /**
+   * Remove um grupo no localStorage.
+   * @param {string} key
+   */
+  removeGroup(key) {
+    localStorage.removeItem(key);
   }
 }

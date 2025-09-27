@@ -23,6 +23,7 @@ import { packingDependecyTask } from "../..";
 import { CreateViewModel } from "../../viewmodels/createViewModel";
 import { ListViewModel } from "../../viewmodels/ListViewModel";
 
+import { GroupForm } from "../../components/groupForm";
 import { HomeUi } from "./homeUI";
 import { homeView } from "./homeDetailView";
 
@@ -34,6 +35,7 @@ const homeListViewModel = new ListViewModel(groupRepository);
 const homeCreateViewModel = new CreateViewModel(groupFactory, groupRepository);
 const homeUi = new HomeUi(homeListViewModel)
 
-const view = new homeView(homeUi, homeListViewModel, homeCreateViewModel)
+const view = new homeView(homeUi, homeListViewModel, homeCreateViewModel, GroupForm)
+
 
 view.render(document)

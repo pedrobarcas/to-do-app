@@ -27,6 +27,7 @@ export class HomeUi {
   }
 
   renderGroups(root) {
+      root.innerHTML = ''
       this.listViewModel.load().forEach((group) => {
       this.createTemplateGroup(root, group);
     });

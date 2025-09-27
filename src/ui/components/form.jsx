@@ -8,6 +8,8 @@
  * @param {string} task.task.description - Anotações da tarefa.
  * @returns {HTMLElement} Formulário com campos de edição.
  */
+
+import { h } from "../../h";
 export function Form(task) {
   return (
     <section className="main-infos-task" id="main-infos-task">
@@ -19,7 +21,7 @@ export function Form(task) {
 
       {/* Data */}
       <div className="form-input-box">
-        <label for="date" className="fa-regular fa-calendar"></label>
+        <label htmlFor="date" className="fa-regular fa-calendar"></label>
         <input
           type="date"
           className="form-input"
@@ -31,8 +33,8 @@ export function Form(task) {
 
       {/* Arquivo */}
       <div className="form-input-box">
-        <label for="archive" className="fa-solid fa-paperclip"></label>
-        <label for="archive"> Adicionar um arquivo</label>
+        <label htmlFor="archive" className="fa-solid fa-paperclip"></label>
+        <label htmlFor="archive"> Adicionar um arquivo</label>
         <input
           type="file"
           className="form-input"
