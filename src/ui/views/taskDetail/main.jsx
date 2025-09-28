@@ -21,10 +21,16 @@ import { packingDependecyTask } from "../../index.js";
 
 import { TaskDetailViewModel } from "../../viewmodels/taskDetailViewModel.js";
 import { EditViewModel } from "../../viewmodels/EditViewModel.js";
-import { RemoveViewModel } from "../../viewmodels/RemoveViewModel.js";
+import { RemoveViewModel } from "../../viewmodels/removeViewModel.js";
 
-import { taskDetail } from "../../components/taskDetail";
+import { taskDetail } from "./taskDetail";
 import { TaskDetailView } from "./taskDetailView";
+
+import { TaskCard } from "../../components/task";
+import { Header } from "../../components/header";
+import { Footer } from "../../components/footer";
+import { Form } from "../../components/form";
+
 
 import { h } from "../../../h.js";
 
@@ -39,7 +45,12 @@ const view = new TaskDetailView(
     taskDetailViewModel,
     taskEditViewModel,
     taskRemoveViewModel,
-    taskDetail
+    taskDetail(taskDetailViewModel.get("task_id"), {
+        "TaskCard": TaskCard,
+        "Header": Header,
+        "Footer": Footer,
+        "Form": Form
+    })
 );
 
 const container = document.querySelector(".container");

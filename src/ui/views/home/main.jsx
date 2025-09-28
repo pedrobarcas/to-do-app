@@ -16,7 +16,7 @@
  * Este arquivo é o ponto de entrada da página inicial.
  */
 
-
+import { GroupCreateViewModel } from "../../viewmodels/createGroupViewModel";
 import { GroupFactory } from "../../../domain/factorys/groupFactory";
 import { packingDependecyTask } from "../..";
 
@@ -32,7 +32,7 @@ const groupFactory = GroupFactory;
 const groupRepository = packingDependecyTask('group');
 
 const homeListViewModel = new ListViewModel(groupRepository);
-const homeCreateViewModel = new CreateViewModel(groupFactory, groupRepository);
+const homeCreateViewModel = new GroupCreateViewModel(groupFactory, groupRepository);
 const homeUi = new HomeUi(homeListViewModel)
 
 const view = new homeView(homeUi, homeListViewModel, homeCreateViewModel, GroupForm)

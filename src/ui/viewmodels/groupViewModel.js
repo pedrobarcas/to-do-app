@@ -12,7 +12,7 @@ export class GroupViewModel {
   remove(key) {
     const group = this.repository.find(key);
     this.repository.remove(group);
-    this.groupRepository.removeGroup(key);
+    this.groupRepository.clear(key);
   }
 
   edit(group, updates = {}) {
@@ -31,7 +31,7 @@ export class GroupViewModel {
       }
 
       this.repository.remove(group);
-      this.groupRepository.removeGroup(group.id);
+      this.groupRepository.clear(group.id);
 
       const updatedGroup = this.service.edit(group, updates);
 

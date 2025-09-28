@@ -1,8 +1,8 @@
-import { h } from "../../h";
-import { TaskCard } from "./task";
-import { Header } from "./header";
-import { Footer } from "./footer";
-import { Form } from "./form";
+import { h } from "../../../h";
+import { TaskCard } from "../../components/task";
+import { Header } from "../../components/header";
+import { Footer } from "../../components/footer";
+import { Form } from "../../components/form";
 
 /**
  * Componente taskDetail
@@ -32,17 +32,17 @@ import { Form } from "./form";
  * atuando como **container da página de detalhe**.
  */
 
-export function taskDetail(task){
+export function taskDetail(task, components = {}){
     return (
       <main className="main-content">
         
 
-        <Header href={"./index.html"}/>
+        <components.Header href={"./index.html"}/>
         <div className="main-task tasks">
-            <TaskCard task={task} forEdition={true} />
+            <components.TaskCard task={task} forEdition={true} />
         </div>
-        <Form task={task}/>
-        <Footer content={task.create_date}/>
+        <components.Form task={task}/>
+        <components.Footer content={task.create_date}/>
     </main>
     )
 }

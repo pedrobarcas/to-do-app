@@ -35,7 +35,7 @@ export class homeView{
     bindEvents(root = document){
 
         const form = root.querySelector('.todo__form--container');
-        console.log('aaaaaasa')
+
         const group = root.getElementById('group');
 
         root.querySelector('.todo__footer--content').addEventListener('click', () => {
@@ -55,7 +55,6 @@ export class homeView{
         document.querySelectorAll(".todo__form--color-content").forEach(color => {
             color.addEventListener('click', (event) => {
             this.color = event.target.dataset.color
-            console.log(this.color)
       })
     })
     }

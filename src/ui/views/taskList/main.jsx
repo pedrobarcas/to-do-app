@@ -22,10 +22,9 @@
  */
 
 
-import { service } from "../../index.js";
+import { service, queryParams, packingDependecyTask, configService } from "../../index.js";
 import { UiElements } from "./elements";
-import { FormUi } from "./listTaskUI";
-import { HeaderUi } from "./listTaskUI";
+import { FormUi, HeaderUi, TaskUi as TaskUiClass } from "./listTaskUI";
 
 import { MainHeader } from "../../components/mainHeader";
 import { AddTask } from "../../components/buttonAddTask";
@@ -34,56 +33,52 @@ import { SettingsDropDown } from "../../components/settingsDropDown.jsx";
 import { GroupSettingsDropDown } from "../../components/groupSettingsDropDown.jsx";
 import { GroupForm } from "../../components/groupForm.jsx";
 
-
 import { ListTaskView } from "./listTaskView";
 import { GroupViewModel } from "../../viewmodels/groupViewModel.js";
-
-
-import { TaskUi } from "./listTaskUI";
-
-import { queryParams } from "../../index.js";
-import { packingDependecyTask } from "../../index.js";
 import { ListViewModel } from "../../viewmodels/ListViewModel.js";
 import { TaskDetailViewModel } from "../../viewmodels/taskDetailViewModel";
-import { RemoveViewModel } from "../../viewmodels/RemoveViewModel.js";
-import { CreateViewModel } from "../../viewmodels/createViewModel.js"; 
-
+import { CreateViewModel } from "../../viewmodels/createViewModel.js";
 import { TaskFactory } from "../../../domain/factorys/taskFactory.js";
 
-
+// Recupera a key da lista
 const key = queryParams.getQueryParams("key");
 
-export const taskRepository = packingDependecyTask(key);
+// Repositories
+const taskRepository = packingDependecyTask(key);
+const groupRepository = packingDependecyTask("group");
 
-
+// ViewModels
 const taskListViewModel = new ListViewModel(taskRepository);
-const removeViewModel = new RemoveViewModel(taskRepository)
+const taskDetailViewModel = new TaskDetailViewModel(taskRepository, queryParams);
+const taskCreateViewModel = new CreateViewModel(TaskFactory, taskRepository);
+const groupVM = new GroupViewModel(groupRepository, taskRepository, service);
 
-const taskDetailViewModel = new TaskDetailViewModel(
-  taskRepository,
-  queryParams
+// UIs
+const taskUi = new TaskUiClass(taskListViewModel, taskDetailViewModel);
 
-)
+const listTaskView = new ListTaskView({
+  viewModels: {
+    groupVM,
+    taskCreateVM: taskCreateViewModel,
+    taskListVM: taskListViewModel,
+    taskDetailVM: taskDetailViewModel,
+  },
+  uis: {
+    taskUI: taskUi,
+    UiElements,
+    FormUi,
+    HeaderUi,
+  },
+  components: {
+    Header: MainHeader,
+    ButtonAddTask: AddTask,
+    Form: MainForm,
+    DropDown: SettingsDropDown,
+    groupDropDown: GroupSettingsDropDown,
+    groupForm: GroupForm,
+  },
+  config: configService,
+});
 
-const taskCreateViewModel = new CreateViewModel(TaskFactory, taskRepository)
-
-const groupRepository = packingDependecyTask('group')
-const groupVM = new GroupViewModel(groupRepository, taskRepository, service)
-
-const taskUi = new TaskUi(taskListViewModel, taskDetailViewModel);
-
-const listTaskView = new ListTaskView(
-  groupVM,
-  taskCreateViewModel,
-  taskUi,
-  UiElements,
-  FormUi,
-  HeaderUi,
-  MainHeader,
-  AddTask,
-  MainForm,
-  GroupSettingsDropDown,
-  GroupForm
-);
-
-listTaskView.render(key)
+// Renderiza a lista
+listTaskView.render(key);

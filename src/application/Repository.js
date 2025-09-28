@@ -62,7 +62,7 @@ export class Repository {
     return this.repository.find(id);
   }
 
-  removeGroup(key) {
-    return this.repository.removeGroup(key);
+  clear(key) {
+    return this.repository.clear(key);
   }
 }

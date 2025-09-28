@@ -3,7 +3,7 @@ footer {
   width: 100vw;
   position: absolute;
   row-gap: 1rem;
-  top: 95%;
+  top: 97%;
 }
 
 header {
@@ -18,7 +18,9 @@ header {
 .todo__footer--content {
   display: flex;
   gap: 1rem;
-  font-size: 1.5rem;
+  width: 90%;
+  font-size: 1.25rem;
+  background-color: var(--main-background);
 }
 
 .main-header {
@@ -143,10 +145,11 @@ header {
   justify-content: space-between;
   align-items: center;
   background-color: transparent;
+  background-color: var(--main-background);
 }
 
 .todo__form--container {
-  display: flex;
+  display: none;
   position: absolute;
   z-index: 1000;
   align-items: center;
@@ -212,4 +215,8 @@ header {
   width: 100%;
   justify-content: flex-end;
   gap: 1rem;
+}
+
+.home__group {
+  margin-bottom: 2rem;
 }

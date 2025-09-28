@@ -85,11 +85,12 @@ export class LocalStorageRepository {
     this._saveAll(data);
   }
 
+  clear(key) {
+    localStorage.removeItem(this.key);
+  }
+
   /**
    * Remove um grupo no localStorage.
    * @param {string} key
    */
-  removeGroup(key) {
-    localStorage.removeItem(key);
-  }
 }

@@ -26,6 +26,6 @@ export class RemoveViewModel {
   }
 
   removeGroup(key) {
-    return this.repository.removeGroup(key);
+    return this.repository.clear(key);
   }
 }

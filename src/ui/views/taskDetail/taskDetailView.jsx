@@ -35,7 +35,7 @@ export class TaskDetailView{
 
     render(root){
         const task = this.taskDetailVM.get("task_id");
-        root.appendChild(this.taskDetailComponent(task));
+        root.appendChild(this.taskDetailComponent);
         
         const name = document.getElementById("name");
         const anotations = document.getElementById("anotations");

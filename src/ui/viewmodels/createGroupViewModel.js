@@ -18,14 +18,22 @@
  * vm.create({ name: "Estudar MVVM" });
  */
 
-export class CreateViewModel {
+export class GroupCreateViewModel {
   constructor(factory, repository) {
     this.factory = factory;
     this.repository = repository;
   }
 
-  create(obj, other = "") {
-    const object = this.factory.create(obj, other);
+  create(key, other = "") {
+    let name = key;
+    let i = 0;
+
+    while (this.repository.find(name)) {
+      i++;
+      name = `${key} (${i})`;
+    }
+
+    const object = this.factory.create(name, other);
     return this.repository.save(object);
   }
 }
