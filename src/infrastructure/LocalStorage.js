@@ -57,7 +57,6 @@ export class LocalStorageRepository {
    * @returns {Object|null} Objeto encontrado ou null se não existir.
    */
   find(id) {
-    console.log(id);
     return this._loadAll().find((obj) => obj.id == id);
   }
 
