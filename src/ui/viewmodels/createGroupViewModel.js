@@ -1,3 +1,5 @@
+import { Observable } from "../../domain/Observable";
+
 /**
  * Classe CreateViewModel
  * ----------------------
@@ -18,13 +20,14 @@
  * vm.create({ name: "Estudar MVVM" });
  */
 
-export class GroupCreateViewModel {
+export class GroupCreateViewModel extends Observable {
   constructor(factory, repository) {
+    super();
     this.factory = factory;
     this.repository = repository;
   }
 
-  create(key, other = "") {
+  create(key, color = "", icon = "fa-solid fa-list-ul") {
     let name = key;
     let i = 0;
 
@@ -33,7 +36,9 @@ export class GroupCreateViewModel {
       name = `${key} (${i})`;
     }
 
-    const object = this.factory.create(name, other);
-    return this.repository.save(object);
+    const object = this.factory.create(name, color, icon);
+    const saved = this.repository.save(object);
+    this.notify(saved);
+    return saved;
   }
 }

@@ -10,12 +10,13 @@ export class GroupFactory {
    * @param {string} name - Nome do grupo.
    * @returns {Group} Novo grupo criado.
    */
-  static create(name, color = undefined) {
+  static create(name, color = undefined, icon) {
     return new Group(
       name.trim(),
       name.trim(), // nome sem espaços extras
       DateFormat.DateFormatBrazilian(),
-      color // data de criação formatada
+      color, // data de criação formatada
+      icon
     );
   }
 }

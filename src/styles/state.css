@@ -15,3 +15,8 @@
   align-items: center;
   box-shadow: var(--box-shadow);
 }
+
+.is-selected {
+  outline: 2px solid var(--secondary-color);
+  outline-offset: 1px;
+}

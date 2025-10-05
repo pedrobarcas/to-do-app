@@ -27,6 +27,8 @@ export class TaskDetailViewModel extends DetailViewModel {
   }
 
   completedTask(task) {
-    return this.repository.completed(task);
+    const completed = this.repository.completed(task);
+    this.notify();
+    return completed;
   }
 }

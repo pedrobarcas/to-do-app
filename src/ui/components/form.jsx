@@ -10,16 +10,15 @@
  */
 
 import { h } from "../../h";
-export function Form(task) {
+export function Form(props) {
   return (
     <section className="main-infos-task" id="main-infos-task">
-      {/* Lembrar-me */}
+   
       <div className="form-input-box">
         <span className="fa-regular fa-sun"></span>
         <button className="remember-me-button form-input">Lembrar-me</button>
       </div>
 
-      {/* Data */}
       <div className="form-input-box">
         <label htmlFor="date" className="fa-regular fa-calendar"></label>
         <input
@@ -27,11 +26,10 @@ export function Form(task) {
           className="form-input"
           name="date"
           id="date"
-          value={task.task.date}
+          value={props.task.date}
         />
       </div>
 
-      {/* Arquivo */}
       <div className="form-input-box">
         <label htmlFor="archive" className="fa-solid fa-paperclip"></label>
         <label htmlFor="archive"> Adicionar um arquivo</label>
@@ -43,12 +41,11 @@ export function Form(task) {
         />
       </div>
 
-      {/* Anotações */}
       <textarea
         name="anotations"
         id="anotations"
         placeholder="Adicionar anotações"
-        value={task.task.description}
+        value={props.task.description}
       ></textarea>
     </section>
   );

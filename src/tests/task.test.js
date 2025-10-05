@@ -1,7 +1,7 @@
 import { Task } from "../domain/entities/task.js";
 import { TaskFactory } from "../domain/factorys/taskFactory.js";
 import { TaskRepository } from "../application/taskRepository.js";
-import { TaskService } from "../domain/taskService.js";
+import { TaskService } from "../domain/services/taskService.js";
 import { LocalStorageRepository } from "../infrastructure/LocalStorage.js";
 import {
   NameExceededValidator,

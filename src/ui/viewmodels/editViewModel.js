@@ -1,3 +1,5 @@
+import { Observable } from "../../domain/Observable";
+
 /**
  * Classe EditViewModel
  * --------------------
@@ -18,14 +20,17 @@
  * vm.edit(task, { name: "Nova tarefa editada" });
  */
 
-export class EditViewModel {
+export class EditViewModel extends Observable {
   constructor(repository, service) {
+    super();
     this.repository = repository;
     this.service = service;
   }
 
   edit(object, updates = {}) {
     const updatedTask = this.service.edit(object, updates);
-    return this.repository.edit(updatedTask);
+    const obj = this.repository.edit(updatedTask);
+    this.notify();
+    return obj;
   }
 }

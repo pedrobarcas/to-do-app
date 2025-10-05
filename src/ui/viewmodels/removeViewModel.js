@@ -1,3 +1,5 @@
+import { Observable } from "../../domain/Observable";
+
 /**
  * Classe RemoveViewModel
  * ----------------------
@@ -16,16 +18,21 @@
  * vm.remove(task);
  */
 
-export class RemoveViewModel {
+export class RemoveViewModel extends Observable {
   constructor(repository) {
+    super();
     this.repository = repository;
   }
 
   remove(object) {
-    return this.repository.remove(object);
+    const removed = this.repository.remove(object);
+    this.notify();
+    return removed;
   }
 
   removeGroup(key) {
-    return this.repository.clear(key);
+    const removed = this.repository.clear(key);
+    this.notify();
+    return removed;
   }
 }

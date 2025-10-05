@@ -46,15 +46,23 @@ export class homeView{
             form.style.display = 'none'
         })
 
-        root.getElementById('create').addEventListener('click', () => {
-            this.createVM.create(group.value.trim(), this.color)
+        this.createVM.subscribe(() => {
             form.style.display = 'none'
             this.Ui.renderGroups(document.querySelector('.home__group'))
         })
 
+        root.getElementById('create').addEventListener('click', () => {
+            this.createVM.create(group.value.trim(), this.color, Array.from(document.querySelector(".icon").classList).slice(0, 2).join(" "))
+        })
+        
         document.querySelectorAll(".todo__form--color-content").forEach(color => {
             color.addEventListener('click', (event) => {
-            this.color = event.target.dataset.color
+            this.color = event.target.dataset.color;
+            document.querySelectorAll(".todo__form--color-content").forEach(colorContent => {
+                colorContent.classList.remove('is-selected');
+            })
+            event.target.classList.add('is-selected');
+
       })
     })
     }

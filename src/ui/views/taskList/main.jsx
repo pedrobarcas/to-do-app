@@ -39,6 +39,8 @@ import { ListViewModel } from "../../viewmodels/ListViewModel.js";
 import { TaskDetailViewModel } from "../../viewmodels/taskDetailViewModel";
 import { CreateViewModel } from "../../viewmodels/createViewModel.js";
 import { TaskFactory } from "../../../domain/factorys/taskFactory.js";
+import { linesRenderer } from "./linesRenderer.jsx";
+import { theme } from "./theme.jsx";
 
 // Recupera a key da lista
 const key = queryParams.getQueryParams("key");
@@ -56,7 +58,7 @@ const groupVM = new GroupViewModel(groupRepository, taskRepository, service);
 // UIs
 const taskUi = new TaskUiClass(taskListViewModel, taskDetailViewModel);
 
-const listTaskView = new ListTaskView({
+const listTaskView = new ListTaskView(key, {
   viewModels: {
     groupVM,
     taskCreateVM: taskCreateViewModel,
@@ -68,6 +70,8 @@ const listTaskView = new ListTaskView({
     UiElements,
     FormUi,
     HeaderUi,
+    linesRenderer,
+    theme
   },
   components: {
     Header: MainHeader,

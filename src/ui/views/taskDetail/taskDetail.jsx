@@ -37,7 +37,7 @@ export function taskDetail(task, components = {}){
       <main className="main-content">
         
 
-        <components.Header href={"./index.html"}/>
+        <components.Header/>
         <div className="main-task tasks">
             <components.TaskCard task={task} forEdition={true} />
         </div>

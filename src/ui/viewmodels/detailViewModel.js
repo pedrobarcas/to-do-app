@@ -1,3 +1,5 @@
+import { Observable } from "../../domain/Observable";
+
 /**
  * Classe DetailViewModel
  * ----------------------
@@ -19,8 +21,9 @@
  * const task = vm.get("task_id");
  */
 
-export class DetailViewModel {
+export class DetailViewModel extends Observable {
   constructor(repository, queryParam) {
+    super();
     this.repository = repository;
     this.queryParam = queryParam;
   }

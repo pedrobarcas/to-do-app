@@ -11,23 +11,29 @@ import { h } from "../../h"
  * - Exibe um ícone ilustrativo (lista) e o nome do grupo.
  * 
  * Parâmetros:
- * @param {Object} group - Objeto contendo as informações do grupo.
- * @param {Object} group.group - Subobjeto que contém os dados do grupo.
- * @param {string} group.group.name - Nome do grupo que será exibido e passado na URL.
+ * @param {Object} props - Objeto contendo as informações do grupo.
+ * @param {Object} props.group - Subobjeto que contém os dados do grupo.
+ * @param {string} props.group.name - Nome do grupo que será exibido e passado na URL.
  * 
  * Retorno:
  * - JSX representando o cartão do grupo.
  */
 
-export function GroupCard(group){
+export function GroupCard(props){
+    let icon = "fa-solid fa-list-ul"
+
+    if (props.group.icon && !props.group.icon.includes("fa-regular")){
+      icon = props.group.icon
+    }
+    
     return (
-        <a className="content-box" href={`listTask.html?key=${group.group.id}`}>
+        <a className="content-box" href={`listTask.html?key=${props.group.id}`}>
         <span
-          className="fa-solid fa-list-ul"
+          className={icon}
           aria-label="Imagem ilustrativa de uma casa"
-          style={`color: ${group.group.color}`}
+          style={`color: ${props.group.color}`}
         ></span>
-        <p>{group.group.name}</p>
+        <p>{props.group.name}</p>
       </a>
     )
 } 

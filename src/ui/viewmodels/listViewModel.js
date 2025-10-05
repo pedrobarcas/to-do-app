@@ -1,3 +1,5 @@
+import { Observable } from "../../domain/Observable";
+
 /**
  * Classe ListViewModel
  * --------------------
@@ -15,12 +17,15 @@
  * const tasks = vm.load();
  */
 
-export class ListViewModel {
+export class ListViewModel extends Observable {
   constructor(repository) {
+    super();
     this.repository = repository;
   }
 
   load() {
-    return this.repository.load();
+    const objects = this.repository.load();
+    this.notify();
+    return objects;
   }
 }

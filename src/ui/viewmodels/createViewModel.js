@@ -1,3 +1,5 @@
+import { Observable } from "../../domain/Observable";
+
 /**
  * Classe CreateViewModel
  * ----------------------
@@ -18,14 +20,17 @@
  * vm.create({ name: "Estudar MVVM" });
  */
 
-export class CreateViewModel {
+export class CreateViewModel extends Observable {
   constructor(factory, repository) {
+    super();
     this.factory = factory;
     this.repository = repository;
   }
 
   create(obj, other = "") {
     const object = this.factory.create(obj, other);
-    return this.repository.save(object);
+    const created = this.repository.save(object);
+    this.notify(object);
+    return created;
   }
 }

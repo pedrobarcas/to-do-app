@@ -26,11 +26,12 @@
  */
 
 export class TaskDetailView{
-    constructor(taskDetailVM, taskEditVM, taskRemove, taskDetailComponent){
-        this.taskDetailVM = taskDetailVM;
-        this.taskEditVM = taskEditVM;
-        this.taskRemoveVM = taskRemove;
-        this.taskDetailComponent = taskDetailComponent
+    constructor(viewModels, components, config){
+        this.taskDetailVM = viewModels.detail;
+        this.taskEditVM = viewModels.edit;
+        this.taskRemoveVM = viewModels.remove;
+        this.taskDetailComponent = components;
+        this.config = config
     }
 
     render(root){
@@ -52,15 +53,19 @@ export class TaskDetailView{
         });
 
         
+        this.taskRemoveVM.subscribe(() => {
+            history.back()
+        })
         document.querySelector(".fa-trash").addEventListener("click", () => {
             this.taskRemoveVM.remove(task);
-            window.location.href = "../../../index.html";
+        })
         
+        this.taskDetailVM.subscribe(() => {
+            location.reload()
         })
         
         button_completed_task.addEventListener('click', () => {
               this.taskDetailVM.completedTask(task);
-              location.reload()
         })
     }
 }

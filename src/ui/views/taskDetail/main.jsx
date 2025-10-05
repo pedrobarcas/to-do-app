@@ -18,6 +18,7 @@
 import { service } from "../../index.js";
 import { queryParams } from "../../index.js";
 import { packingDependecyTask } from "../../index.js";
+import { configService } from "../../index.js";
 
 import { TaskDetailViewModel } from "../../viewmodels/taskDetailViewModel.js";
 import { EditViewModel } from "../../viewmodels/EditViewModel.js";
@@ -33,6 +34,7 @@ import { Form } from "../../components/form";
 
 
 import { h } from "../../../h.js";
+import { config } from "../../../config.js";
 
 const taskRepository = packingDependecyTask(queryParams.getQueryParams("key"))
 
@@ -42,15 +44,19 @@ const taskEditViewModel = new EditViewModel(taskRepository, service);
 const taskRemoveViewModel = new RemoveViewModel(taskRepository);
 
 const view = new TaskDetailView(
-    taskDetailViewModel,
-    taskEditViewModel,
-    taskRemoveViewModel,
+    {
+        "detail": taskDetailViewModel,
+        "edit": taskEditViewModel,
+        "remove": taskRemoveViewModel,
+    },
+
     taskDetail(taskDetailViewModel.get("task_id"), {
         "TaskCard": TaskCard,
         "Header": Header,
         "Footer": Footer,
         "Form": Form
-    })
+    }),
+    configService
 );
 
 const container = document.querySelector(".container");

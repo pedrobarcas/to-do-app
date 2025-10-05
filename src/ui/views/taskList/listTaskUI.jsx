@@ -81,9 +81,12 @@ export class TaskUi {
     if (!completed) UiElements.main_tasks.appendChild(taskCard);
     else UiElements.completed_tasks.appendChild(taskCard);
 
-    // ✅ Completar task sem reload, apenas re-renderiza
     taskButton.addEventListener("click", () => {
       this.detailViewModel.completedTask(task);
+      if (task.completed){
+        const audio = new Audio("./src/assets/completedTaskSound.mp3")
+        audio.play()
+      }
       this.renderTask(key); // Atualiza toda a lista de forma fluida
     });
   }

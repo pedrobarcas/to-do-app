@@ -1,5 +1,8 @@
-export class GroupViewModel {
+import { Observable } from "../../domain/Observable";
+
+export class GroupViewModel extends Observable {
   constructor(repository, groupRepository, service) {
+    super(); // ⚠️ importante chamar antes de acessar this
     this.repository = repository;
     this.groupRepository = groupRepository;
     this.service = service;
@@ -10,14 +13,20 @@ export class GroupViewModel {
   }
 
   remove(key) {
+    this.unsubscribeAll();
     const group = this.repository.find(key);
     this.repository.remove(group);
     this.groupRepository.clear(key);
+
+    // Notifica os inscritos que um grupo foi removido
+    this.notify({ removed: key });
   }
 
   edit(group, updates = {}) {
     const idChanged = updates.id && updates.id !== group.id;
     const nameChanged = updates.name && updates.name !== group.name;
+
+    let updatedGroup;
 
     if (idChanged || nameChanged) {
       const oldKey = group.name;
@@ -33,17 +42,18 @@ export class GroupViewModel {
       this.repository.remove(group);
       this.groupRepository.clear(group.id);
 
-      const updatedGroup = this.service.edit(group, updates);
+      updatedGroup = this.service.edit(group, updates);
 
       this.repository.save(updatedGroup);
       this.groupRepository.save(updatedGroup);
-
-      return updatedGroup;
+    } else {
+      updatedGroup = this.service.edit(group, updates);
+      this.groupRepository.edit(updatedGroup);
+      this.repository.edit(updatedGroup);
     }
 
-    const updatedGroup = this.service.edit(group, updates);
-    this.groupRepository.edit(updatedGroup);
-    this.repository.edit(updatedGroup);
+    // Notifica os inscritos que o grupo foi atualizado
+    this.notify(updatedGroup);
 
     return updatedGroup;
   }
