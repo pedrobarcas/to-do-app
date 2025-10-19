@@ -1,0 +1,1 @@
+html{display:flex}body{margin:4rem 1rem 1rem;width:100%}section{margin-top:1rem;display:flex;flex-direction:column;row-gap:1rem}nav{margin-top:1rem;row-gap:1rem;display:flex;flex-direction:column}strong{color:gray}.main-header{position:fixed;top:0;background-color:var(--main-background);padding:1rem .4rem;display:flex;gap:2rem;width:100%;font-size:1.2rem}
