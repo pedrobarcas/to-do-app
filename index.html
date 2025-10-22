@@ -26,7 +26,7 @@
       type="image/x-icon"
     />
     <link rel="stylesheet" href="src/styles/base.css" />
-    <link rel="stylesheet" href="./src/styles/module.css" />
+    <link rel="stylesheet" href="src/styles/module.css" />
     <link rel="stylesheet" href="src/styles/layout.css" />
     <link rel="stylesheet" href="src/styles/state.css" />
     <link rel="stylesheet" href="src/styles/theme.css" />
@@ -43,58 +43,49 @@
     <title>Microsoft to-do</title>
   </head>
 
-  <main class="main-content">
-    <header class="home__header">
-      <img
-        src="https://www.svgrepo.com/show/303143/microsoft-logo.svg"
-        alt=""
-        width="100px"
-        height="100px"
-      />
-      <span class="fa-solid fa-magnifying-glass"></span>
-    </header>
-
-    <section class="home__main-groups">
-      <a class="content-box" href="listTask.html?key=Meu%20Dia">
-        <span
-          class="fa-regular fa-sun"
-          aria-label="Imagem ilustrativa do Sol"
-          style="color: #929292"
-        ></span>
-        <p>Meu Dia</p>
-      </a>
-
-      <a class="content-box" href="listTask.html?key=Importante">
-        <span
-          class="fa-regular fa-star"
-          aria-label="Imagem ilustrativa de uma estrela"
-          style="color: var(--pink)"
-        ></span>
-        <p>Importante</p>
-      </a>
-
-      <a class="content-box" href="listTask.html?key=Tarefas">
-        <span
-          class="fa-solid fa-home"
-          aria-label="Imagem ilustrativa de uma casa"
-          style="color: var(--main-color)"
-        ></span>
-        <p>Tarefas</p>
-      </a>
-    </section>
-
-    <hr />
-    <section class="home__group home__main-groups"></section>
-
-    <footer class="todo__footer">
-      <div class="todo__footer--content">
-        <span class="fa-solid fa-plus"></span>
-        <p>Nova lista</p>
-      </div>
-    </footer>
-  </main>
-
   <body>
+    <main class="main-content">
+      <section class="home__main-groups">
+        <a class="content-box" href="list.html?key=Meu%20Dia">
+          <span
+            class="fa-regular fa-sun"
+            aria-label="Imagem ilustrativa do Sol"
+            style="color: #929292"
+          ></span>
+          <p>Meu Dia</p>
+        </a>
+
+        <a class="content-box" href="list.html?key=Importante">
+          <span
+            class="fa-regular fa-star"
+            aria-label="Imagem ilustrativa de uma estrela"
+            style="color: var(--pink)"
+          ></span>
+          <p>Importante</p>
+        </a>
+
+        <a class="content-box" href="list.html?key=Tarefas">
+          <span
+            class="fa-solid fa-home"
+            aria-label="Imagem ilustrativa de uma casa"
+            style="color: var(--main-color)"
+          ></span>
+          <p>Tarefas</p>
+        </a>
+      </section>
+
+      <hr />
+      <section class="home__group home__main-groups"></section>
+
+      <footer class="todo__footer">
+        <div class="todo__footer--content">
+          <span class="fa-solid fa-plus"></span>
+          <p>Nova lista</p>
+        </div>
+      </footer>
+    </main>
+
+    <script type="module" src="src/ui/private-check.js"></script>
     <script src="./src/ui/views/home/main.jsx" type="module"></script>
   </body>
 </html>

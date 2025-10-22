@@ -21,20 +21,24 @@
  *   2. Renderiza os grupos na seção `.home__group` via `Ui.renderGroups`.
  */
 import { h } from "../../../h";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../../../firebase/firebase";
+import { AccountHeader } from "../../components/accountHeader";
 
 export class homeView{
-    constructor(Ui, listVM, createVM, groupForm){
-        this.Ui = Ui
+    constructor(Ui, listVM, createVM, groupForm, styles){
+        this.Ui = Ui;
         this.listVM = listVM;
         this.createVM = createVM;
         this.groupForm = groupForm;
         this.color;
+        this.styles = styles;
 
     }
 
     bindEvents(root = document){
 
-        const form = root.querySelector('.todo__form--container');
+        const form = root.querySelector(`.${this.styles.container}`);
 
         const group = root.getElementById('group');
 
@@ -55,10 +59,10 @@ export class homeView{
             this.createVM.create(group.value.trim(), this.color, Array.from(document.querySelector(".icon").classList).slice(0, 2).join(" "))
         })
         
-        document.querySelectorAll(".todo__form--color-content").forEach(color => {
+        document.querySelectorAll(`.${this.styles.colorContent}`).forEach(color => {
             color.addEventListener('click', (event) => {
             this.color = event.target.dataset.color;
-            document.querySelectorAll(".todo__form--color-content").forEach(colorContent => {
+            document.querySelectorAll(`.${this.styles.colorContent}`).forEach(colorContent => {
                 colorContent.classList.remove('is-selected');
             })
             event.target.classList.add('is-selected');
@@ -69,6 +73,12 @@ export class homeView{
 
     render(root = document){
         const main_content = document.querySelector(".main-content")
+        onAuthStateChanged(auth, (user) => {
+            console.log(user)
+            const header = h(AccountHeader, {user: user})
+            main_content.prepend(header)
+        })
+        
         const form = <this.groupForm method={'post'}/>
         main_content.prepend(form)
 

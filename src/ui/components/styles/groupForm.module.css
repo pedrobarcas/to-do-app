@@ -1,0 +1,87 @@
+.container {
+  display: none;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--form-background);
+  z-index: 99999999;
+}
+
+.button {
+  background: none;
+  border: none;
+  color: white;
+}
+
+.group {
+  display: flex;
+  justify-self: flex-end;
+  width: 100%;
+  border-bottom: 2px solid var(--main-color);
+}
+
+.personalizationContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.personalization {
+  display: flex;
+  background-color: var(--main-color);
+  width: max-content;
+  border-radius: 25%;
+  padding: 0.25rem;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  min-width: auto;
+  max-width: 300px;
+  height: auto;
+  width: 80%;
+  color: var(--secondary-color);
+  background-color: var(--task-background);
+  padding: 2rem;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.input {
+  display: flex;
+  font-size: 1.25rem;
+  gap: 0.5rem;
+}
+
+.selectColor {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.colorContent {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background-color: var(--main-color);
+}
+
+.actions {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.listIcons {
+  display: none;
+  font-size: 1.5rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}

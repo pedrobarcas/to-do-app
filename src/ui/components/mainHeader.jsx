@@ -20,9 +20,11 @@ import { SettingsDropDown } from "./settingsDropDown";
 export function MainHeader({title, dropDown}){
     return (
         <header className="main-header">
-            <h1>{title}</h1>
+  
+              <a className="fa-solid fa-arrow-left" href="/"></a>
+              <h1>{title}</h1>
+              <div id="settings" className="fa-solid fa-ellipsis-vertical"></div>
             <div className="main-settings">
-            <div id="settings" className="fa-solid fa-ellipsis-vertical"></div>
             </div>
             {dropDown}
         </header>

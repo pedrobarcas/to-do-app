@@ -3,13 +3,17 @@ import { h } from "../../h";
 export function SettingsDropDown(){
     return (
         <div className="settings-drop-down">
-            <p id="changeThemeButton">
+            <div id="changeThemeButton" className="drop-down-content">
             <span
                 className="fa-solid fa-palette"
-                aria-label="imagem ilustrativa de uma palheta artística"
+                aria-label="Botão para alterar o tema da lista atual"
             ></span>
-            Alterar tema
-            </p>
+            <strong>Alterar tema</strong>
+            </div>
+            <div id="sendCopy" className="drop-down-content">
+                <span className="fa-solid fa-copy" aria-label="Botão para enviar uma cópia da lista de tarefas atual"></span>
+                    <strong>Enviar uma cópia</strong>
+            </div>
         </div>
     )
 }

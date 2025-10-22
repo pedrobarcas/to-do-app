@@ -16,18 +16,20 @@ import { h } from "../../h"
  * - JSX representando o formulário de criação de tarefas.
  */
 
-export function MainForm(){
+export function MainForm(handle){
     return (
-        <section className="main-form">
+        <form className="main-form" onSubmit={handle}>
             <div className="content-form">
+
+            <button className="circle-button"></button>
             <input type="text" placeholder="Sua tarefa" id="task" />
-            <button id="send-task">
+            <button title="Botão de adicionar tarefa" id="send-task" className="send-button" type="submit">
                 <span
                 className="fa-solid fa-arrow-up"
                 aria-label="imagem ilustrativa de inclusão de uma tarefa"
                 ></span>
             </button>
             </div>
-        </section>
+        </form>
     )   
 }

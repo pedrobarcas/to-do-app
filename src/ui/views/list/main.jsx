@@ -38,9 +38,12 @@ import { GroupViewModel } from "../../viewmodels/groupViewModel.js";
 import { ListViewModel } from "../../viewmodels/ListViewModel.js";
 import { TaskDetailViewModel } from "../../viewmodels/taskDetailViewModel";
 import { CreateViewModel } from "../../viewmodels/createViewModel.js";
+import { CreateTaskViewModel } from "../../viewmodels/createTaskViewModel.js";
 import { TaskFactory } from "../../../domain/factorys/taskFactory.js";
 import { linesRenderer } from "./linesRenderer.jsx";
 import { theme } from "./theme.jsx";
+
+import styles from "../../components/styles/groupForm.module.css"
 
 // Recupera a key da lista
 const key = queryParams.getQueryParams("key");
@@ -52,7 +55,7 @@ const groupRepository = packingDependecyTask("group");
 // ViewModels
 const taskListViewModel = new ListViewModel(taskRepository);
 const taskDetailViewModel = new TaskDetailViewModel(taskRepository, queryParams);
-const taskCreateViewModel = new CreateViewModel(TaskFactory, taskRepository);
+const taskCreateViewModel = new CreateTaskViewModel(TaskFactory, taskRepository);
 const groupVM = new GroupViewModel(groupRepository, taskRepository, service);
 
 // UIs
@@ -80,6 +83,9 @@ const listTaskView = new ListTaskView(key, {
     DropDown: SettingsDropDown,
     groupDropDown: GroupSettingsDropDown,
     groupForm: GroupForm,
+  },
+  styles: {
+    groupForm: styles,
   },
   config: configService,
 });

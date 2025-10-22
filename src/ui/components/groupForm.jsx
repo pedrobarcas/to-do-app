@@ -1,87 +1,60 @@
 import { h } from "../../h";
+import styles from "./styles/groupForm.module.css";
 
-function listColor(){
+function listColor() {
   return (
-    <div className="todo__form--select-color">
-      <div
-        dataset={{"color":  "#778cdd"}}
-        className="todo__form--color-content"
-        style="background-color: #778bddff"
-      ></div>
-
-      <div
-        dataset={{"color": "#f2b7c1"}}
-        className="todo__form--color-content"
-        style="background-color: #f2b7c1"
-      ></div>
-
-      <div
-        dataset={{"color": "#437d89"}}
-        className="todo__form--color-content"
-        style="background-color: #437d89"
-      ></div>
-
-      <div
-        dataset={{"color": "#f4a261"}}
-        className="todo__form--color-content"
-        style="background-color: #f4a261"
-      ></div>
-
-      <div
-        dataset={{"color": "#e76f51"}}
-        className="todo__form--color-content"
-        style="background-color: #e76f51"
-      ></div>
-
-      <div
-        dataset={{"color": "#9b5de5"}}
-        className="todo__form--color-content"
-        style="background-color: #9b5de5"
-      ></div>
+    <div className={styles.selectColor}>
+      {[
+        "#778cdd",
+        "#f2b7c1",
+        "#437d89",
+        "#f4a261",
+        "#e76f51",
+        "#9b5de5",
+      ].map((color) => (
+        <div
+          key={color}
+          dataset={{color}}
+          className={styles.colorContent}
+          style={{ backgroundColor: color }}
+        ></div>
+      ))}
     </div>
-  )
+  );
 }
 
-function listIcons(){
+function listIcons() {
+  const icons = [
+    "fa-bars", "fa-star", "fa-heart", "fa-gift", "fa-tag", "fa-book",
+    "fa-pen-to-square", "fa-trash", "fa-folder", "fa-code", "fa-thumbtack",
+    "fa-users", "fa-flask", "fa-briefcase", "fa-cart-shopping",
+    "fa-dumbbell", "fa-moon", "fa-sun",
+  ];
+
   return (
-    <div className="todo__form--list-icons" onClick={selectIcon}>
-      <span className="fa-solid fa-bars"></span>
-      <span className="fa-solid fa-star"></span>
-      <span className="fa-solid fa-heart"></span>
-      <span className="fa-solid fa-gift"></span>
-      <span className="fa-solid fa-tag"></span>
-      <span className="fa-solid fa-book"></span>
-      <span className="fa-solid fa-pen-to-square"></span>
-      <span className="fa-solid fa-trash"></span>
-      <span className="fa-solid fa-folder"></span>
-      <span className="fa-solid fa-code"></span>
-      <span className="fa-solid fa-thumbtack"></span>
-      <span className="fa-solid fa-users"></span>
-      <span className="fa-solid fa-flask"></span>
-      <span className="fa-solid fa-briefcase"></span>
-      <span className="fa-solid fa-cart-shopping"></span>
+    <div className={styles.listIcons} onClick={selectIcon}>
+      {icons.map((icon) => (
+        <span key={icon} className={`fa-solid ${icon}`}></span>
+      ))}
     </div>
-  )
+  );
 }
 
-export function GroupForm(method) {  
-  let title = "Nova lista";
-  let message = "CRIAR LISTA";
-  if (method && method.method != "post") {
-    title = "Renomear lista";
-    message = "SALVAR";
-  }
+export function GroupForm(method) {
+  const isEdit = method && method.method !== "post";
+  const title = isEdit ? "Renomear lista" : "Nova lista";
+  const message = isEdit ? "SALVAR" : "CRIAR LISTA";
 
   return (
-    <section className="todo__form--container">
-      <div className="todo__form--content">
-        <p className="todo__form--title">{title}</p>
+    <form className={styles.container}>
+      <div className={styles.content}>
+        <p className={styles.title}>{title}</p>
 
-        <div className="todo__form--input">
+        <div className={styles.input}>
           <label htmlFor="group" role="button" tabIndex="0" onClick={showListIcon}>
             <span
               className="fa-regular fa-face-smile icon"
-              style="color: var(--main-color)"
+              style={{ color: "var(--main-color)" }}
             ></span>
           </label>
           <input
@@ -89,40 +62,49 @@ export function GroupForm(method) {
             name="group"
             id="group"
             placeholder="Inserir o título da lista"
+            className={styles.group}
           />
         </div>
 
-        <div className="todo__form--personalization-content">
-          <div className="todo__form--personalization">Cor</div>
+        <div className={styles.personalizationContent}>
+          <div className={styles.personalization}>Cor</div>
           {listColor()}
         </div>
 
         {listIcons()}
 
-        <div className="todo__form--actions">
-          <p id="cancel" role="button">CANCELAR</p>
-          <p id="create" role="button">{message}</p>
+        <div className={styles.actions}>
+          <button id="cancel" tabIndex={1} type="button" className={styles.button}>
+            CANCELAR
+          </button>
+          <button id="create" tabIndex={0} type="button" className={styles.button}>
+            {message}
+          </button>
         </div>
       </div>
-    </section>
+    </form>
   );
 }
 
-function showListIcon(){
-  document.querySelector('.todo__form--personalization-content').classList.toggle('is-hidden')
-  document.querySelector('.todo__form--list-icons').classList.toggle('is-active')
+function showListIcon() {
+  const personalization = document.querySelector(`.${styles.personalizationContent}`);
+  const list = document.querySelector(`.${styles.listIcons}`);
+  if (personalization.style.display === "flex") {
+    personalization.style.display = "none";
+    list.style.display = "flex";
+  } else {
+    personalization.style.display = "flex";
+    list.style.display = "none";
+  }
 }
 
-function selectIcon(){
-  const icons = document.querySelector('.todo__form--list-icons').querySelectorAll("*")
-  icons.forEach(
-    el => {
-      el.addEventListener('click', (e) => {
-        icons.forEach(icon => {
-          icon.classList.remove("is-selected")
-        })
-        e.target.classList.add("is-selected");
-        document.querySelector(".icon").classList = `${e.target.classList} icon`
-      })
-  })
+function selectIcon() {
+  const icons = document.querySelector(`.${styles.listIcons}`).querySelectorAll("*");
+  icons.forEach((el) => {
+    el.addEventListener("click", (e) => {
+      icons.forEach((icon) => icon.classList.remove("is-selected"));
+      e.target.classList.add("is-selected");
+      document.querySelector(".icon").classList = `${e.target.classList} icon`;
+    });
+  });
 }

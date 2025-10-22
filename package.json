@@ -26,5 +26,8 @@
     "transform": {
       "^.+\\.jsx?$": "babel-jest"
     }
+  },
+  "dependencies": {
+    "firebase": "^12.4.0"
   }
 }

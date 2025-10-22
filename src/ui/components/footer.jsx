@@ -14,7 +14,7 @@ export function Footer(content) {
     <footer className="main-footer">
       <hr />
       <div className="footer-content">
-        <div className="task-date">{content.content}</div>
+        <time className="task-date" title={content.content}>{content.content}</time>
         <div className="task-actions">
           <span className="fa-solid fa-trash"></span>
         </div>

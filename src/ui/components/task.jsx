@@ -30,7 +30,7 @@ export function TaskCard({ task, forEdition = false, key}) {
   let button = <button className="task-checkbox"></button>
 
   let name = (
-    <a className="task-name" href={`./taskDetail.html?task_id=${task.id}&key=${key}`}>
+    <a className="task-name" href={`./detail.html?task_id=${task.id}&key=${key}`}>
       {task.name}
     </a>
   )
@@ -48,7 +48,9 @@ export function TaskCard({ task, forEdition = false, key}) {
 
   return (
     <ol className={`tasks task${task.id}`}>
-      {button}
+      <div>
+        {button}
+      </div>
       {name}
     </ol>
   )

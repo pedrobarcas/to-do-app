@@ -16,11 +16,11 @@ import { h } from "../../h"
  * - JSX representando o cabeçalho.
  */
 
-export function Header(href){
+export function Header({title, href = "/"}){
     return (
         <header className="main-header">
-            <a className="fa-solid fa-arrow-left" href="./index.html"></a>
-            <h1>Tarefas</h1>
+            <a className="fa-solid fa-arrow-left" href={href}></a>
+            <h1>{title}</h1>
         </header>
     )
 }

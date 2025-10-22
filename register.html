@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta
+      name="description"
+      content="A clone to-do list application of Microsoft"
+    />
+    <meta
+      name="author"
+      content="Pedro Barcas (GitHub: github.com/pedrobarcas)"
+    />
+    <meta
+      name="keywords"
+      content="to-do, list, application, javascript, web development, gerenciador de tarefas, Pedro Barcas"
+    />
+
+    <link
+      rel="shortcut icon"
+      href="https://img.icons8.com/?size=100&id=xF9ZbyGPFTC2&format=png&color=000000"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="src/styles/base.css" />
+    <link rel="stylesheet" href="src/styles/module.css" />
+    <link rel="stylesheet" href="src/styles/layout.css" />
+    <link rel="stylesheet" href="src/styles/state.css" />
+    <link rel="stylesheet" href="src/styles/theme.css" />
+    <link rel="stylesheet" href="src/styles/pages/login.css" />
+
+    <title>Login</title>
+  </head>
+
+  <main class="login"></main>
+
+  <div class="login-content">
+    <img
+      src="https://www.svgrepo.com/show/303143/microsoft-logo.svg"
+      alt=""
+      width="100px"
+      height="100px"
+    />
+    <form>
+      <input type="text" name="email" id="email" placeholder="Seu email" />
+      <input
+        type="text"
+        name="password"
+        id="password"
+        placeholder="Sua senha"
+      />
+      <button type="button" id="submit">
+        <strong>Realizar cadastro</strong>
+      </button>
+      <p>Crie uma conta To do, corporativa ou de estudante.</p>
+    </form>
+  </div>
+
+  <footer>
+    <a href="login.html">Você já tem uma conta To do?</a>
+  </footer>
+  <body>
+    <script src="src/ui/views/auth/registerView.jsx" type="module"></script>
+  </body>
+</html>

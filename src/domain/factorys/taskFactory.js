@@ -9,18 +9,19 @@ export class TaskFactory {
   /**
    * Cria uma nova instância de Task.
    * @param {string} name - Nome da tarefa.
-   * @param {string} [description=""] - Descrição opcional da tarefa.
+   * @param {string} [userId] - Descrição opcional da tarefa.
    * @returns {Task} Nova tarefa criada.
    */
-  static create(name, description = "") {
+  static create(name, userId) {
     return new Task(
       uuidv4(), // id único
       name.trim(), // nome sem espaços extras
-      description.trim(), // descrição limpa
+      "", // descrição limpa
       DateFormat.DateFormatBrazilian(), // data de criação formatada
       false, // completed (default: false)
       null, // date (sem prazo por padrão)
-      null // file (sem anexo inicial)
+      null, // file (sem anexo inicial)
+      userId
     );
   }
 }

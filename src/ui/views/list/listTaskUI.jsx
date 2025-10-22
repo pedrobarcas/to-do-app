@@ -84,7 +84,7 @@ export class TaskUi {
     taskButton.addEventListener("click", () => {
       this.detailViewModel.completedTask(task);
       if (task.completed){
-        const audio = new Audio("./src/assets/completedTaskSound.mp3")
+        const audio = new Audio("./completedTaskSound.mp3")
         audio.play()
       }
       this.renderTask(key); // Atualiza toda a lista de forma fluida

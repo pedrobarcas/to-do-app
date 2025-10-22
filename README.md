@@ -66,8 +66,8 @@ O projeto segue **Clean Architecture**:
 1. Clone o repositório:
 
 ```bash
-git clone https://github.com/pedrobarcas/todo-app.git
-cd todo-app
+git clone https://github.com/pedrobarcas/to-do-app.git
+cd to-do-app
 npm install
 npm run dev
 ```

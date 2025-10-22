@@ -1,4 +1,6 @@
 import { Observable } from "../../domain/Observable";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../../firebase/firebase";
 
 /**
  * Classe CreateViewModel
@@ -29,16 +31,22 @@ export class GroupCreateViewModel extends Observable {
 
   create(key, color = "", icon = "fa-solid fa-list-ul") {
     let name = key;
-    let i = 0;
+    if (key === "") {
+      name = "Lista sem título";
+      key = "Lista sem título";
+    }
+
+    let i = 1;
 
     while (this.repository.find(name)) {
       i++;
       name = `${key} (${i})`;
     }
 
-    const object = this.factory.create(name, color, icon);
-    const saved = this.repository.save(object);
-    this.notify(saved);
-    return saved;
+    onAuthStateChanged(auth, (user) => {
+      const object = this.factory.create(name, color, icon, user.uid);
+      const saved = this.repository.save(object);
+      this.notify(saved);
+    });
   }
 }

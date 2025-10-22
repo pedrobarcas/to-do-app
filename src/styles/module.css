@@ -2,9 +2,10 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px;
+  padding-left: 1rem;
   border-radius: 5px;
   height: 4rem;
+  max-height: auto;
   background-color: var(--task-background);
   width: 97%;
   min-height: 2.5rem;
@@ -15,11 +16,24 @@
 }
 
 .task-name {
+  width: 90%;
   color: var(--secondary-color);
   opacity: 70%;
+  padding: 1rem;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .tasks button {
+  height: 1.5rem;
+  width: 1.5rem;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  background-color: transparent;
+}
+
+.circle-button {
   height: 1.5rem;
   width: 1.5rem;
   border: 2px solid #ccc;
@@ -37,7 +51,7 @@
   color: var(--main-color);
   border: none;
   font-size: 1rem;
-  margin-bottom: 5rem;
+  margin-bottom: 2.5rem;
 }
 
 .main-settings {
@@ -54,37 +68,18 @@
 .settings-drop-down {
   display: none;
   flex-direction: column;
+  margin-right: 0.5rem;
   padding: 10px;
   position: absolute;
   top: 100%;
   right: 0;
   row-gap: 1rem;
   color: var(--secondary-color);
-  width: 10rem;
+  width: 50%;
   height: auto;
   font-size: 1rem;
   border-radius: 5px;
   background-color: var(--settings-background);
-}
-
-.main-mockup-task {
-  display: flex;
-  width: 100vw;
-  height: 50vh;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.mockup-task {
-  display: flex;
-  width: 30%;
-  height: 50%;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  color: var(--main-color);
 }
 
 .add-task {
@@ -133,8 +128,14 @@
 
 .drop-down-content {
   display: flex;
+  cursor: pointer;
   gap: 0.5rem;
   opacity: 100%;
+  width: 100rem;
   font-family: "Arial";
   font-weight: lighter;
+}
+
+.drop-down-content:hover {
+  opacity: 80%;
 }

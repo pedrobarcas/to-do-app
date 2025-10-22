@@ -12,7 +12,16 @@ export class Task {
    * @param {Date|null} date - Data de vencimento/execução (opcional).
    * @param {File|string|null} file - Arquivo associado à tarefa (opcional).
    */
-  constructor(id, name, description, create_date, completed, date, file) {
+  constructor(
+    id,
+    name,
+    description,
+    create_date,
+    completed,
+    date,
+    file,
+    user_id
+  ) {
     this.id = id;
     this.name = name;
     this.description = description;
@@ -20,5 +29,6 @@ export class Task {
     this.completed = completed;
     this.date = date;
     this.file = file;
+    this.user_id = user_id;
   }
 }

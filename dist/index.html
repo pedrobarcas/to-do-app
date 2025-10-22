@@ -7,7 +7,10 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta name="description" content="A simple to-do list application" />
+    <meta
+      name="description"
+      content="A clone to-do list application of Microsoft"
+    />
     <meta
       name="author"
       content="Pedro Barcas (GitHub: github.com/pedrobarcas)"
@@ -16,7 +19,12 @@
       name="keywords"
       content="to-do, list, application, javascript, web development"
     />
-
+
+    <link
+      rel="shortcut icon"
+      href="https://img.icons8.com/?size=100&id=xF9ZbyGPFTC2&format=png&color=000000"
+      type="image/x-icon"
+    />
 
     <link
       rel="stylesheet"
@@ -26,28 +34,32 @@
       referrerpolicy="no-referrer"
     />
 
-    <title>Tela inicial</title>
-    <script type="module" crossorigin src="/to-do-app/assets/main-D7I208pZ.js"></script>
-    <link rel="modulepreload" crossorigin href="/to-do-app/assets/h-B9Kqazla.js">
-    <link rel="modulepreload" crossorigin href="/to-do-app/assets/groupForm-B5APNPYO.js">
-    <link rel="stylesheet" crossorigin href="/to-do-app/assets/h-DEeFMFo7.css">
-    <link rel="stylesheet" crossorigin href="/to-do-app/assets/groupForm-B_QrKuh_.css">
-    <link rel="stylesheet" crossorigin href="/to-do-app/assets/taskDetail-DwTa09Ap.css">
+    <title>Microsoft to-do</title>
+    <script type="module" crossorigin src="/to-do-app/assets/main-BJb2_50s.js"></script>
+    <link rel="modulepreload" crossorigin href="/to-do-app/assets/h-CDZiPmD0.js">
+    <link rel="modulepreload" crossorigin href="/to-do-app/assets/Observable-1Zn7hIqi.js">
+    <link rel="modulepreload" crossorigin href="/to-do-app/assets/groupForm-DMfUBYxy.js">
+    <link rel="stylesheet" crossorigin href="/to-do-app/assets/h-68hGAczx.css">
+    <link rel="stylesheet" crossorigin href="/to-do-app/assets/Observable-ByE70xTU.css">
+    <link rel="stylesheet" crossorigin href="/to-do-app/assets/groupForm-BRdYbbaS.css">
+    <link rel="stylesheet" crossorigin href="/to-do-app/assets/taskDetail-DM_ZW6KS.css">
   </head>
 
   <main class="main-content">
     <header class="home__header">
-      <img
-        src="https://www.svgrepo.com/show/303143/microsoft-logo.svg"
-        alt=""
-        width="100px"
-        height="100px"
-      />
+      <a href="./configurations.html">
+        <img
+          src="https://www.svgrepo.com/show/303143/microsoft-logo.svg"
+          alt=""
+          width="100px"
+          height="100px"
+        />
+      </a>
       <span class="fa-solid fa-magnifying-glass"></span>
     </header>
-    
+
     <section class="home__main-groups">
-      <a class="content-box" href="listTask.html?key=Meu%20Dia">
+      <a class="content-box" href="list.html?key=Meu%20Dia">
         <span
           class="fa-regular fa-sun"
           aria-label="Imagem ilustrativa do Sol"
@@ -56,7 +68,7 @@
         <p>Meu Dia</p>
       </a>
 
-      <a class="content-box" href="listTask.html?key=Importante">
+      <a class="content-box" href="list.html?key=Importante">
         <span
           class="fa-regular fa-star"
           aria-label="Imagem ilustrativa de uma estrela"
@@ -65,7 +77,7 @@
         <p>Importante</p>
       </a>
 
-      <a class="content-box" href="listTask.html?key=Tarefas">
+      <a class="content-box" href="list.html?key=Tarefas">
         <span
           class="fa-solid fa-home"
           aria-label="Imagem ilustrativa de uma casa"
@@ -76,8 +88,7 @@
     </section>
 
     <hr />
-    <section class="home__group home__main-groups">
-    </section>
+    <section class="home__group home__main-groups"></section>
 
     <footer class="todo__footer">
       <div class="todo__footer--content">

@@ -6,8 +6,11 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: "index.html",
-        list: "listTask.html",
-        detail: "taskDetail.html",
+        list: "list.html",
+        detail: "detail.html",
+        configurations: "configurations.html",
+        agradecimentos: "AGRADECIMENTOS.html",
+        notice: "NOTICE.html",
       },
     },
   },

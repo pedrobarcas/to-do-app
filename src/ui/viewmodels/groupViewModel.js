@@ -2,7 +2,7 @@ import { Observable } from "../../domain/Observable";
 
 export class GroupViewModel extends Observable {
   constructor(repository, groupRepository, service) {
-    super(); // ⚠️ importante chamar antes de acessar this
+    super();
     this.repository = repository;
     this.groupRepository = groupRepository;
     this.service = service;
@@ -18,11 +18,11 @@ export class GroupViewModel extends Observable {
     this.repository.remove(group);
     this.groupRepository.clear(key);
 
-    // Notifica os inscritos que um grupo foi removido
     this.notify({ removed: key });
   }
 
   edit(group, updates = {}) {
+    this.unsubscribeAll();
     const idChanged = updates.id && updates.id !== group.id;
     const nameChanged = updates.name && updates.name !== group.name;
 
@@ -51,9 +51,6 @@ export class GroupViewModel extends Observable {
       this.groupRepository.edit(updatedGroup);
       this.repository.edit(updatedGroup);
     }
-
-    // Notifica os inscritos que o grupo foi atualizado
-    this.notify(updatedGroup);
 
     return updatedGroup;
   }

@@ -7,7 +7,10 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta name="description" content="A simple to-do list application" />
+    <meta
+      name="description"
+      content="A clone to-do list application of Microsoft"
+    />
     <meta
       name="author"
       content="Pedro Barcas (GitHub: github.com/pedrobarcas)"
@@ -23,10 +26,11 @@
       type="image/x-icon"
     />
     <link rel="stylesheet" href="src/styles/base.css" />
-    <link rel="stylesheet" href="src/styles/layout.css" />
     <link rel="stylesheet" href="src/styles/module.css" />
+    <link rel="stylesheet" href="src/styles/layout.css" />
     <link rel="stylesheet" href="src/styles/state.css" />
     <link rel="stylesheet" href="src/styles/theme.css" />
+    <link rel="stylesheet" href="src/styles/pages/account.css" />
 
     <link
       rel="stylesheet"
@@ -36,28 +40,32 @@
       referrerpolicy="no-referrer"
     />
 
-    <title>Lista de tarefas</title>
+    <title>Conta</title>
   </head>
-
   <body>
-    <main class="main-content">
-      <ul class="main-tasks"></ul>
+    <section>
+      <a href="/">
+        <div class="dual-content">
+          <div class="circle-img" id="icon">P</div>
+          <span class="fa-solid fa-x"></span>
+        </div>
+        <p id="username">To do</p>
+        <p id="email">email</p>
+        <hr />
+      </a>
+    </section>
+    <section>
+      <div class="content-box" id="logout" style="color: red">
+        <span class="fa-solid fa-door-open"></span>
+        <p>SAIR</p>
+      </div>
+      <hr />
+      <a class="content-box" href="configurations.html">
+        <span class="fa-solid fa-gear"></span>
+        <p>Configurações</p>
+      </a>
+    </section>
 
-      <section class="main-drop-down-task">
-        <button id="button-completed-tasks">
-          <span
-            class="fa-solid fa-chevron-right"
-            aria-label="imagem indicadora de abre e fecha de uma seção"
-          ></span>
-          Concluídas
-        </button>
-
-        <ul class="drop-down-task"></ul>
-
-        <div class="lines"></div>
-      </section>
-    </main>
-
-    <script src="./src/ui/views/taskList/main.jsx" type="module"></script>
+    <script type="module" src="src/ui/views/auth/account.jsx"></script>
   </body>
 </html>

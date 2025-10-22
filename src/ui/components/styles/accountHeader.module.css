@@ -1,0 +1,40 @@
+.header {
+  display: flex;
+  margin: 1rem;
+  justify-content: space-between;
+  background-color: var(--main-background);
+  width: 90%;
+  color: white;
+  box-sizing: border-box;
+}
+
+.header_content {
+  display: flex;
+  gap: 1rem;
+}
+
+.header_content_text {
+  display: flex;
+  flex-direction: column;
+}
+
+.circle_img {
+  display: flex;
+  height: 2rem;
+  width: 2rem;
+  color: white;
+  border-radius: 50%;
+  background-color: rebeccapurple;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+h2 {
+  color: gray;
+}
+
+span {
+  color: gray;
+  font-size: 1rem;
+}
