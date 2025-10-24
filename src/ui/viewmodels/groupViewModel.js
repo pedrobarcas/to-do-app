@@ -8,21 +8,21 @@ export class GroupViewModel extends Observable {
     this.service = service;
   }
 
-  find(key) {
-    return this.repository.find(key);
+  async find(key) {
+    const resolution = await this.repository.find(key);
+    return resolution;
   }
 
-  remove(key) {
+  async remove(key) {
     this.unsubscribeAll();
-    const group = this.repository.find(key);
-    this.repository.remove(group);
-    this.groupRepository.clear(key);
+    const group = await this.repository.find(key);
+    await this.repository.remove(group);
+    await this.groupRepository.clear(key);
 
     this.notify({ removed: key });
   }
 
   edit(group, updates = {}) {
-    this.unsubscribeAll();
     const idChanged = updates.id && updates.id !== group.id;
     const nameChanged = updates.name && updates.name !== group.name;
 
@@ -39,8 +39,9 @@ export class GroupViewModel extends Observable {
         localStorage.removeItem(oldKey);
       }
 
+      console.log("aaaa");
       this.repository.remove(group);
-      this.groupRepository.clear(group.id);
+      this.groupRepository.remove(group);
 
       updatedGroup = this.service.edit(group, updates);
 

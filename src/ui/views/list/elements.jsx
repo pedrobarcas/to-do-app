@@ -55,15 +55,3 @@ const TaskUiElements = (root = document) => ({
 });
 
 export const TaskElements = TaskUiElements();
-
-/**
- * MockupUiElements
- * ----------------
- * Seletores para mockups da interface (quando não há tarefas)
- */
-const MockupUiElements = (root = document) => ({
-  get main_mockup_task() { return must(root.querySelector(".main-mockup-task"), "Mockup principal"); },
-  get mockup() { return must(root.querySelector(".mockup"), "Mockup Inicial"); },
-});
-
-export const MockupElements = MockupUiElements();

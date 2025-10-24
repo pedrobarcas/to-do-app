@@ -36,7 +36,7 @@ export class homeView{
 
     }
 
-    bindEvents(root = document){
+    async bindEvents(root = document){
 
         const form = root.querySelector(`.${this.styles.container}`);
 
@@ -50,12 +50,12 @@ export class homeView{
             form.style.display = 'none'
         })
 
-        this.createVM.subscribe(() => {
+        this.createVM.subscribe(async () => {
             form.style.display = 'none'
-            this.Ui.renderGroups(document.querySelector('.home__group'))
+            await this.Ui.renderGroups(document.querySelector('.home__group'))
         })
 
-        root.getElementById('create').addEventListener('click', () => {
+        root.getElementById('create').addEventListener('click', async () => {
             this.createVM.create(group.value.trim(), this.color, Array.from(document.querySelector(".icon").classList).slice(0, 2).join(" "))
         })
         
@@ -71,7 +71,7 @@ export class homeView{
     })
     }
 
-    render(root = document){
+    async render(root = document){
         const main_content = document.querySelector(".main-content")
         onAuthStateChanged(auth, (user) => {
             console.log(user)
@@ -84,7 +84,7 @@ export class homeView{
 
         this.bindEvents(root)
 
-        this.Ui.renderGroups(document.querySelector('.home__group'))
+        await this.Ui.renderGroups(document.querySelector('.home__group'))
 
     }
 }

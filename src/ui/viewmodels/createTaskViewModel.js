@@ -9,10 +9,10 @@ export class CreateTaskViewModel extends Observable {
     this.repository = repository;
   }
 
-  create(obj) {
-    onAuthStateChanged(auth, (user) => {
+  async create(obj) {
+    onAuthStateChanged(auth, async (user) => {
       const object = this.factory.create(obj, user.uid);
-      this.repository.save(object);
+      await this.repository.save(object);
       this.notify(object);
     });
   }

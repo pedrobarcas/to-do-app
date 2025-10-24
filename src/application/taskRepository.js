@@ -18,10 +18,10 @@ export class TaskRepository extends Repository {
    * @param {Object} task - Entidade Task.
    * @returns {Object} Task atualizada.
    */
-  completed(task) {
+  async completed(task) {
     if (task.completed) task.completed = false;
     else task.completed = true;
-
-    return this.repository.edit(task);
+    const resolution = await this.repository.edit(task);
+    return resolution;
   }
 }

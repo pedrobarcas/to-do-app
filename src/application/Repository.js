@@ -16,8 +16,9 @@ export class Repository {
    * Carrega todos os objetos do repositório.
    * @returns {Array} Lista de objetos armazenados.
    */
-  load() {
-    return this.repository.load();
+  async load() {
+    const objects = await this.repository.load();
+    return objects;
   }
 
   /**
@@ -27,9 +28,10 @@ export class Repository {
    * @param {Object} object - Entidade a ser salva.
    * @returns {Object} Objeto salvo.
    */
-  save(object) {
+  async save(object) {
     this.service.save(object);
-    return this.repository.save(object);
+    const resolution = await this.repository.save(object);
+    return resolution;
   }
 
   /**
@@ -39,9 +41,10 @@ export class Repository {
    * @param {Object} object - Entidade a ser removida.
    * @returns {Object} Objeto removido.
    */
-  remove(object) {
+  async remove(object) {
     const validatedTask = this.service.remove(object);
-    return this.repository.remove(validatedTask);
+    const resolution = await this.repository.remove(validatedTask);
+    return resolution;
   }
 
   /**
@@ -49,8 +52,9 @@ export class Repository {
    * @param {Object} task - Entidade a ser editada.
    * @returns {Object} Entidade editada.
    */
-  edit(task) {
-    return this.repository.edit(task);
+  async edit(task) {
+    const resolution = await this.repository.edit(task);
+    return resolution;
   }
 
   /**
@@ -58,11 +62,13 @@ export class Repository {
    * @param {string|number} id - Identificador da entidade.
    * @returns {Object|null} Entidade encontrada ou null.
    */
-  find(id) {
-    return this.repository.find(id);
+  async find(id) {
+    const resolution = await this.repository.find(id);
+    return resolution;
   }
 
-  clear(key) {
-    return this.repository.clear(key);
+  async clear(key) {
+    const resolution = await this.repository.clear(key);
+    return resolution;
   }
 }

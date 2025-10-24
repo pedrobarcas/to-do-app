@@ -26,9 +26,10 @@ export class HomeUi {
     this.listViewModel = listViewModel
   }
 
-  renderGroups(root) {
+  async renderGroups(root) {
       root.innerHTML = ''
-      this.listViewModel.load().forEach((group) => {
+      const groups = await this.listViewModel.load()
+      groups.forEach((group) => {
       this.createTemplateGroup(root, group);
     });
   }

@@ -23,8 +23,8 @@ export class ListViewModel extends Observable {
     this.repository = repository;
   }
 
-  load() {
-    const objects = this.repository.load();
+  async load() {
+    const objects = await this.repository.load();
     this.notify();
     return objects;
   }

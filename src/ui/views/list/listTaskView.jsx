@@ -72,9 +72,9 @@ export class ListTaskView {
 
   }
 
-  bindViewModelsEvents(key){
+  async bindViewModelsEvents(key){
 
-    document.getElementById("create")?.addEventListener("click", () => {
+    document.getElementById("create")?.addEventListener("click", async () => {
       this.viewModels.groupVM.edit(
         this.viewModels.groupVM.find(key),
         {
@@ -87,8 +87,6 @@ export class ListTaskView {
         }
       );
 
-      localStorage.setItem("teste de location", location.href)
-      console.log(group.name)
       location.href = this.config.get("routers").list.concat(`?key=${document.getElementById("group").value}`)
     });
 
@@ -99,19 +97,18 @@ export class ListTaskView {
       
     });
     
-    this.uis.UiElements.send_task.addEventListener("click", (event) => {
+    this.uis.UiElements.send_task.addEventListener("click", async (event) => {
       this.uis.UiElements.settings.setAttribute("disabled", "false");
 
       const value = this.uis.UiElements.task.value.trim();
       
-      this.viewModels.taskCreateVM.create(value);
+      await this.viewModels.taskCreateVM.create(value);
     
 
     });
 
-    document.getElementById("deleteGroup")?.addEventListener("click", () => {
-      this.viewModels.groupVM.remove(key);
-      console.trace()
+    document.getElementById("deleteGroup")?.addEventListener("click", async () => {
+      await this.viewModels.groupVM.remove(key);
       location.href = this.config.get("routers").home;
     });
 
@@ -128,8 +125,6 @@ export class ListTaskView {
     }
     } else {
       alert("Seu navegador não suporta compartilhamento nativo. Por isso, copiamos a lista de tarefa para Área de transferência do seu teclado, basta apenas colar onde quiser.");
-
-
     }  
     }
 
@@ -137,7 +132,7 @@ export class ListTaskView {
       let tasksCopy = `${key}\n`
       const tasksNotCompleted = [];
       const tasksCompleted = [];
-      this.viewModels.taskListVM.load().forEach((task) => {
+      await this.viewModels.taskListVM.load().forEach((task) => {
         if (!task.completed){
           tasksNotCompleted.push(task)
         }
@@ -176,8 +171,8 @@ export class ListTaskView {
    * ----------------
    * Renderiza toda a interface da lista.
    */
-  render(key) {
-    this.uis.taskUI.renderTask(key);
+  async render(key) {
+    await this.uis.taskUI.renderTask(key);
     this.uis.theme(key, this.color);
     
     this.uis.UiElements.main_content.prepend(<this.components.groupForm method={"put"} />);
@@ -191,12 +186,15 @@ export class ListTaskView {
     this.uis.UiElements.main_content.appendChild(header);
     this.uis.UiElements.main_content.appendChild(this.components.ButtonAddTask());
     this.uis.UiElements.main_content.appendChild(this.components.Form(this.handle));
-    if (document.querySelector(".icon")){
-      document.querySelector(".icon").classList = `${this.viewModels.groupVM.find(key)?.icon} icon`
-    }
+    const groupSearch = await this.viewModels.groupVM.find(key).then(group => {
+      if (document.querySelector(".icon")){
+        document.querySelector(".icon").classList = `${group.icon} icon`
+      }
+    })
+    console.log(groupSearch)
 
     this.uis.linesRenderer();
-    this.bindViewModelsEvents(key)
+    await this.bindViewModelsEvents(key)
     this.bindUiEvents();
   }
 }

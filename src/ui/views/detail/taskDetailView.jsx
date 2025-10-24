@@ -34,38 +34,41 @@ export class TaskDetailView{
         this.config = config
     }
 
-    render(root){
-        const task = this.taskDetailVM.get("task_id");
-        root.appendChild(this.taskDetailComponent);
-        
-        const name = document.getElementById("name");
-        const anotations = document.getElementById("anotations");
-        const date = document.getElementById("date");
-
-        const button_completed_task = document.querySelector(".task-checkbox");
-        
-        window.addEventListener("input", () => {
-            this.taskEditVM.edit(task, {
-            name: name.value,
-            description: anotations.value,
-            date: date.value
-           });
+    async render(root){
+        await this.taskDetailVM.get("task_id").then(task => {
+            console.log(task)
+            
+            root.appendChild(this.taskDetailComponent);
+            
+            const name = document.getElementById("name");
+            const anotations = document.getElementById("anotations");
+            const date = document.getElementById("date");
+    
+            const button_completed_task = document.querySelector(".task-checkbox");
+            
+            window.addEventListener("input", async () => {
+                await this.taskEditVM.edit(task, {
+                name: name.value,
+                description: anotations.value,
+                date: date.value
+               });
+            });
+    
+            
+            this.taskRemoveVM.subscribe(() => {
+                history.back()
+            })
+            document.querySelector(".fa-trash").addEventListener("click", async () => {
+                await this.taskRemoveVM.remove(task);
+            })
+            
+            this.taskDetailVM.subscribe(() => {
+                location.reload()
+            })
+            
+            button_completed_task.addEventListener('click', async () => {
+                  await this.taskDetailVM.completedTask(task);
+            })
         });
-
-        
-        this.taskRemoveVM.subscribe(() => {
-            history.back()
-        })
-        document.querySelector(".fa-trash").addEventListener("click", () => {
-            this.taskRemoveVM.remove(task);
-        })
-        
-        this.taskDetailVM.subscribe(() => {
-            location.reload()
-        })
-        
-        button_completed_task.addEventListener('click', () => {
-              this.taskDetailVM.completedTask(task);
-        })
     }
 }

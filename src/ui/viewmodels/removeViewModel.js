@@ -24,14 +24,14 @@ export class RemoveViewModel extends Observable {
     this.repository = repository;
   }
 
-  remove(object) {
-    const removed = this.repository.remove(object);
+  async remove(object) {
+    const removed = await this.repository.remove(object);
     this.notify();
     return removed;
   }
 
-  removeGroup(key) {
-    const removed = this.repository.clear(key);
+  async removeGroup(key) {
+    const removed = await this.repository.clear(key);
     this.notify();
     return removed;
   }

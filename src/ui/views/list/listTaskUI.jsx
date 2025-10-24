@@ -60,11 +60,13 @@ export class TaskUi {
    * ----------------
    * Renderiza todas as tasks do grupo, separando concluídas e ativas.
    */
-  renderTask(key) {
+  async renderTask(key) {
     UiElements.main_tasks.innerHTML = "";
     UiElements.completed_tasks.innerHTML = "";
 
-    this.listViewModel.load().forEach((task) => {
+    const tasks = await this.listViewModel.load()
+    
+    tasks.forEach((task) => {
       this.createTemplateTask(task, task.completed, key);
     });
   }

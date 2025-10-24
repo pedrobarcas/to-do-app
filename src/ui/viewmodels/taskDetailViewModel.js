@@ -26,8 +26,8 @@ export class TaskDetailViewModel extends DetailViewModel {
     super(repository, queryParam);
   }
 
-  completedTask(task) {
-    const completed = this.repository.completed(task);
+  async completedTask(task) {
+    const completed = await this.repository.completed(task);
     this.notify();
     return completed;
   }

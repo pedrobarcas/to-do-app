@@ -29,8 +29,9 @@ export class GroupCreateViewModel extends Observable {
     this.repository = repository;
   }
 
-  create(key, color = "", icon = "fa-solid fa-list-ul") {
+  async create(key, color = "", icon = "fa-solid fa-list-ul") {
     let name = key;
+    console.log("aaaa");
     if (key === "") {
       name = "Lista sem título";
       key = "Lista sem título";
@@ -38,14 +39,14 @@ export class GroupCreateViewModel extends Observable {
 
     let i = 1;
 
-    while (this.repository.find(name)) {
+    while (await this.repository.find(name)) {
       i++;
       name = `${key} (${i})`;
     }
 
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, async (user) => {
       const object = this.factory.create(name, color, icon, user.uid);
-      const saved = this.repository.save(object);
+      const saved = await this.repository.save(object);
       this.notify(saved);
     });
   }

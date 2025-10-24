@@ -85,7 +85,7 @@ export class LocalStorageRepository {
   }
 
   clear(key) {
-    localStorage.removeItem(this.key);
+    localStorage.removeItem(key);
   }
 
   /**

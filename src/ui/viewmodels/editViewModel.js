@@ -27,10 +27,10 @@ export class EditViewModel extends Observable {
     this.service = service;
   }
 
-  edit(object, updates = {}) {
+  async edit(object, updates = {}) {
     const updatedTask = this.service.edit(object, updates);
-    const obj = this.repository.edit(updatedTask);
-    this.notify();
+    const obj = await this.repository.edit(updatedTask);
+    this.notify(updatedTask);
     return obj;
   }
 }

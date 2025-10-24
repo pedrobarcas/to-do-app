@@ -50,7 +50,7 @@ const view = new TaskDetailView(
         "remove": taskRemoveViewModel,
     },
 
-    taskDetail(taskDetailViewModel.get("task_id"), {
+    taskDetail(await taskDetailViewModel.get("task_id"), {
         "TaskCard": TaskCard,
         "Header": Header,
         "Footer": Footer,

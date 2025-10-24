@@ -28,7 +28,11 @@ export class DetailViewModel extends Observable {
     this.queryParam = queryParam;
   }
 
-  get(param) {
-    return this.repository.find(this.queryParam.getQueryParams(param));
+  async get(param) {
+    const resolution = await this.repository.find(
+      this.queryParam.getQueryParams(param)
+    );
+
+    return resolution;
   }
 }

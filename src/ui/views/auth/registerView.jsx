@@ -1,5 +1,6 @@
 import { createUserWithEmailAndPassword } from "firebase/auth"
 import { auth } from "../../../../firebase/firebase"
+import { configService } from "../.."
 
 const email = document.getElementById("email")
 const password = document.getElementById("password")

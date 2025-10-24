@@ -27,9 +27,9 @@ export class CreateViewModel extends Observable {
     this.repository = repository;
   }
 
-  create(obj, other = "") {
+  async create(obj, other = "") {
     const object = this.factory.create(obj, other);
-    const created = this.repository.save(object);
+    const created = await this.repository.save(object);
     this.notify(object);
     return created;
   }
