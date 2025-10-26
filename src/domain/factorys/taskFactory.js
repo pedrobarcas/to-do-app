@@ -12,7 +12,7 @@ export class TaskFactory {
    * @param {string} [userId] - Descrição opcional da tarefa.
    * @returns {Task} Nova tarefa criada.
    */
-  static create(name, userId) {
+  static create(name, userId, groupId) {
     const task = new Task(
       uuidv4(), // id único
       name.trim(), // nome sem espaços extras
@@ -21,7 +21,8 @@ export class TaskFactory {
       false, // completed (default: false)
       null, // date (sem prazo por padrão)
       null, // file (sem anexo inicial)
-      userId
+      userId,
+      groupId
     );
 
     return {
@@ -33,6 +34,7 @@ export class TaskFactory {
       date: task.date,
       file: task.file,
       user_id: task.user_id,
+      group_id: task.group_id,
     };
   }
 }

@@ -24,4 +24,9 @@ export class TaskRepository extends Repository {
     const resolution = await this.repository.edit(task);
     return resolution;
   }
+
+  async load(group_id) {
+    const resolution = await this.repository.load(group_id);
+    return resolution;
+  }
 }

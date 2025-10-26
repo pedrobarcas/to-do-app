@@ -21,8 +21,6 @@
  *   2. Renderiza os grupos na seção `.home__group` via `Ui.renderGroups`.
  */
 import { h } from "../../../h";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../../../../firebase/firebase";
 import { AccountHeader } from "../../components/accountHeader";
 
 export class homeView{
@@ -73,11 +71,10 @@ export class homeView{
 
     async render(root = document){
         const main_content = document.querySelector(".main-content")
-        onAuthStateChanged(auth, (user) => {
-            console.log(user)
-            const header = h(AccountHeader, {user: user})
-            main_content.prepend(header)
-        })
+        const header = h(AccountHeader, {user: JSON.parse(localStorage.getItem("userCached"))})
+
+        main_content.prepend(header)
+
         
         const form = <this.groupForm method={'post'}/>
         main_content.prepend(form)

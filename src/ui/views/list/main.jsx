@@ -22,7 +22,7 @@
  */
 
 
-import { service, queryParams, packingDependecyTask, configService } from "../../index.js";
+import { service, queryParams, packingDependecyTask, packingDependecyTaskFirestore, configService } from "../../index.js";
 import { UiElements } from "./elements";
 import { FormUi, HeaderUi, TaskUi as TaskUiClass } from "./listTaskUI";
 
@@ -38,7 +38,7 @@ import { RelationViewModel } from "../../viewmodels/relationViewModel.js";
 
 import { ListTaskView } from "./listTaskView";
 import { GroupViewModel } from "../../viewmodels/groupViewModel.js";
-import { ListViewModel } from "../../viewmodels/ListViewModel.js";
+import { ListTasksViewModel } from "../../viewmodels/listTasksViewModel.js";
 import { TaskDetailViewModel } from "../../viewmodels/taskDetailViewModel";
 import { CreateTaskViewModel } from "../../viewmodels/createTaskViewModel.js";
 import { TaskFactory } from "../../../domain/factorys/taskFactory.js";
@@ -49,24 +49,24 @@ import styles from "../../components/styles/groupForm.module.css"
 
 // Recupera a key da lista
 const key = queryParams.getQueryParams("key");
-
 // Repositories
-const taskRepository = packingDependecyTask("task");
+const taskRepository = packingDependecyTaskFirestore("task");
 const groupRepository = packingDependecyTask("group");
 const relationRepository = packingDependecyTask("relation")
 
 // ViewModels
-const taskListViewModel = new ListViewModel(taskRepository);
+const taskListViewModel = new ListTasksViewModel(taskRepository);
 const taskDetailViewModel = new TaskDetailViewModel(taskRepository, queryParams);
 const taskCreateViewModel = new CreateTaskViewModel(TaskFactory, taskRepository);
 const relationViewModel = new RelationViewModel(RelationFactory, relationRepository)
 const groupVM = new GroupViewModel(groupRepository, taskRepository, service);
+const group = await groupVM.find(key)
 
 // UIs
 const taskUi = new TaskUiClass(taskListViewModel, taskDetailViewModel);
 
 const listTaskView = new ListTaskView(
-  await groupVM.find(key), {
+  group, {
   viewModels: {
     groupVM,
     taskCreateVM: taskCreateViewModel,

@@ -7,12 +7,15 @@ import {
   getDocs,
   updateDoc,
   deleteDoc,
+  query,
+  where,
 } from "firebase/firestore";
 
 export class Firestore {
   constructor(db, collectionName) {
     this.db = db;
     this.collectionName = collectionName;
+    this.userCached = JSON.parse(localStorage.getItem("userCached"));
   }
 
   colRef() {
@@ -24,8 +27,15 @@ export class Firestore {
   }
 
   async load() {
-    const snapshot = await getDocs(this.colRef());
+    const q = query(this.colRef(), where("user_id", "==", this.userCached.uid));
+    const snapshot = await getDocs(q);
     // sempre retornar array de objetos normalizados
+    return snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+  }
+
+  async loadTasks(group_id) {
+    const q = query(this.colRef(), where("group_id", "==", group_id));
+    const snapshot = await getDocs(q);
     return snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
   }
 

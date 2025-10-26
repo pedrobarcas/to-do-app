@@ -73,7 +73,7 @@ export class ListTaskView {
 
   }
 
-  async bindViewModelsEvents(key){
+  bindViewModelsEvents(key){
 
     document.getElementById("create")?.addEventListener("click", async () => {
       this.viewModels.groupVM.edit(
@@ -94,7 +94,7 @@ export class ListTaskView {
 
     this.viewModels.taskCreateVM.subscribe(() => {
       this.uis.FormUi.hideForm();
-      this.uis.taskUI.renderTask(key);
+      this.uis.taskUI.renderTask(key, this.group.id);
       
     });
     
@@ -103,9 +103,8 @@ export class ListTaskView {
 
       const value = this.uis.UiElements.task.value.trim();
       
-      await this.viewModels.taskCreateVM.create(value).then(async (task) => {
+      await this.viewModels.taskCreateVM.create(value, this.group.id).then(async (task) => {
         console.log(task)
-        await this.viewModels.relationVM.create(this.group.id, task.id, task.user_id)
       });
     
 
@@ -116,59 +115,11 @@ export class ListTaskView {
       location.href = this.config.get("routers").home;
     });
 
-    async function sendCopy(text) {
-      if (navigator.share) {
-        try {
-           await navigator.share({
-             title: "Lista de tarefas",
-             text: text,
-        });
-      console.log("Compartilhamento feito com sucesso!");
-    } catch (err) {
-      console.error("Erro ao compartilhar:", err);
-    }
-    } else {
-      alert("Seu navegador não suporta compartilhamento nativo. Por isso, copiamos a lista de tarefa para Área de transferência do seu teclado, basta apenas colar onde quiser.");
-    }  
+    document?.getElementById("sendCopy")?.addEventListener("click", async () => {
+      throw new Error("not iplemented");
+    })
     }
 
-    document?.getElementById("sendCopy")?.addEventListener("click", async () => {
-      let tasksCopy = `${key}\n`
-      const tasksNotCompleted = [];
-      const tasksCompleted = [];
-      await this.viewModels.taskListVM.load().forEach((task) => {
-        if (!task.completed){
-          tasksNotCompleted.push(task)
-        }
-        
-        else{
-          tasksCompleted.push(task)
-        }
-      });
-      
-      tasksNotCompleted.forEach(task => {
-        tasksCopy += (`○ ${task.name}\n`)
-      })
-      
-      tasksCopy += ("\n Concluidas:\n")
-      
-      tasksCompleted.forEach(task => {
-        tasksCopy += (`    ● ${task.name}\n`)
-      })
-      
-      
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(tasksCopy);
-      } else {
-        copyToClipboardFallback(tasksCopy);
-      }
-      sendCopy(tasksCopy)
-    })
-  }
-  
-  handle(e){
-    e.preventDefault()
-  }
   
   /**
    * render(key)
@@ -176,7 +127,6 @@ export class ListTaskView {
    * Renderiza toda a interface da lista.
    */
   async render(key) {
-    await this.uis.taskUI.renderTask(key);
     this.uis.theme(key, this.color);
     
     this.uis.UiElements.main_content.prepend(<this.components.groupForm method={"put"} />);
@@ -189,16 +139,16 @@ export class ListTaskView {
     const header = <this.components.Header title={this.group.name} dropDown={dropDown} />;
     this.uis.UiElements.main_content.appendChild(header);
     this.uis.UiElements.main_content.appendChild(this.components.ButtonAddTask());
-    this.uis.UiElements.main_content.appendChild(this.components.Form(this.handle));
-    const groupSearch = await this.viewModels.groupVM.find(key).then(async group => {
-      console.log(group)
-      if (document.querySelector(".icon")){
-        document.querySelector(".icon").classList = `${group.icon} icon`
-      }
-    })
-
-    this.uis.linesRenderer();
-    await this.bindViewModelsEvents(key)
+    this.uis.UiElements.main_content.appendChild(this.components.Form((e) => {e.preventDefault()}));
+    
+    if (document.querySelector(".icon")){
+      document.querySelector(".icon").classList = `${this.group.icon} icon`
+    }
+    
+    
+    this.bindViewModelsEvents(key)
     this.bindUiEvents();
+    await this.uis.taskUI.renderTask(key, this.group.id);
+    this.uis.linesRenderer();
   }
 }

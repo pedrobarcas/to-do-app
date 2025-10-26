@@ -20,7 +20,8 @@ export class Task {
     completed,
     date,
     file,
-    user_id
+    user_id,
+    group_id
   ) {
     this.id = id;
     this.name = name;
@@ -30,5 +31,6 @@ export class Task {
     this.date = date;
     this.file = file;
     this.user_id = user_id;
+    this.group_id = group_id;
   }
 }
