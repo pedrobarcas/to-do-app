@@ -8,13 +8,14 @@ import { h } from "../../../h";
  */
 
 export class ListTaskView {
-  constructor(key, {viewModels = {}, uis = {}, components = {}, styles={}, config }) {
+  constructor(group, {viewModels = {}, uis = {}, components = {}, styles={}, config }) {
     this.viewModels = viewModels;
     this.uis = uis;
     this.components = components;
     this.config = config;
-    this.styles = styles
-    this.color = this.viewModels.groupVM.find(key)?.color;
+    this.styles = styles;
+    this.group = group;
+    this.color = this.group.color;
   }
 
   /**
@@ -102,7 +103,10 @@ export class ListTaskView {
 
       const value = this.uis.UiElements.task.value.trim();
       
-      await this.viewModels.taskCreateVM.create(value);
+      await this.viewModels.taskCreateVM.create(value).then(async (task) => {
+        console.log(task)
+        await this.viewModels.relationVM.create(this.group.id, task.id, task.user_id)
+      });
     
 
     });
@@ -182,16 +186,16 @@ export class ListTaskView {
       dropDown = <this.components.DropDown />;
     }
     
-    const header = <this.components.Header title={key} dropDown={dropDown} />;
+    const header = <this.components.Header title={this.group.name} dropDown={dropDown} />;
     this.uis.UiElements.main_content.appendChild(header);
     this.uis.UiElements.main_content.appendChild(this.components.ButtonAddTask());
     this.uis.UiElements.main_content.appendChild(this.components.Form(this.handle));
-    const groupSearch = await this.viewModels.groupVM.find(key).then(group => {
+    const groupSearch = await this.viewModels.groupVM.find(key).then(async group => {
+      console.log(group)
       if (document.querySelector(".icon")){
         document.querySelector(".icon").classList = `${group.icon} icon`
       }
     })
-    console.log(groupSearch)
 
     this.uis.linesRenderer();
     await this.bindViewModelsEvents(key)

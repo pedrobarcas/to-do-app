@@ -31,7 +31,7 @@ export class GroupCreateViewModel extends Observable {
 
   async create(key, color = "", icon = "fa-solid fa-list-ul") {
     let name = key;
-    console.log("aaaa");
+
     if (key === "") {
       name = "Lista sem título";
       key = "Lista sem título";

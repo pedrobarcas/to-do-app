@@ -36,7 +36,7 @@ import { Form } from "../../components/form";
 import { h } from "../../../h.js";
 import { config } from "../../../config.js";
 
-const taskRepository = packingDependecyTask(queryParams.getQueryParams("key"))
+const taskRepository = packingDependecyTask("task")
 
 // viewmodels
 const taskDetailViewModel = new TaskDetailViewModel(taskRepository, queryParams);

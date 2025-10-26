@@ -17,12 +17,12 @@ export class GroupViewModel extends Observable {
     this.unsubscribeAll();
     const group = await this.repository.find(key);
     await this.repository.remove(group);
-    await this.groupRepository.clear(key);
+    await this.groupRepository.remove(key);
 
     this.notify({ removed: key });
   }
 
-  edit(group, updates = {}) {
+  async edit(group, updates = {}) {
     const idChanged = updates.id && updates.id !== group.id;
     const nameChanged = updates.name && updates.name !== group.name;
 

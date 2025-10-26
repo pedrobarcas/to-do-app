@@ -9,7 +9,7 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 
-export class FirestoreAdapter {
+export class Firestore {
   constructor(db, collectionName) {
     this.db = db;
     this.collectionName = collectionName;
@@ -31,10 +31,8 @@ export class FirestoreAdapter {
 
   // Se obj.id existir: setDoc(com id). Se não: addDoc()
   async save(obj) {
-    const payload = sanitizeForFirestore(obj);
-    console.log(obj);
-
     try {
+      const payload = obj;
       if (payload.id) {
         // garante string
         const ref = this.docRef(payload.id);
@@ -54,7 +52,7 @@ export class FirestoreAdapter {
 
   async edit(obj) {
     if (!obj.id) throw new Error("edit: missing id");
-    const payload = sanitizeForFirestore(obj);
+    const payload = obj;
     const ref = this.docRef(payload.id);
     await updateDoc(ref, payload);
     return { id: payload.id, ...payload };
@@ -68,16 +66,9 @@ export class FirestoreAdapter {
     return id;
   }
 
-  async find(idOrField) {
-    // Se passar string/uuid, tratar como find by id
-    if (typeof idOrField === "string" && idOrField.includes("-")) {
-      const ref = this.docRef(idOrField);
-      const snap = await getDoc(ref);
-      return snap.exists() ? { id: snap.id, ...snap.data() } : null;
-    }
-
-    // Se passar objeto { field, value } ou (field, value) poderia criar query — simples aqui:
-    // implementa conforme necessidade (query where)
-    return null;
+  async find(id) {
+    const ref = this.docRef(id);
+    const snap = await getDoc(ref);
+    return snap.exists() ? { id: snap.id, ...snap.data() } : null;
   }
 }

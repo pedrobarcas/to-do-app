@@ -33,6 +33,8 @@ export class DetailViewModel extends Observable {
       this.queryParam.getQueryParams(param)
     );
 
+    console.log(this.queryParam.getQueryParams(param));
+
     return resolution;
   }
 }

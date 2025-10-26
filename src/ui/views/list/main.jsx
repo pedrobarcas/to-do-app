@@ -33,11 +33,13 @@ import { SettingsDropDown } from "../../components/settingsDropDown.jsx";
 import { GroupSettingsDropDown } from "../../components/groupSettingsDropDown.jsx";
 import { GroupForm } from "../../components/groupForm.jsx";
 
+import { RelationFactory } from "../../../domain/factorys/relationFactory.js";
+import { RelationViewModel } from "../../viewmodels/relationViewModel.js";
+
 import { ListTaskView } from "./listTaskView";
 import { GroupViewModel } from "../../viewmodels/groupViewModel.js";
 import { ListViewModel } from "../../viewmodels/ListViewModel.js";
 import { TaskDetailViewModel } from "../../viewmodels/taskDetailViewModel";
-import { CreateViewModel } from "../../viewmodels/createViewModel.js";
 import { CreateTaskViewModel } from "../../viewmodels/createTaskViewModel.js";
 import { TaskFactory } from "../../../domain/factorys/taskFactory.js";
 import { linesRenderer } from "./linesRenderer.jsx";
@@ -49,24 +51,28 @@ import styles from "../../components/styles/groupForm.module.css"
 const key = queryParams.getQueryParams("key");
 
 // Repositories
-const taskRepository = packingDependecyTask(key);
+const taskRepository = packingDependecyTask("task");
 const groupRepository = packingDependecyTask("group");
+const relationRepository = packingDependecyTask("relation")
 
 // ViewModels
 const taskListViewModel = new ListViewModel(taskRepository);
 const taskDetailViewModel = new TaskDetailViewModel(taskRepository, queryParams);
 const taskCreateViewModel = new CreateTaskViewModel(TaskFactory, taskRepository);
+const relationViewModel = new RelationViewModel(RelationFactory, relationRepository)
 const groupVM = new GroupViewModel(groupRepository, taskRepository, service);
 
 // UIs
 const taskUi = new TaskUiClass(taskListViewModel, taskDetailViewModel);
 
-const listTaskView = new ListTaskView(key, {
+const listTaskView = new ListTaskView(
+  await groupVM.find(key), {
   viewModels: {
     groupVM,
     taskCreateVM: taskCreateViewModel,
     taskListVM: taskListViewModel,
     taskDetailVM: taskDetailViewModel,
+    relationVM: relationViewModel
   },
   uis: {
     taskUI: taskUi,
