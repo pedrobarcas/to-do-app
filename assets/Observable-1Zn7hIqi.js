@@ -1,1 +1,0 @@
-class i{constructor(){this.subscribers=[]}subscribe(s){this.subscribers.push(s)}unsubscribe(s){this.subscribers=this.subscribers.filter(r=>r!==s)}unsubscribeAll(){this.subscribers=[]}notify(s){this.subscribers.forEach(r=>r(s))}}export{i as O};

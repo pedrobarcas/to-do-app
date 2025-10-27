@@ -4,10 +4,13 @@
     <meta charset="UTF-8" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1,0"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta name="description" content="A simple to-do list application" />
+    <meta
+      name="description"
+      content="A clone to-do list application of Microsoft"
+    />
     <meta
       name="author"
       content="Pedro Barcas (GitHub: github.com/pedrobarcas)"
@@ -21,7 +24,7 @@
       rel="shortcut icon"
       href="https://img.icons8.com/?size=100&id=xF9ZbyGPFTC2&format=png&color=000000"
       type="image/x-icon"
-    />
+    />
 
     <link
       rel="stylesheet"
@@ -31,21 +34,37 @@
       referrerpolicy="no-referrer"
     />
 
-    <title>Detalhes da tarefa</title>
-    <script type="module" crossorigin src="/to-do-app/assets/detail-CnykHr_E.js"></script>
+    <title>Conta</title>
+    <script type="module" crossorigin src="/to-do-app/assets/account-ByjqTI1b.js"></script>
     <link rel="modulepreload" crossorigin href="/to-do-app/assets/firebase-CX8_CCfr.js">
-    <link rel="modulepreload" crossorigin href="/to-do-app/assets/index-ExnFxcWi.js">
-    <link rel="modulepreload" crossorigin href="/to-do-app/assets/Observable-DAjlzQLp.js">
-    <link rel="modulepreload" crossorigin href="/to-do-app/assets/h-B3JzLlQ8.js">
-    <link rel="modulepreload" crossorigin href="/to-do-app/assets/taskDetailViewModel-OGZhBJz2.js">
-    <link rel="modulepreload" crossorigin href="/to-do-app/assets/header-HKd_pVn0.js">
     <link rel="stylesheet" crossorigin href="/to-do-app/assets/firebase-68hGAczx.css">
-    <link rel="stylesheet" crossorigin href="/to-do-app/assets/detail-CzdPwc0K.css">
+    <link rel="stylesheet" crossorigin href="/to-do-app/assets/account-BHJcvftv.css">
     <link rel="stylesheet" crossorigin href="/to-do-app/assets/state-0440DlJ6.css">
+    <link rel="stylesheet" crossorigin href="/to-do-app/assets/layout-CwWJddfK.css">
   </head>
-
   <body>
-    <div class="container"></div>
-
+    <section>
+      <a href="/">
+        <div class="dual-content">
+          <div class="circle-img" id="icon">P</div>
+          <span class="fa-solid fa-x"></span>
+        </div>
+        <p id="username">To do</p>
+        <p id="email">email</p>
+        <hr />
+      </a>
+    </section>
+    <section>
+      <div class="content-box" id="logout" style="color: red">
+        <span class="fa-solid fa-door-open"></span>
+        <p>SAIR</p>
+      </div>
+      <hr />
+      <a class="content-box" href="configurations.html">
+        <span class="fa-solid fa-gear"></span>
+        <p>Configurações</p>
+      </a>
+    </section>
+
   </body>
 </html>

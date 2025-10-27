@@ -1,1 +1,0 @@
-import{h as a}from"./h-CDZiPmD0.js";function m({title:e,href:r="index.html"}){return a("header",{className:"main-header"},a("a",{className:"fa-solid fa-arrow-left",href:r}),a("h1",null,e))}export{m as H};
