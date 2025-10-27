@@ -1,17 +1,22 @@
-import { signInWithEmailAndPassword } from "firebase/auth"
 import { auth } from "../../../../firebase/firebase";
 import { configService } from "../..";
+import { getRedirectResult, onAuthStateChanged, signInWithRedirect } from "firebase/auth";
+import { provider } from "../../../../firebase/firebase";
 
-const email = document.getElementById("email")
-const password = document.getElementById("password")
-const button = document.getElementById("submit")
+const email = document.getElementById("email");
 
-button.addEventListener("click", () => {
-    signInWithEmailAndPassword(auth, email.value, password.value)
-    .then(() => {
-        location.replace(configService.get("routers").home)
-    })
-    .catch((error) => {
-        console.log(error)
-    })
+onAuthStateChanged(auth, user => {
+  console.log(user)
 })
+
+email.addEventListener("click", async () => {
+  const result = await signInWithRedirect(auth, provider);
+  console.log(result);
+});
+
+
+getRedirectResult(auth).then(
+  console.log("Usuario logado").catch(error => {
+    console.log(error)
+  })
+)
