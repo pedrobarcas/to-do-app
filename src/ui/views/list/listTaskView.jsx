@@ -15,7 +15,7 @@ export class ListTaskView {
     this.config = config;
     this.styles = styles;
     this.group = group;
-    this.color = this.group.color;
+    this.color = this.group?.color;
   }
 
   /**
@@ -136,12 +136,12 @@ export class ListTaskView {
       dropDown = <this.components.DropDown />;
     }
     
-    const header = <this.components.Header title={this.group.name} dropDown={dropDown} />;
+    const header = <this.components.Header title={this.group?.name} dropDown={dropDown} />;
     this.uis.UiElements.main_content.appendChild(header);
     this.uis.UiElements.main_content.appendChild(this.components.ButtonAddTask());
     this.uis.UiElements.main_content.appendChild(this.components.Form((e) => {e.preventDefault()}));
     
-    if (document.querySelector(".icon")){
+    if (document.querySelector(".icon")  && this.group){
       document.querySelector(".icon").classList = `${this.group.icon} icon`
     }
     

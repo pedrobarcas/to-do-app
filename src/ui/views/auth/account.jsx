@@ -14,6 +14,7 @@ icon.textContent = userCached.email[0].toUpperCase();
 //})
 
 logout.addEventListener("click", () => {
+    localStorage.removeItem("userCached")
     signOut(auth)
     location.replace("/")
 })
