@@ -33,7 +33,7 @@ export class ListTaskView {
 
     this.uis.UiElements.button_completed_tasks.addEventListener("click", () => {
       this.uis.taskUI.showCompletedTasks();
-      this.uis.linesRenderer()
+      this.uis.linesRenderer();
     });
 
     this.uis.UiElements.settings.addEventListener("click", () => {

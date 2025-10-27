@@ -67,7 +67,7 @@ export class TaskUi {
     const tasks = await this.listViewModel.load(groupId)
     
     tasks.forEach((task) => {
-      this.createTemplateTask(task, task.completed, key);
+      this.createTemplateTask(task, task.completed, key, groupId);
     });
   }
 
@@ -76,7 +76,7 @@ export class TaskUi {
    * ----------------
    * Cria o card da task e adiciona eventos.
    */
-  createTemplateTask(task, completed = false, key) {
+  createTemplateTask(task, completed = false, key, groupId) {
     const taskCard = <TaskCard task={task} key={key}/>;
     const taskButton = taskCard.querySelector(".task-checkbox");
 
@@ -89,7 +89,7 @@ export class TaskUi {
         const audio = new Audio("./completedTaskSound.mp3")
         audio.play()
       }
-      this.renderTask(key); // Atualiza toda a lista de forma fluida
+      this.renderTask(key, groupId); // Atualiza toda a lista de forma fluida
     });
   }
 }
