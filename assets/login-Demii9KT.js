@@ -1,0 +1,1 @@
+import{o as t,a as e,s as a,g as s,p as n}from"./firebase-Db4owiX9.js";/* empty css              *//* empty css               */import"./index-h4Nq3WtJ.js";const i=document.getElementById("email");t(e,o=>{console.log(o)});i.addEventListener("click",async()=>{const o=await a(e,n);console.log(o)});s(e).then(console.log("Usuario logado").catch(o=>{console.log(o)}));

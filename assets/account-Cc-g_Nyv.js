@@ -1,0 +1,1 @@
+import{k as e,a as t}from"./firebase-Db4owiX9.js";/* empty css              *//* empty css               */document.getElementById("email");const o=document.getElementById("logout");document.getElementById("icon");o.addEventListener("click",()=>{localStorage.removeItem("userCached"),e(t),location.replace("/")});
