@@ -1,0 +1,1 @@
+import{o as t,a as e,s as a,p as i}from"./firebase-DriaDaxO.js";/* empty css              *//* empty css               */import{c as n}from"./index-CX7AbXmf.js";const r=document.getElementById("email");t(e,o=>{console.log(o)});r.addEventListener("click",async()=>{await a(e,i),location.replace(n.get("routers").home)});
