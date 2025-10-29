@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  base: "/to-do-app/",
+  base: "/",
   build: {
     rollupOptions: {
       input: {
@@ -12,7 +12,6 @@ export default defineConfig({
         agradecimentos: "AGRADECIMENTOS.html",
         notice: "NOTICE.html",
         login: "login.html",
-        register: "register.html",
         account: "account.html",
       },
     },

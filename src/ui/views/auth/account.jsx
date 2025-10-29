@@ -1,17 +1,16 @@
 import { signOut } from "firebase/auth";
 import { auth } from "../../../../firebase/firebase";
-
+import { userCached } from "../../../../firebase/firebase";
 
 const email = document.getElementById("email");
 const logout = document.getElementById("logout");
 const icon = document.getElementById("icon")
+const username = document.getElementById("username")
 
-const userCached = JSON.parse(localStorage.getItem("userCached"))
 
-//onAuthStateChanged(auth, user => {
-email.textContent = userCached.email;
-icon.textContent = userCached.email[0].toUpperCase();
-//})
+email.textContent = userCached?.email;
+username.textContent = userCached?.displayName
+icon.textContent = userCached?.displayName[0].toUpperCase();
 
 logout.addEventListener("click", () => {
     localStorage.removeItem("userCached")
