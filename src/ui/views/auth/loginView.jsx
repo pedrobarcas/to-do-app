@@ -1,6 +1,6 @@
 import { auth } from "../../../../firebase/firebase";
 import { configService } from "../..";
-import { getRedirectResult, onAuthStateChanged, signInWithRedirect } from "firebase/auth";
+import { getRedirectResult, onAuthStateChanged, signInWithPopup, signInWithRedirect } from "firebase/auth";
 import { provider } from "../../../../firebase/firebase";
 
 const email = document.getElementById("email");
@@ -10,13 +10,6 @@ onAuthStateChanged(auth, user => {
 })
 
 email.addEventListener("click", async () => {
-  const result = await signInWithRedirect(auth, provider);
-  console.log(result);
+  const result = await signInWithPopup(auth, provider);
+  location.replace(configService.get("routers").home)
 });
-
-
-getRedirectResult(auth).then(
-  console.log("Usuario logado").catch(error => {
-    console.log(error)
-  })
-)
