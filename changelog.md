@@ -1,29 +1,24 @@
-# Changelog 1.5.2 - 22/10/2025
+# Changelog 2.0 - 28/10/2025
 
 ## Adicionado:
 
-- Integração com o firebase
-- Autenticação Firebase (login e cadastro)
-- Template de configurações e agradecimentos
-- Tarefas agora possuem um dono
+- Integração com o Firestore
+- Sincronização de grupos e tarefas
+- Autenticação OAuth com a Microsoft
 
 ## Removido:
 
-- Inchaço desnecessário nos arquivos de estilo
+- Aréa de cadastro
+- _LocalStorage_ como infraestrutura
 
 ## Corrigido:
 
-- Bug no Header
-- Bug nos botões sem estilo
-- Bug onde alterava o endereço da lista ao adicionar tarefa
-- Bug nos formulários do Grupo
+- Problemas de deploy com Firebase
 
 ## Para o futuro:
 
-- Será possivel a sincronização de tarefas
-- Tarefas serão disponíveis online
-- Remoção da infraestrutura _LocalStorage_
-- Melhorar o sistema de autenticação com Verficação por Email
+- Deploy com o Firebase
+- Ordenação de tarefas
 
 ### Atualização disponível por Pedro Barcas
 
