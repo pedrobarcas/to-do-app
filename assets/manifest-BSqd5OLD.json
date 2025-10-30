@@ -1,7 +1,7 @@
 {
   "name": "To do",
   "short_name": "To do",
-  "start_url": "/index.html",
+  "start_url": "index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#1e88e5",
