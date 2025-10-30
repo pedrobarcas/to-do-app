@@ -17,11 +17,11 @@ import { SettingsDropDown } from "./settingsDropDown";
  * - JSX representando o cabeçalho principal com configurações.
  */
 
-export function MainHeader({title, dropDown}){
+export function MainHeader({title, dropDown, href}){
     return (
         <header className="main-header">
   
-              <a className="fa-solid fa-arrow-left" href="/"></a>
+              <a className="fa-solid fa-arrow-left" href={href}></a>
               <h1>{title}</h1>
               <div id="settings" className="fa-solid fa-ellipsis-vertical"></div>
             <div className="main-settings">

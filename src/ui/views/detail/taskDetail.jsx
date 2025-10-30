@@ -32,12 +32,12 @@ import { Form } from "../../components/form";
  * atuando como **container da página de detalhe**.
  */
 
-export function taskDetail(task, components = {}){
+export function taskDetail(task, components = {}, href){
     return (
       <main className="main-content">
         
 
-        <components.Header title="Tarefas"/>
+        <components.Header title="Tarefas" href={href}/>
         <div className="main-task tasks">
             <components.TaskCard task={task} forEdition={true} />
         </div>

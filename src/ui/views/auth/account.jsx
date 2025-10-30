@@ -1,5 +1,6 @@
 import { signOut } from "firebase/auth";
 import { auth } from "../../../../firebase/firebase";
+import { configService } from "../..";
 
 
 const email = document.getElementById("email");
@@ -16,5 +17,5 @@ icon.textContent = userCached.email[0].toUpperCase();
 logout.addEventListener("click", () => {
     localStorage.removeItem("userCached")
     signOut(auth)
-    location.replace("/")
+    location.replace(configService.get("routers").login)
 })

@@ -136,7 +136,7 @@ export class ListTaskView {
       dropDown = <this.components.DropDown />;
     }
     
-    const header = <this.components.Header title={this.group?.name} dropDown={dropDown} />;
+    const header = <this.components.Header title={this.group?.name} dropDown={dropDown} href={this.config.get("routers").home} />;
     this.uis.UiElements.main_content.appendChild(header);
     this.uis.UiElements.main_content.appendChild(this.components.ButtonAddTask());
     this.uis.UiElements.main_content.appendChild(this.components.Form((e) => {e.preventDefault()}));

@@ -55,7 +55,7 @@ const view = new TaskDetailView(
         "Header": Header,
         "Footer": Footer,
         "Form": Form
-    }),
+    }, configService.get("routers").home),
     configService
 );
 

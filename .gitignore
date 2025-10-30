@@ -10,6 +10,7 @@ lerna-debug.log*
 node_modules
 dist-ssr
 dist/
+*dist/
 *.local
 *map
 # Editor directories and files
@@ -22,6 +23,3 @@ dist/
 *.njsproj
 *.sln
 *.sw?
-
-# Configurações do Firebase
-firebase/
