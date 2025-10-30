@@ -1,0 +1,30 @@
+name: Pull Request
+
+on:
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Análise do código
+        uses: actions/checkout@v4
+
+      - name: Cache do npm
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
+      - name: Instalação de dependências
+        run: npm install
+
+      - name: Execução dos testes
+        run: npm test
+
+      - name: Build do projeto
+        run: npm run build
