@@ -1,1 +1,0 @@
-import{h as e}from"./h-B3JzLlQ8.js";import{H as o}from"./header-cKqmM25f.js";import{c as r}from"./index-C9oEpwqP.js";const t=e(o,{title:"Configurações",href:r.get("home")}),n=document.getElementById("container");n.prepend(t);
