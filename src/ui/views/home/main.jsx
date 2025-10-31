@@ -26,9 +26,7 @@ import { GroupForm } from "../../components/groupForm";
 import { HomeUi } from "./homeUI";
 import { homeView } from "./homeDetailView";
 
-
 import styles from "../../components/styles/groupForm.module.css"
-
 
 const groupFactory = GroupFactory;
 const groupRepository = packingDependecyTask('group');

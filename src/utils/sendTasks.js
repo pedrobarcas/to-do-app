@@ -1,5 +1,7 @@
-export function copyListTasks(tasks) {
-  let tasksCopy = `${key}\n`;
+import { sendCopy } from "./share";
+
+export function copyListTasks(tasks, title) {
+  let tasksCopy = `${title}\n`;
   const tasksNotCompleted = [];
   const tasksCompleted = [];
   tasks.forEach((task) => {
@@ -19,4 +21,6 @@ export function copyListTasks(tasks) {
       tasksCopy += `    ● ${task.name}\n`;
     });
   });
+
+  sendCopy(tasksCopy);
 }

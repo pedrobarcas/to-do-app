@@ -1,29 +1,22 @@
-# Changelog 1.5.2 - 22/10/2025
+# Changelog 2.0.1 - 31/10/2025
 
 ## Adicionado:
 
-- Integração com o firebase
-- Autenticação Firebase (login e cadastro)
-- Template de configurações e agradecimentos
-- Tarefas agora possuem um dono
+- Compartilhamento de tarefas
+- Integração contínua
 
 ## Removido:
 
-- Inchaço desnecessário nos arquivos de estilo
+- Duplicidade no código
 
 ## Corrigido:
 
-- Bug no Header
-- Bug nos botões sem estilo
-- Bug onde alterava o endereço da lista ao adicionar tarefa
-- Bug nos formulários do Grupo
+- Edição de nomes grupo
+- Bug visual nos detalhes da tarefa
 
 ## Para o futuro:
 
-- Será possivel a sincronização de tarefas
-- Tarefas serão disponíveis online
-- Remoção da infraestrutura _LocalStorage_
-- Melhorar o sistema de autenticação com Verficação por Email
+- Integração com PWA
 
 ### Atualização disponível por Pedro Barcas
 

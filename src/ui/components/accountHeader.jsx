@@ -14,8 +14,6 @@ export function AccountHeader({user}){
                 </div>
             </div>
         </a>
-
-        <span className="fa-solid fa-magnifying-glass"></span>
     </header>
     )
 }

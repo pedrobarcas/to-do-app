@@ -1,4 +1,5 @@
 import { h } from "../../../h";
+import { copyListTasks } from "../../../utils/sendTasks";
 
 /**
  * ListTaskView
@@ -48,7 +49,7 @@ export class ListTaskView {
 
     window.addEventListener("scroll", () => {
       const header = document.querySelector(".main-header");
-      if (window.scrollY > 50) header?.classList.add("is-shrink");
+      if (window.scrollY > 45) header?.classList.add("is-shrink");
       else header?.classList.remove("is-shrink");
     });
 
@@ -75,11 +76,13 @@ export class ListTaskView {
 
   bindViewModelsEvents(key){
 
+    this.viewModels.groupVM.subscribe(() => {
+      location.reload()
+    })
     document.getElementById("create")?.addEventListener("click", async () => {
       this.viewModels.groupVM.edit(
-        this.viewModels.groupVM.find(key),
+        this.group,
         {
-          id: document.getElementById("group").value,
           name: document.getElementById("group").value,
           color: this.color,
           icon: Array.from(document.querySelector(".icon").classList)
@@ -87,8 +90,6 @@ export class ListTaskView {
                       .join(" ") 
         }
       );
-
-      location.href = this.config.get("routers").list.concat(`?key=${document.getElementById("group").value}`)
     });
 
 
@@ -98,25 +99,22 @@ export class ListTaskView {
       
     });
     
-    this.uis.UiElements.send_task.addEventListener("click", async (event) => {
+    this.uis.UiElements.send_task.addEventListener("click", async () => {
       this.uis.UiElements.settings.setAttribute("disabled", "false");
 
       const value = this.uis.UiElements.task.value.trim();
       
-      await this.viewModels.taskCreateVM.create(value, this.group.id).then(async (task) => {
-        console.log(task)
-      });
+      await this.viewModels.taskCreateVM.create(value, this.group.id)
     
-
     });
 
     document.getElementById("deleteGroup")?.addEventListener("click", async () => {
       await this.viewModels.groupVM.remove(key);
-      location.href = this.config.get("routers").home;
+      location.replace(this.config.get("routers").home);
     });
 
     document?.getElementById("sendCopy")?.addEventListener("click", async () => {
-      throw new Error("not iplemented");
+      copyListTasks(await this.viewModels.taskListVM.load(this.group.id), this.group.name)
     })
     }
 

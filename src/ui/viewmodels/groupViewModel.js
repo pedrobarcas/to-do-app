@@ -23,36 +23,11 @@ export class GroupViewModel extends Observable {
   }
 
   async edit(group, updates = {}) {
-    const idChanged = updates.id && updates.id !== group.id;
-    const nameChanged = updates.name && updates.name !== group.name;
-
-    let updatedGroup;
-
-    if (idChanged || nameChanged) {
-      const oldKey = group.name;
-      const newKey = updates.name || group.name;
-
-      const tasks = JSON.parse(localStorage.getItem(oldKey)) || [];
-
-      if (oldKey !== newKey) {
-        localStorage.setItem(newKey, JSON.stringify(tasks));
-        localStorage.removeItem(oldKey);
-      }
-
-      console.log("aaaa");
-      this.repository.remove(group);
-      this.groupRepository.remove(group);
-
-      updatedGroup = this.service.edit(group, updates);
-
-      this.repository.save(updatedGroup);
-      this.groupRepository.save(updatedGroup);
-    } else {
-      updatedGroup = this.service.edit(group, updates);
-      this.groupRepository.edit(updatedGroup);
-      this.repository.edit(updatedGroup);
-    }
-
-    return updatedGroup;
+    const updatedGroup = this.service.edit(group, updates);
+    console.log(updatedGroup);
+    const obj = await this.repository.edit(updatedGroup);
+    console.log(obj);
+    this.notify(updatedGroup);
+    return obj;
   }
 }

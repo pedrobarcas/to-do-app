@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   base: "/to-do-app/",
+
   build: {
     rollupOptions: {
       input: {
@@ -17,6 +18,7 @@ export default defineConfig({
       },
     },
   },
+
   esbuild: {
     jsxFactory: "h",
     jsxFragment: "Fragment",

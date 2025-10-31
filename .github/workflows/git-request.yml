@@ -1,0 +1,33 @@
+name: Github request
+
+on:
+  push:
+    branches: ["deploy"]
+    paths: ["src/**", "package.json"]
+
+  pull_request:
+    branches: ["deploy"]
+
+job:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v4
+
+      - name: Cache do npm
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
+      -
+
+      - name: Dependencies install
+        run: npm install
+
+      - name: Run tests
+        run: npm run test

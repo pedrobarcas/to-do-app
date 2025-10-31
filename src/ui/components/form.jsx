@@ -19,19 +19,21 @@ export function Form(props) {
         <button className="remember-me-button form-input">Lembrar-me</button>
       </div>
 
-      <hr />
-      <div className="form-input-box">
-        <label htmlFor="date" className="fa-regular fa-calendar"></label>
-        <input
-          type="date"
-          className="form-input"
-          name="date"
-          title="Adicionar uma data"
-          id="date"
-          value={props.task.date}
-        />
+      <div>
+        <hr />
+        <div className="form-input-box">
+          <label htmlFor="date" className="fa-regular fa-calendar"></label>
+          <input
+            type="date"
+            className="form-input"
+            name="date"
+            title="Adicionar uma data"
+            id="date"
+            value={props.task.date}
+            />
+        </div>
+        <hr />
       </div>
-      <hr />
 
       <div className="form-input-box">
         <label htmlFor="archive" className="fa-solid fa-paperclip"></label>
