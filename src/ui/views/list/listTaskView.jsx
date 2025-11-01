@@ -94,7 +94,6 @@ export class ListTaskView {
 
 
     this.viewModels.taskCreateVM.subscribe(() => {
-      this.uis.FormUi.hideForm();
       this.uis.taskUI.renderTask(key, this.group.id);
       
     });
@@ -103,8 +102,8 @@ export class ListTaskView {
       this.uis.UiElements.settings.setAttribute("disabled", "false");
 
       const value = this.uis.UiElements.task.value.trim();
-      
-      await this.viewModels.taskCreateVM.create(value, this.group.id)
+      this.uis.FormUi.hideForm();
+      this.viewModels.taskCreateVM.create(value, this.group.id);
     
     });
 

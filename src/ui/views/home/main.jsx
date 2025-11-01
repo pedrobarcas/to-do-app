@@ -27,6 +27,23 @@ import { HomeUi } from "./homeUI";
 import { homeView } from "./homeDetailView";
 
 import styles from "../../components/styles/groupForm.module.css"
+import { registerSW } from "virtual:pwa-register";
+
+const updateSW = registerSW({
+  onNeedRefresh() {
+
+    const shouldRefresh = confirm(
+      "Nova versão disponível! Deseja atualizar agora?"
+    );
+    if (shouldRefresh) {
+      updateSW(true);
+    }
+  },
+  onOfflineReady() {
+    console.log("Aplicativo pronto para uso offline 🚀");
+  },
+});
+
 
 const groupFactory = GroupFactory;
 const groupRepository = packingDependecyTask('group');
