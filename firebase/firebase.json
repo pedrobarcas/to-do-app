@@ -1,7 +1,7 @@
 {
   "firestore": {
     "database": "default",
-    "location": "nam5",
+    "location": "southamerica-east1",
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
   }

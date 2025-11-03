@@ -1,16 +1,19 @@
-// 📂 Domain/Task.js
-// Entidade Task: representa uma tarefa dentro da aplicação.
-// Contém apenas propriedades fundamentais da entidade.
+/**
+ * Entidade Task: representa uma tarefa dentro da aplicação.
+ * --
+ * Contém apenas propriedades fundamentais da entidade.
+ * @module domínio/entidades/tarefa
+ */
 
 export class Task {
   /**
-   * @param {string|number} id - Identificador único da tarefa.
-   * @param {string} name - Nome da tarefa.
-   * @param {string} description - Descrição detalhada da tarefa.
-   * @param {Date} create_date - Data de criação da tarefa.
-   * @param {boolean} completed - Indica se a tarefa está concluída.
-   * @param {Date|null} date - Data de vencimento/execução (opcional).
-   * @param {File|string|null} file - Arquivo associado à tarefa (opcional).
+   * @property {string|number} id - Identificador único da tarefa.
+   * @property {string} name - Nome da tarefa.
+   * @property {string} description - Descrição detalhada da tarefa.
+   * @property {Date} create_date - Data de criação da tarefa.
+   * @property {boolean} completed - Indica se a tarefa está concluída.
+   * @property {Date|null} date - Data de vencimento/execução (opcional).
+   * @property {File|string|null} file - Arquivo associado à tarefa (opcional).
    */
   constructor(
     id,

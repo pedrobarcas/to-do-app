@@ -1,19 +1,32 @@
-// Classe genérica de repositório na camada Application.
-// Responsável por orquestrar o Service (regras de negócio)
-// e o Repository real (infraestrutura: DB, LocalStorage, API...).
+import { Observable } from "../domain/Observable";
 
-export class Repository {
+/**
+ *
+ *Classe de de aplicação abstraída destinada a casos de uso.
+ * --
+ *Onde é alocado a principal comunicação com a infraestrutura.
+ *Responsável por toda a orquestração da aplicação.
+ *
+ *
+ *@example const repository = new Repository(new Service([], [], []), new Repository())
+ */
+
+export class Repository extends Observable {
   /**
+   * @constructor
    * @param {Object} service - Camada de regras de negócio (validações, lógica).
    * @param {Object} repository - Repositório concreto (infraestrutura).
    */
   constructor(service, repository) {
+    super();
     this.service = service;
     this.repository = repository;
   }
 
   /**
    * Carrega todos os objetos do repositório.
+   * --
+   * @async
    * @returns {Array} Lista de objetos armazenados.
    */
   async load() {
@@ -23,9 +36,11 @@ export class Repository {
 
   /**
    * Valida e salva um objeto.
+   * --
    * Primeiro chama o service para aplicar regras de negócio,
    * depois persiste no repositório concreto.
-   * @param {Object} object - Entidade a ser salva.
+   * @async
+   * @param {Object} object Entidade a ser salva.
    * @returns {Object} Objeto salvo.
    */
   async save(object) {
@@ -38,6 +53,7 @@ export class Repository {
    * Valida e remove um objeto.
    * Primeiro o service confirma se pode ser removido,
    * depois o repository executa a remoção.
+   * @async
    * @param {Object} object - Entidade a ser removida.
    * @returns {Object} Objeto removido.
    */
@@ -49,6 +65,7 @@ export class Repository {
 
   /**
    * Edita uma entidade existente.
+   * @async
    * @param {Object} task - Entidade a ser editada.
    * @returns {Object} Entidade editada.
    */
@@ -59,7 +76,7 @@ export class Repository {
 
   /**
    * Busca uma entidade pelo ID.
-   * @param {string|number} id - Identificador da entidade.
+   * @param {string} id - Identificador da entidade.
    * @returns {Object|null} Entidade encontrada ou null.
    */
   async find(id) {
@@ -67,6 +84,11 @@ export class Repository {
     return resolution;
   }
 
+  /**
+   * Limpa uma chave única e indiret
+   *
+   * @deprecated Será descontinuado em versões posteriores
+   */
   async clear(key) {
     const resolution = await this.repository.clear(key);
     return resolution;

@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { OAuthProvider, getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {
   initializeFirestore,
   persistentLocalCache,
@@ -9,12 +9,12 @@ import {
 import "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDHexASt3dkYnOPvBoC1-q6vneX65sGxr8",
-  authDomain: "parafazer-microsft-clone.firebaseapp.com",
-  projectId: "parafazer-microsft-clone",
-  storageBucket: "parafazer-microsft-clone.firebasestorage.app",
-  messagingSenderId: "180102714961",
-  appId: "1:180102714961:web:8d9fb39f73f6a3656e4a70",
+  apiKey: "AIzaSyCu3JChcmMTcG90s5FHhkCc_FdjK9DxM34",
+  authDomain: "parafazer-office.firebaseapp.com",
+  projectId: "parafazer-office",
+  storageBucket: "parafazer-office.firebasestorage.app",
+  messagingSenderId: "918055471970",
+  appId: "1:918055471970:web:c3da7a6d5d56e73687ba3b",
 };
 
 export const app = initializeApp(firebaseConfig);
@@ -26,7 +26,6 @@ export const db = initializeFirestore(app, {
 });
 
 export const auth = getAuth(app);
-export const provider = new OAuthProvider("microsoft.com");
 
 export const userCached = JSON.parse(localStorage.getItem("userCached"));
 

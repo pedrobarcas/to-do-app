@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: domain/services/Service.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: domain/services/Service.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// Classe base para Services na camada Domain.
+// Responsável por aplicar validações a objetos antes de executar operações de negócio.
+
+/**
+ * Classe base para os *Services* da camada **Domain**.
+ * --
+ *
+ * Fornece um conjunto padrão de estratégias de validação para operações de negócio,
+ * garantindo que objetos sejam verificados antes de serem persistidos, editados ou removidos.
+ *
+ * Essa classe é projetada para ser **herdada** por classes de serviço específicas (ex: `TaskService`, `UserService`),
+ * que devem definir seus próprios validadores conforme a regra de domínio.
+ *
+ * @class
+ * @abstract
+ * @since 1.0.0
+ *
+ * @example
+ * class UserService extends Service {
+ *   constructor() {
+ *     super([new EditValidator()], [new RemoveValidator()], [new SaveValidator()]);
+ *   }
+ * }
+ * @module domínio/serviços/Serviços
+ */
+export class Service {
+  /**
+   * Cria uma nova instância base de Service.
+   * --
+   *
+   * @constructor
+   * @param {Array&lt;Object>} [validatorsEdit=[]] - Lista de validadores aplicados na edição de objetos.
+   * Cada validador deve implementar o método `validate(object)`.
+   * @param {Array&lt;Object>} [validatorsRemove=[]] - Lista de validadores aplicados na remoção de objetos.
+   * @param {Array&lt;Object>} [validatorsSave=[]] - Lista de validadores aplicados no salvamento de objetos.
+   *
+   * @example
+   * const service = new Service([], [], [new RequiredFieldValidator()]);
+   */
+  constructor(validatorsEdit = [], validatorsRemove = [], validatorsSave = []) {
+    this.validatorsEdit = validatorsEdit;
+    this.validatorsRemove = validatorsRemove;
+    this.validatorsSave = validatorsSave;
+  }
+
+  /**
+   * Aplica uma lista de validadores sobre um objeto.
+   * --
+   *
+   * Cada elemento da estratégia deve possuir um método `validate(object)`.
+   *
+   * @protected
+   * @param {Object} object - Objeto a ser validado.
+   * @param {Array&lt;Object>} strategy - Lista de validadores a serem aplicados.
+   * @throws {Error} Se `strategy` não for um array ou se algum validador falhar.
+   *
+   * @example
+   * this.validate(user, this.validatorsSave);
+   */
+  validate(object, strategy) {
+    if (!Array.isArray(strategy)) {
+      throw new Error("Estratégia de validação inválida.");
+    }
+    strategy.forEach((v) => v.validate(object));
+  }
+
+  /**
+   * Valida o objeto e o retorna pronto para ser salvo.
+   * --
+   *
+   * @param {Object} object - Objeto a ser salvo.
+   * @returns {Object} O mesmo objeto, após validação.
+   *
+   * @example
+   * const validado = service.save({ nome: "Pedro" });
+   */
+  save(object) {
+    this.validate(object, this.validatorsSave);
+    return object;
+  }
+
+  /**
+   * Valida o objeto e o retorna pronto para remoção.
+   * --
+   *
+   * @param {Object} object - Objeto a ser removido.
+   * @returns {Object} O mesmo objeto, após validação.
+   *
+   * @example
+   * const validado = service.remove({ id: "123" });
+   */
+  remove(object) {
+    this.validate(object, this.validatorsRemove);
+    return object;
+  }
+
+  /**
+   * Valida e aplica alterações em um objeto existente.
+   * --
+   *
+   * @param {Object} object - Objeto original.
+   * @param {Object} [updates={}] - Conjunto de campos e valores a serem atualizados.
+   * @returns {Object} Um novo objeto contendo as propriedades atualizadas.
+   *
+   * @example
+   * const atualizado = service.edit({ nome: "Pedro" }, { nome: "Pedro Barcas" });
+   */
+  edit(object, updates = {}) {
+    this.validate(object, this.validatorsEdit);
+
+    const updated = {
+      ...object,
+      ...updates,
+    };
+
+    return updated;
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-aplica%25C3%25A7%25C3%25A3o_Reposit%25C3%25B3rio.html">aplicação/Repositório</a></li><li><a href="module-dom%25C3%25ADnio_entidades_tarefa.html">domínio/entidades/tarefa</a></li><li><a href="module-dom%25C3%25ADnio_fabricas_groupFactory.html">domínio/fabricas/groupFactory</a></li><li><a href="module-dom%25C3%25ADnio_fabricas_taskFactory.html">domínio/fabricas/taskFactory</a></li><li><a href="module-dom%25C3%25ADnio_servi%25C3%25A7os_Servi%25C3%25A7os.html">domínio/serviços/Serviços</a></li><li><a href="module-dom%25C3%25ADnio_servi%25C3%25A7os_configService.html">domínio/serviços/configService</a></li><li><a href="module-dom%25C3%25ADnio_servi%25C3%25A7os_taskService.html">domínio/serviços/taskService</a></li><li><a href="module-infraestrutura_Firestore.html">infraestrutura/Firestore</a></li><li><a href="module-infraestrutura_LocalStorage.html">infraestrutura/LocalStorage</a></li><li><a href="module-infraestrutura_taskFirestore.html">infraestrutura/taskFirestore</a></li></ul><h3>Classes</h3><ul><li><a href="CreateTaskViewModel.html">CreateTaskViewModel</a></li><li><a href="CreateViewModel.html">CreateViewModel</a></li><li><a href="DetailViewModel.html">DetailViewModel</a></li><li><a href="EditViewModel.html">EditViewModel</a></li><li><a href="FormUi.html">FormUi</a></li><li><a href="Group.html">Group</a></li><li><a href="GroupCreateViewModel.html">GroupCreateViewModel</a></li><li><a href="GroupViewModel.html">GroupViewModel</a></li><li><a href="HeaderUi.html">HeaderUi</a></li><li><a href="HomeUi.html">HomeUi</a></li><li><a href="ListTaskView.html">ListTaskView</a></li><li><a href="ListTasksViewModel.html">ListTasksViewModel</a></li><li><a href="ListViewModel.html">ListViewModel</a></li><li><a href="Observable.html">Observable</a></li><li><a href="RemoveViewModel.html">RemoveViewModel</a></li><li><a href="Repository.html">Repository</a></li><li><a href="TaskDetailView.html">TaskDetailView</a></li><li><a href="TaskDetailViewModel.html">TaskDetailViewModel</a></li><li><a href="TaskUi.html">TaskUi</a></li><li><a href="module-aplica%25C3%25A7%25C3%25A3o_Reposit%25C3%25B3rio.TaskRepository.html">TaskRepository</a></li><li><a href="module-dom%25C3%25ADnio_entidades_tarefa.Task.html">Task</a></li><li><a href="module-dom%25C3%25ADnio_servi%25C3%25A7os_Servi%25C3%25A7os.Service.html">Service</a></li><li><a href="module-dom%25C3%25ADnio_servi%25C3%25A7os_configService.ConfigService.html">ConfigService</a></li><li><a href="module-dom%25C3%25ADnio_servi%25C3%25A7os_taskService.TaskService.html">TaskService</a></li><li><a href="module-infraestrutura_Firestore.Firestore.html">Firestore</a></li><li><a href="module-infraestrutura_LocalStorage.LocalStorageRepository.html">LocalStorageRepository</a></li><li><a href="module-infraestrutura_taskFirestore.TaskFirestore.html">TaskFirestore</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Elements">Elements</a></li><li><a href="global.html#GroupCard">GroupCard</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#MainForm">MainForm</a></li><li><a href="global.html#MainHeader">MainHeader</a></li><li><a href="global.html#TaskCard">TaskCard</a></li><li><a href="global.html#TaskUiElements">TaskUiElements</a></li><li><a href="global.html#must">must</a></li><li><a href="global.html#taskDetail">taskDetail</a></li><li><a href="global.html#theme">theme</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Sun Nov 02 2025 22:05:08 GMT-0300 (Horário Padrão de Brasília)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

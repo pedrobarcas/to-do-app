@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: infrastructure/Firestore.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: infrastructure/Firestore.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import {
+  collection,
+  addDoc,
+  doc,
+  setDoc,
+  getDoc,
+  getDocs,
+  updateDoc,
+  deleteDoc,
+  query,
+  where,
+} from "firebase/firestore";
+
+/**
+ * Classe responsável pela infraestrutura gerenciada pelo Firestore
+ * --
+ * Salva, remove, edita, procura dados de uma determinada coleção
+ *
+ * @version 1.0.0
+ * @example const firestore = new Firestore(db, "group")
+ * @module infraestrutura/Firestore
+ */
+
+export class Firestore {
+  /**
+   * Estabelece uma comunicação abstrata entre um coleção
+   * --
+   * @property {Object} db - Instãncia da inicialização da conexão como Banco de dados do Firebase
+   * @property {String} collectionName - Nome de uma coleção específica
+   * @property {Object} userCached - Dados cacheados do usúario autenticado
+   * @constructor
+   */
+  constructor(db, collectionName) {
+    this.db = db;
+    this.collectionName = collectionName;
+    this.userCached = JSON.parse(localStorage.getItem("userCached"));
+  }
+
+  /**
+   * Função destinada a retornar uma referência a uma coleção
+   * --
+   *
+   * @returns {collection} retora uma referência de uma coleção
+   */
+  colRef() {
+    return collection(this.db, this.collectionName);
+  }
+
+  /**
+   * Função destinada a retornar uma referência de documento
+   * --
+   *
+   * @param {UUID} id - Um identificador único
+   * @returns {collection} - Uma referência a um documento
+   */
+  docRef(id) {
+    return doc(this.db, this.collectionName, String(id));
+  }
+
+  /**
+   * Função destinada a retornar objetos de um usuário específico
+   * --
+   *
+   * @returns {Array} lista de objetos do banco de dados
+   * @async
+   */
+  async load() {
+    const q = query(this.colRef(), where("user_id", "==", this.userCached.uid));
+    const snapshot = await getDocs(q);
+    return snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+  }
+
+  /**
+   * Sobrescreve ou ou cria novos dados no banco de dados
+   * --
+   *
+   * @param {Object} obj - Um objeto abstraído
+   * @returns {Object} retorna o objeto criado ou nada
+   * @async
+   */
+  async save(obj) {
+    try {
+      const payload = obj;
+      if (payload.id) {
+        const ref = this.docRef(payload.id);
+        await setDoc(ref, payload, { merge: false });
+        r;
+        return { id: payload.id, ...payload };
+      } else {
+        const ref = await addDoc(this.colRef(), payload);
+
+        const created = { id: ref.id, ...payload };
+        await setDoc(ref, created, { merge: true });
+        return created;
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  /**
+   * Edita um documento no banco de dados
+   * --
+   * Recebe apenas os valores de edição, onde o uníco valor não alterado
+   * é o ID - usado para a edição
+   * @param {Object} obj - Um objeto abstraído
+   * @returns {Object} O novo objeto alterado
+   * @async
+   */
+
+  async edit(obj) {
+    if (!obj.id) throw new Error("edit: missing id");
+    const payload = obj;
+    const ref = this.docRef(payload.id);
+    await updateDoc(ref, payload);
+    return { id: payload.id, ...payload };
+  }
+
+  /**
+   * Remove um objeto no banco de dados
+   * --
+   *
+   * @param {Object} objOrId - Recebe um objeto ou um identificador único
+   * @returns {UUID} - O identificador do objeto removido
+   * @async
+   */
+
+  async remove(objOrId) {
+    const id = typeof objOrId === "object" ? objOrId.id : objOrId;
+    if (!id) throw new Error("remove: missing id");
+    const ref = this.docRef(id);
+    await deleteDoc(ref);
+    return id;
+  }
+
+  /**
+   * Procura por um objeto no banco de dados pelo id
+   * --
+   *
+   * @param {UUID} id - Identificador único do objeto
+   * @returns {Object}
+   */
+
+  async find(id) {
+    const ref = this.docRef(id);
+    const snap = await getDoc(ref);
+    return snap.exists() ? { id: snap.id, ...snap.data() } : null;
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-aplica%25C3%25A7%25C3%25A3o_Reposit%25C3%25B3rio.html">aplicação/Repositório</a></li><li><a href="module-dom%25C3%25ADnio_entidades_tarefa.html">domínio/entidades/tarefa</a></li><li><a href="module-dom%25C3%25ADnio_fabricas_groupFactory.html">domínio/fabricas/groupFactory</a></li><li><a href="module-dom%25C3%25ADnio_fabricas_taskFactory.html">domínio/fabricas/taskFactory</a></li><li><a href="module-dom%25C3%25ADnio_servi%25C3%25A7os_Servi%25C3%25A7os.html">domínio/serviços/Serviços</a></li><li><a href="module-dom%25C3%25ADnio_servi%25C3%25A7os_configService.html">domínio/serviços/configService</a></li><li><a href="module-dom%25C3%25ADnio_servi%25C3%25A7os_taskService.html">domínio/serviços/taskService</a></li><li><a href="module-infraestrutura_Firestore.html">infraestrutura/Firestore</a></li><li><a href="module-infraestrutura_LocalStorage.html">infraestrutura/LocalStorage</a></li><li><a href="module-infraestrutura_taskFirestore.html">infraestrutura/taskFirestore</a></li></ul><h3>Classes</h3><ul><li><a href="CreateTaskViewModel.html">CreateTaskViewModel</a></li><li><a href="CreateViewModel.html">CreateViewModel</a></li><li><a href="DetailViewModel.html">DetailViewModel</a></li><li><a href="EditViewModel.html">EditViewModel</a></li><li><a href="FormUi.html">FormUi</a></li><li><a href="Group.html">Group</a></li><li><a href="GroupCreateViewModel.html">GroupCreateViewModel</a></li><li><a href="GroupViewModel.html">GroupViewModel</a></li><li><a href="HeaderUi.html">HeaderUi</a></li><li><a href="HomeUi.html">HomeUi</a></li><li><a href="ListTaskView.html">ListTaskView</a></li><li><a href="ListTasksViewModel.html">ListTasksViewModel</a></li><li><a href="ListViewModel.html">ListViewModel</a></li><li><a href="Observable.html">Observable</a></li><li><a href="RemoveViewModel.html">RemoveViewModel</a></li><li><a href="Repository.html">Repository</a></li><li><a href="TaskDetailView.html">TaskDetailView</a></li><li><a href="TaskDetailViewModel.html">TaskDetailViewModel</a></li><li><a href="TaskUi.html">TaskUi</a></li><li><a href="module-aplica%25C3%25A7%25C3%25A3o_Reposit%25C3%25B3rio.TaskRepository.html">TaskRepository</a></li><li><a href="module-dom%25C3%25ADnio_entidades_tarefa.Task.html">Task</a></li><li><a href="module-dom%25C3%25ADnio_servi%25C3%25A7os_Servi%25C3%25A7os.Service.html">Service</a></li><li><a href="module-dom%25C3%25ADnio_servi%25C3%25A7os_configService.ConfigService.html">ConfigService</a></li><li><a href="module-dom%25C3%25ADnio_servi%25C3%25A7os_taskService.TaskService.html">TaskService</a></li><li><a href="module-infraestrutura_Firestore.Firestore.html">Firestore</a></li><li><a href="module-infraestrutura_LocalStorage.LocalStorageRepository.html">LocalStorageRepository</a></li><li><a href="module-infraestrutura_taskFirestore.TaskFirestore.html">TaskFirestore</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Elements">Elements</a></li><li><a href="global.html#GroupCard">GroupCard</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#MainForm">MainForm</a></li><li><a href="global.html#MainHeader">MainHeader</a></li><li><a href="global.html#TaskCard">TaskCard</a></li><li><a href="global.html#TaskUiElements">TaskUiElements</a></li><li><a href="global.html#must">must</a></li><li><a href="global.html#taskDetail">taskDetail</a></li><li><a href="global.html#theme">theme</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Sun Nov 02 2025 22:05:08 GMT-0300 (Horário Padrão de Brasília)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: ui/views/list/listTaskUI.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: ui/views/list/listTaskUI.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { UiElements } from "./elements";
+import { TaskCard } from "../../components/task";
+import { h } from "../../../h";
+
+/**
+ * HeaderUi
+ * ----------------
+ * Classe estática para manipulação do menu de configurações
+ */
+export class HeaderUi {
+  static showDropDown() {
+    UiElements.settings_drop_down.classList.toggle("is-active");
+  }
+}
+
+/**
+ * FormUi
+ * ----------------
+ * Classe estática para manipular o formulário de criação de tarefa
+ */
+export class FormUi {
+  static showForm() {
+    UiElements.add_task.style.display = "none";
+    UiElements.main_form.style.display = "flex";
+  }
+  static hideForm() {
+    UiElements.add_task.style.display = "flex";
+    UiElements.main_form.style.display = "none";
+  }
+}
+
+/**
+ * TaskUi
+ * ----------------
+ * Responsável por renderizar tasks, tanto ativas quanto concluídas,
+ * e ligar eventos de checkbox para completar tarefas.
+ */
+export class TaskUi {
+  constructor(listViewModel, detailViewModel) {
+    this.listViewModel = listViewModel;
+    this.detailViewModel = detailViewModel;
+  }
+
+  /**
+   * showCompletedTasks()
+   * Alterna a visibilidade das tarefas concluídas.
+   */
+  showCompletedTasks() {
+    if (UiElements.completed_tasks.style.display === "none" || UiElements.completed_tasks.style.display === "") {
+      UiElements.completed_tasks.style.display = "flex";
+      UiElements.button_completed_tasks.innerHTML = `&lt;span class="fa-solid fa-chevron-down">&lt;/span> Concluídas`;
+    } else {
+      UiElements.completed_tasks.style.display = "none";
+      UiElements.button_completed_tasks.innerHTML = `&lt;span class="fa-solid fa-chevron-right">&lt;/span> Concluídas`;
+    }
+  }
+
+  /**
+   * renderTask(key)
+   * ----------------
+   * Renderiza todas as tasks do grupo, separando concluídas e ativas.
+   */
+  async renderTask(key, groupId) {
+    UiElements.main_tasks.innerHTML = "";
+    UiElements.completed_tasks.innerHTML = "";
+
+    const tasks = await this.listViewModel.load(groupId)
+    
+    tasks.forEach((task) => {
+      this.createTemplateTask(task, task.completed, key, groupId);
+    });
+  }
+
+  /**
+   * createTemplateTask(task, completed, key)
+   * ----------------
+   * Cria o card da task e adiciona eventos.
+   */
+  createTemplateTask(task, completed = false, key, groupId) {
+    const taskCard = &lt;TaskCard task={task} key={key}/>;
+    const taskButton = taskCard.querySelector(".task-checkbox");
+
+    if (!completed) UiElements.main_tasks.appendChild(taskCard);
+    else UiElements.completed_tasks.appendChild(taskCard);
+
+    taskButton.addEventListener("click", () => {
+      this.detailViewModel.completedTask(task);
+      if (task.completed){
+        const audio = new Audio("./completedTaskSound.mp3")
+        audio.play()
+      }
+      this.renderTask(key, groupId); // Atualiza toda a lista de forma fluida
+    });
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-aplica%25C3%25A7%25C3%25A3o_Reposit%25C3%25B3rio.html">aplicação/Repositório</a></li><li><a href="module-dom%25C3%25ADnio_entidades_tarefa.html">domínio/entidades/tarefa</a></li><li><a href="module-dom%25C3%25ADnio_fabricas_groupFactory.html">domínio/fabricas/groupFactory</a></li><li><a href="module-dom%25C3%25ADnio_fabricas_taskFactory.html">domínio/fabricas/taskFactory</a></li><li><a href="module-dom%25C3%25ADnio_servi%25C3%25A7os_Servi%25C3%25A7os.html">domínio/serviços/Serviços</a></li><li><a href="module-dom%25C3%25ADnio_servi%25C3%25A7os_configService.html">domínio/serviços/configService</a></li><li><a href="module-dom%25C3%25ADnio_servi%25C3%25A7os_taskService.html">domínio/serviços/taskService</a></li><li><a href="module-infraestrutura_Firestore.html">infraestrutura/Firestore</a></li><li><a href="module-infraestrutura_LocalStorage.html">infraestrutura/LocalStorage</a></li><li><a href="module-infraestrutura_taskFirestore.html">infraestrutura/taskFirestore</a></li></ul><h3>Classes</h3><ul><li><a href="CreateTaskViewModel.html">CreateTaskViewModel</a></li><li><a href="CreateViewModel.html">CreateViewModel</a></li><li><a href="DetailViewModel.html">DetailViewModel</a></li><li><a href="EditViewModel.html">EditViewModel</a></li><li><a href="FormUi.html">FormUi</a></li><li><a href="Group.html">Group</a></li><li><a href="GroupCreateViewModel.html">GroupCreateViewModel</a></li><li><a href="GroupViewModel.html">GroupViewModel</a></li><li><a href="HeaderUi.html">HeaderUi</a></li><li><a href="HomeUi.html">HomeUi</a></li><li><a href="ListTaskView.html">ListTaskView</a></li><li><a href="ListTasksViewModel.html">ListTasksViewModel</a></li><li><a href="ListViewModel.html">ListViewModel</a></li><li><a href="Observable.html">Observable</a></li><li><a href="RemoveViewModel.html">RemoveViewModel</a></li><li><a href="Repository.html">Repository</a></li><li><a href="TaskDetailView.html">TaskDetailView</a></li><li><a href="TaskDetailViewModel.html">TaskDetailViewModel</a></li><li><a href="TaskUi.html">TaskUi</a></li><li><a href="module-aplica%25C3%25A7%25C3%25A3o_Reposit%25C3%25B3rio.TaskRepository.html">TaskRepository</a></li><li><a href="module-dom%25C3%25ADnio_entidades_tarefa.Task.html">Task</a></li><li><a href="module-dom%25C3%25ADnio_servi%25C3%25A7os_Servi%25C3%25A7os.Service.html">Service</a></li><li><a href="module-dom%25C3%25ADnio_servi%25C3%25A7os_configService.ConfigService.html">ConfigService</a></li><li><a href="module-dom%25C3%25ADnio_servi%25C3%25A7os_taskService.TaskService.html">TaskService</a></li><li><a href="module-infraestrutura_Firestore.Firestore.html">Firestore</a></li><li><a href="module-infraestrutura_LocalStorage.LocalStorageRepository.html">LocalStorageRepository</a></li><li><a href="module-infraestrutura_taskFirestore.TaskFirestore.html">TaskFirestore</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Elements">Elements</a></li><li><a href="global.html#GroupCard">GroupCard</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#MainForm">MainForm</a></li><li><a href="global.html#MainHeader">MainHeader</a></li><li><a href="global.html#TaskCard">TaskCard</a></li><li><a href="global.html#TaskUiElements">TaskUiElements</a></li><li><a href="global.html#must">must</a></li><li><a href="global.html#taskDetail">taskDetail</a></li><li><a href="global.html#theme">theme</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Sun Nov 02 2025 22:05:08 GMT-0300 (Horário Padrão de Brasília)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

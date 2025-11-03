@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: domain/Observable.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: domain/Observable.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Implementação simples do padrão **Observer** (ou *Publish/Subscribe*),
+ * --
+ * permitindo que múltiplos observadores (funções) sejam notificados 
+ * automaticamente quando um evento ou alteração ocorre.
+ *
+ * Ideal para cenários onde é necessário reagir a mudanças de estado 
+ * sem criar dependências diretas entre componentes.
+ *
+ * @class
+ * @since 1.0.0
+ *
+ * @example
+ * const obs = new Observable();
+ *
+ * function logger(data) {
+ *   console.log("Evento recebido:", data);
+ * }
+ *
+ * obs.subscribe(logger);
+ * obs.notify({ msg: "Olá, mundo!" }); // -> "Evento recebido: { msg: 'Olá, mundo!' }"
+ *
+ * obs.unsubscribe(logger);
+ * obs.notify({ msg: "Não será logado" }); // Nenhum assinante restante
+ */
+export class Observable {
+  /**
+   * Cria uma nova instância do Observable.
+   * --
+   *
+   * @constructor
+   * @example
+   * const observable = new Observable();
+   */
+  constructor() {
+    /**
+     * Lista de funções assinantes (observers) que serão notificadas.
+     * --
+     * @type {Array&lt;Function>}
+     * @private
+     */
+    this.subscribers = [];
+  }
+
+  /**
+   * Adiciona uma nova função à lista de assinantes.
+   * --
+   *
+   * @param {Function} fn - Função a ser chamada quando o evento ocorrer.
+   * @returns {void}
+   *
+   * @example
+   * observable.subscribe((data) => console.log(data));
+   */
+  subscribe(fn) {
+    this.subscribers.push(fn);
+  }
+
+  /**
+   * Remove uma função específica da lista de assinantes.
+   * --
+   *
+   * @param {Function} fn - Função previamente registrada com `subscribe`.
+   * @returns {void}
+   *
+   * @example
+   * observable.unsubscribe(logger);
+   */
+  unsubscribe(fn) {
+    this.subscribers = this.subscribers.filter((sub) => sub !== fn);
+  }
+
+  /**
+   * Remove **todas** as funções assinantes.
+   * --
+   *
+   * @returns {void}
+   *
+   * @example
+   * observable.unsubscribeAll();
+   */
+  unsubscribeAll() {
+    this.subscribers = [];
+  }
+
+  /**
+   * Notifica todos os assinantes, enviando um dado para cada um deles.
+   * --
+   *
+   * @param {*} data - Dados ou payload a serem transmitidos aos observadores.
+   * @returns {void}
+   *
+   * @example
+   * observable.notify({ type: "TASK_ADDED", task: newTask });
+   */
+  notify(data) {
+    this.subscribers.forEach((fn) => fn(data));
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-aplica%25C3%25A7%25C3%25A3o_Reposit%25C3%25B3rio.html">aplicação/Repositório</a></li><li><a href="module-dom%25C3%25ADnio_entidades_tarefa.html">domínio/entidades/tarefa</a></li><li><a href="module-dom%25C3%25ADnio_fabricas_groupFactory.html">domínio/fabricas/groupFactory</a></li><li><a href="module-dom%25C3%25ADnio_fabricas_taskFactory.html">domínio/fabricas/taskFactory</a></li><li><a href="module-dom%25C3%25ADnio_servi%25C3%25A7os_Servi%25C3%25A7os.html">domínio/serviços/Serviços</a></li><li><a href="module-dom%25C3%25ADnio_servi%25C3%25A7os_configService.html">domínio/serviços/configService</a></li><li><a href="module-dom%25C3%25ADnio_servi%25C3%25A7os_taskService.html">domínio/serviços/taskService</a></li><li><a href="module-infraestrutura_Firestore.html">infraestrutura/Firestore</a></li><li><a href="module-infraestrutura_LocalStorage.html">infraestrutura/LocalStorage</a></li><li><a href="module-infraestrutura_taskFirestore.html">infraestrutura/taskFirestore</a></li></ul><h3>Classes</h3><ul><li><a href="CreateTaskViewModel.html">CreateTaskViewModel</a></li><li><a href="CreateViewModel.html">CreateViewModel</a></li><li><a href="DetailViewModel.html">DetailViewModel</a></li><li><a href="EditViewModel.html">EditViewModel</a></li><li><a href="FormUi.html">FormUi</a></li><li><a href="Group.html">Group</a></li><li><a href="GroupCreateViewModel.html">GroupCreateViewModel</a></li><li><a href="GroupViewModel.html">GroupViewModel</a></li><li><a href="HeaderUi.html">HeaderUi</a></li><li><a href="HomeUi.html">HomeUi</a></li><li><a href="ListTaskView.html">ListTaskView</a></li><li><a href="ListTasksViewModel.html">ListTasksViewModel</a></li><li><a href="ListViewModel.html">ListViewModel</a></li><li><a href="Observable.html">Observable</a></li><li><a href="RemoveViewModel.html">RemoveViewModel</a></li><li><a href="Repository.html">Repository</a></li><li><a href="TaskDetailView.html">TaskDetailView</a></li><li><a href="TaskDetailViewModel.html">TaskDetailViewModel</a></li><li><a href="TaskUi.html">TaskUi</a></li><li><a href="module-aplica%25C3%25A7%25C3%25A3o_Reposit%25C3%25B3rio.TaskRepository.html">TaskRepository</a></li><li><a href="module-dom%25C3%25ADnio_entidades_tarefa.Task.html">Task</a></li><li><a href="module-dom%25C3%25ADnio_servi%25C3%25A7os_Servi%25C3%25A7os.Service.html">Service</a></li><li><a href="module-dom%25C3%25ADnio_servi%25C3%25A7os_configService.ConfigService.html">ConfigService</a></li><li><a href="module-dom%25C3%25ADnio_servi%25C3%25A7os_taskService.TaskService.html">TaskService</a></li><li><a href="module-infraestrutura_Firestore.Firestore.html">Firestore</a></li><li><a href="module-infraestrutura_LocalStorage.LocalStorageRepository.html">LocalStorageRepository</a></li><li><a href="module-infraestrutura_taskFirestore.TaskFirestore.html">TaskFirestore</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Elements">Elements</a></li><li><a href="global.html#GroupCard">GroupCard</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#MainForm">MainForm</a></li><li><a href="global.html#MainHeader">MainHeader</a></li><li><a href="global.html#TaskCard">TaskCard</a></li><li><a href="global.html#TaskUiElements">TaskUiElements</a></li><li><a href="global.html#must">must</a></li><li><a href="global.html#taskDetail">taskDetail</a></li><li><a href="global.html#theme">theme</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Sun Nov 02 2025 22:05:08 GMT-0300 (Horário Padrão de Brasília)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

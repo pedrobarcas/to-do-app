@@ -1,22 +1,21 @@
-# Changelog 2.0.1 - 31/10/2025
+# Changelog 2.0.2 - 2/11/2025
 
 ## Adicionado:
 
-- Compartilhamento de tarefas
-- Integração contínua
+- Documentação
 
 ## Removido:
 
-- Duplicidade no código
+- Relações entre grupos e tarefas
 
 ## Corrigido:
 
-- Edição de nomes grupo
-- Bug visual nos detalhes da tarefa
+- Alteração do banco de dados - destinado ao servidor de São Paulo
 
 ## Para o futuro:
 
-- Integração com PWA
+- Ordenação de tarefas por tipos especifícos
+- Adicionar temas universais
 
 ### Atualização disponível por Pedro Barcas
 

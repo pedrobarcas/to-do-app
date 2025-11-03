@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: ui/views/list/listTaskView.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: ui/views/list/listTaskView.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { h } from "../../../h";
+import { copyListTasks } from "../../../utils/sendTasks";
+
+/**
+ * ListTaskView
+ * ----------------
+ * Classe que coordena toda a interface da lista de tarefas,
+ * manipulando UI, Mockup, Form e Header.
+ */
+
+export class ListTaskView {
+  constructor(group, {viewModels = {}, uis = {}, components = {}, styles={}, config }) {
+    this.viewModels = viewModels;
+    this.uis = uis;
+    this.components = components;
+    this.config = config;
+    this.styles = styles;
+    this.group = group;
+    this.color = this.group?.color;
+  }
+
+  /**
+   * bindEvents(key)
+   * ----------------
+   * Liga todos os eventos da UI (formulário, botões, scroll, tema, etc)
+   * 
+   */
+  bindUiEvents() {
+
+    this.uis.UiElements.add_task.addEventListener("click", () => {
+      this.uis.UiElements.settings.setAttribute("disabled", "true");
+      this.uis.FormUi.showForm();
+    });
+
+    this.uis.UiElements.button_completed_tasks.addEventListener("click", () => {
+      this.uis.taskUI.showCompletedTasks();
+      this.uis.linesRenderer();
+    });
+
+    this.uis.UiElements.settings.addEventListener("click", () => {
+      this.uis.HeaderUi.showDropDown();
+    });
+
+    const form = document.querySelector(`.${this.styles.groupForm.container}`);
+
+    document.getElementById("cancel")?.addEventListener("click", () => {
+      form.style.display = "none";
+    });
+
+    window.addEventListener("scroll", () => {
+      const header = document.querySelector(".main-header");
+      if (window.scrollY > 45) header?.classList.add("is-shrink");
+      else header?.classList.remove("is-shrink");
+    });
+
+    document
+      .getElementById("changeThemeButton")
+      ?.addEventListener("click", () => {
+        this.uis.UiElements.main_content.classList.toggle("light-theme");
+      });
+
+    document.getElementById("editGroup")?.addEventListener("click", () => {
+      form.style.display = "flex";
+    });
+
+    document.querySelectorAll(`.${this.styles.groupForm.colorContent}`)
+      .forEach((colorEl) => {
+        colorEl.addEventListener("click", (event) => {
+          const color = event.target.dataset.color;
+          document.documentElement.style.setProperty("--main-color", color);
+          this.color = color;
+        });
+      });
+
+  }
+
+  bindViewModelsEvents(key){
+
+    this.viewModels.groupVM.subscribe(() => {
+      location.reload()
+    })
+    document.getElementById("create")?.addEventListener("click", async () => {
+      this.viewModels.groupVM.edit(
+        this.group,
+        {
+          name: document.getElementById("group").value,
+          color: this.color,
+          icon: Array.from(document.querySelector(".icon").classList)
+                      .slice(0, 2)
+                      .join(" ") 
+        }
+      );
+    });
+
+
+    this.viewModels.taskCreateVM.subscribe(() => {
+      this.uis.taskUI.renderTask(key, this.group.id);
+      
+    });
+    
+    this.uis.UiElements.send_task.addEventListener("click", async () => {
+      this.uis.UiElements.settings.setAttribute("disabled", "false");
+
+      const value = this.uis.UiElements.task.value.trim();
+      this.uis.FormUi.hideForm();
+      this.viewModels.taskCreateVM.create(value, this.group.id);
+    
+    });
+
+    document.getElementById("deleteGroup")?.addEventListener("click", async () => {
+      await this.viewModels.groupVM.remove(key);
+      location.replace(this.config.get("routers").home);
+    });
+
+    document?.getElementById("sendCopy")?.addEventListener("click", async () => {
+      copyListTasks(await this.viewModels.taskListVM.load(this.group.id), this.group.name)
+    })
+    }
+
+  
+  /**
+   * render(key)
+   * ----------------
+   * Renderiza toda a interface da lista.
+   */
+  async render(key) {
+    this.uis.theme(key, this.color);
+    
+    this.uis.UiElements.main_content.prepend(&lt;this.components.groupForm method={"put"} />);
+    
+    let dropDown = &lt;this.components.groupDropDown />;
+    if (this.config.get("mainGroups").includes(key)) {
+      dropDown = &lt;this.components.DropDown />;
+    }
+    
+    const header = &lt;this.components.Header title={this.group?.name} dropDown={dropDown} href={this.config.get("routers").home} />;
+    this.uis.UiElements.main_content.appendChild(header);
+    this.uis.UiElements.main_content.appendChild(this.components.ButtonAddTask());
+    this.uis.UiElements.main_content.appendChild(this.components.Form((e) => {e.preventDefault()}));
+    
+    if (document.querySelector(".icon")  &amp;&amp; this.group){
+      document.querySelector(".icon").classList = `${this.group.icon} icon`
+    }
+    
+    
+    this.bindViewModelsEvents(key)
+    this.bindUiEvents();
+    await this.uis.taskUI.renderTask(key, this.group.id);
+    this.uis.linesRenderer();
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-aplica%25C3%25A7%25C3%25A3o_Reposit%25C3%25B3rio.html">aplicação/Repositório</a></li><li><a href="module-dom%25C3%25ADnio_entidades_tarefa.html">domínio/entidades/tarefa</a></li><li><a href="module-dom%25C3%25ADnio_fabricas_groupFactory.html">domínio/fabricas/groupFactory</a></li><li><a href="module-dom%25C3%25ADnio_fabricas_taskFactory.html">domínio/fabricas/taskFactory</a></li><li><a href="module-dom%25C3%25ADnio_servi%25C3%25A7os_Servi%25C3%25A7os.html">domínio/serviços/Serviços</a></li><li><a href="module-dom%25C3%25ADnio_servi%25C3%25A7os_configService.html">domínio/serviços/configService</a></li><li><a href="module-dom%25C3%25ADnio_servi%25C3%25A7os_taskService.html">domínio/serviços/taskService</a></li><li><a href="module-infraestrutura_Firestore.html">infraestrutura/Firestore</a></li><li><a href="module-infraestrutura_LocalStorage.html">infraestrutura/LocalStorage</a></li><li><a href="module-infraestrutura_taskFirestore.html">infraestrutura/taskFirestore</a></li></ul><h3>Classes</h3><ul><li><a href="CreateTaskViewModel.html">CreateTaskViewModel</a></li><li><a href="CreateViewModel.html">CreateViewModel</a></li><li><a href="DetailViewModel.html">DetailViewModel</a></li><li><a href="EditViewModel.html">EditViewModel</a></li><li><a href="FormUi.html">FormUi</a></li><li><a href="Group.html">Group</a></li><li><a href="GroupCreateViewModel.html">GroupCreateViewModel</a></li><li><a href="GroupViewModel.html">GroupViewModel</a></li><li><a href="HeaderUi.html">HeaderUi</a></li><li><a href="HomeUi.html">HomeUi</a></li><li><a href="ListTaskView.html">ListTaskView</a></li><li><a href="ListTasksViewModel.html">ListTasksViewModel</a></li><li><a href="ListViewModel.html">ListViewModel</a></li><li><a href="Observable.html">Observable</a></li><li><a href="RemoveViewModel.html">RemoveViewModel</a></li><li><a href="Repository.html">Repository</a></li><li><a href="TaskDetailView.html">TaskDetailView</a></li><li><a href="TaskDetailViewModel.html">TaskDetailViewModel</a></li><li><a href="TaskUi.html">TaskUi</a></li><li><a href="module-aplica%25C3%25A7%25C3%25A3o_Reposit%25C3%25B3rio.TaskRepository.html">TaskRepository</a></li><li><a href="module-dom%25C3%25ADnio_entidades_tarefa.Task.html">Task</a></li><li><a href="module-dom%25C3%25ADnio_servi%25C3%25A7os_Servi%25C3%25A7os.Service.html">Service</a></li><li><a href="module-dom%25C3%25ADnio_servi%25C3%25A7os_configService.ConfigService.html">ConfigService</a></li><li><a href="module-dom%25C3%25ADnio_servi%25C3%25A7os_taskService.TaskService.html">TaskService</a></li><li><a href="module-infraestrutura_Firestore.Firestore.html">Firestore</a></li><li><a href="module-infraestrutura_LocalStorage.LocalStorageRepository.html">LocalStorageRepository</a></li><li><a href="module-infraestrutura_taskFirestore.TaskFirestore.html">TaskFirestore</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Elements">Elements</a></li><li><a href="global.html#GroupCard">GroupCard</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#MainForm">MainForm</a></li><li><a href="global.html#MainHeader">MainHeader</a></li><li><a href="global.html#TaskCard">TaskCard</a></li><li><a href="global.html#TaskUiElements">TaskUiElements</a></li><li><a href="global.html#must">must</a></li><li><a href="global.html#taskDetail">taskDetail</a></li><li><a href="global.html#theme">theme</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Sun Nov 02 2025 22:05:08 GMT-0300 (Horário Padrão de Brasília)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

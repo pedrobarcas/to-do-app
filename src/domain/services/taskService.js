@@ -1,8 +1,12 @@
-// Serviço específico para entidade Task.
-// Extende o Service genérico adicionando regras de negócio de edição de tarefas.
-
 import { Service } from "./Service";
 
+/**
+ * Serviço específico para entidade Task.
+ * --
+ * Extende o Service genérico adicionando regras de negócio de edição de tarefas.
+ *
+ * @module domínio/serviços/taskService
+ */
 export class TaskService extends Service {
   /**
    * @param {Array<Object>} validatorsEdit - Validadores aplicados em edição de Task.

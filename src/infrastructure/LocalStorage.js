@@ -1,9 +1,9 @@
-// Implementação concreta de um repositório utilizando o LocalStorage do navegador.
-// Responsável por persistir e recuperar dados localmente no cliente.
-
 /**
  * Classe LocalStorageRepository
  * Abstrai operações de CRUD em um armazenamento baseado em LocalStorage.
+ *
+ * @deprecated Será descontinuado em breve
+ * @module infraestrutura/LocalStorage
  */
 export class LocalStorageRepository {
   /**
