@@ -18,6 +18,8 @@ export default defineConfig({
         account: "account.html",
       },
     },
+    sourcemap: true,
+    minify: false,
   },
 
   esbuild: {

@@ -84,7 +84,6 @@ export class Firestore {
       if (payload.id) {
         const ref = this.docRef(payload.id);
         await setDoc(ref, payload, { merge: false });
-        r;
         return { id: payload.id, ...payload };
       } else {
         const ref = await addDoc(this.colRef(), payload);

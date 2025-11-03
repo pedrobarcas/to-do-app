@@ -33,9 +33,6 @@ import { SettingsDropDown } from "../../components/settingsDropDown.jsx";
 import { GroupSettingsDropDown } from "../../components/groupSettingsDropDown.jsx";
 import { GroupForm } from "../../components/groupForm.jsx";
 
-import { RelationFactory } from "../../../domain/factorys/relationFactory.js";
-import { RelationViewModel } from "../../viewmodels/relationViewModel.js";
-
 import { ListTaskView } from "./listTaskView";
 import { GroupViewModel } from "../../viewmodels/groupViewModel.js";
 import { ListTasksViewModel } from "../../viewmodels/listTasksViewModel.js";
@@ -58,7 +55,6 @@ const relationRepository = packingDependecyTask("relation")
 const taskListViewModel = new ListTasksViewModel(taskRepository);
 const taskDetailViewModel = new TaskDetailViewModel(taskRepository, queryParams);
 const taskCreateViewModel = new CreateTaskViewModel(TaskFactory, taskRepository);
-const relationViewModel = new RelationViewModel(RelationFactory, relationRepository)
 const groupVM = new GroupViewModel(groupRepository, taskRepository, service);
 const group = await groupVM.find(key)
 
@@ -71,8 +67,7 @@ const listTaskView = new ListTaskView(
     groupVM,
     taskCreateVM: taskCreateViewModel,
     taskListVM: taskListViewModel,
-    taskDetailVM: taskDetailViewModel,
-    relationVM: relationViewModel
+    taskDetailVM: taskDetailViewModel
   },
   uis: {
     taskUI: taskUi,
