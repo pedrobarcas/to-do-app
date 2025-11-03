@@ -1,0 +1,38 @@
+html {
+  display: flex;
+}
+
+body {
+  margin: 1rem;
+  margin-top: 4rem;
+  width: 100%;
+}
+
+section {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+
+nav {
+  margin-top: 1rem;
+  row-gap: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+strong {
+  color: gray;
+}
+
+.main-header {
+  position: fixed;
+  top: 0;
+  background-color: var(--main-background);
+  padding: 1rem 0.4rem;
+  display: flex;
+  gap: 2rem;
+  width: 100%;
+  font-size: 1.2rem;
+}

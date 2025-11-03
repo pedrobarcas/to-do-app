@@ -1,1 +1,0 @@
-import{h as e}from"./h-B3JzLlQ8.js";import{H as r}from"./header-cKqmM25f.js";import{c as o}from"./index-CHvACQ46.js";const t=e(r,{title:"Configurações",href:o.get("routers").home}),n=document.getElementById("container");n.prepend(t);
