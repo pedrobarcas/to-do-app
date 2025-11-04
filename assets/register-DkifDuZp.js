@@ -1,4 +1,4 @@
-import { e as createUserWithEmailAndPassword, a as auth, f as sendEmailVerification, c as configService } from "./index-CszmcCWL.js";
+import { e as createUserWithEmailAndPassword, a as auth, f as sendEmailVerification, c as configService } from "./index-CEjhPFPf.js";
 /* empty css               */
 /* empty css                */
 /* empty css               */
@@ -12,4 +12,4 @@ button.addEventListener("click", async () => {
   console.log("Email enviado, por favor, veja sua caixa de e-mails. Caso não apareça, navegue ate a aba de SPAM do seu e-mail.");
   location.replace(configService.get("routers").login);
 });
-//# sourceMappingURL=register-CHqrvkcm.js.map
+//# sourceMappingURL=register-DkifDuZp.js.map

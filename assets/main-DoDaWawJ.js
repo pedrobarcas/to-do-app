@@ -1,7 +1,7 @@
-import { O as Observable, o as onAuthStateChanged, a as auth, p as packingDependecyTask } from "./index-CszmcCWL.js";
+import { O as Observable, o as onAuthStateChanged, a as auth, p as packingDependecyTask, c as configService } from "./index-CEjhPFPf.js";
 /* empty css               */
 /* empty css                */
-import "./private-check-CyHAhL7g.js";
+import "./private-check-CHlmduoZ.js";
 import { v as v4, D as DateFormat, G as GroupForm, s as styles$1 } from "./groupForm-DMEoLfJa.js";
 import { h } from "./h-DjMzbvrD.js";
 class GroupCreateViewModel extends Observable {
@@ -36,7 +36,7 @@ class Group {
    * @property {string} color - Cor do grupo
    * @property {string} icon - Icone expresso em classes Awesome
    * @property {UUID} user_id - Id do usuário
-   * 
+   *
    * @constructor
    */
   constructor(id, name, create_date, color, icon, user_id) {
@@ -82,8 +82,9 @@ class ListViewModel extends Observable {
     super();
     this.repository = repository;
   }
-  async load() {
-    const objects = await this.repository.load();
+  async load(cached = false) {
+    const objects = await this.repository.load(cached);
+    console.log(objects);
     this.notify();
     return objects;
   }
@@ -106,9 +107,9 @@ class HomeUi {
   constructor(listViewModel) {
     this.listViewModel = listViewModel;
   }
-  async renderGroups(root) {
+  async renderGroups(root, cached = false) {
     root.innerHTML = "";
-    const groups = await this.listViewModel.load();
+    const groups = await this.listViewModel.load(cached);
     groups.forEach((group) => {
       this.createTemplateGroup(root, group);
     });
@@ -132,48 +133,29 @@ function AccountHeader({ user }) {
   return /* @__PURE__ */ h("header", { className: styles.header }, /* @__PURE__ */ h("a", { href: "./account.html" }, /* @__PURE__ */ h("div", { className: styles.header_content }, /* @__PURE__ */ h("div", { className: styles.circle_img }, user.email[0].toUpperCase()), /* @__PURE__ */ h("div", { className: styles.header_content_text }, /* @__PURE__ */ h("h1", null, "To do", /* @__PURE__ */ h("span", { className: "fa-solid fa-chevron-down" })), /* @__PURE__ */ h("h2", null, user.email)))));
 }
 class homeView {
-  constructor(Ui, listVM, createVM, groupForm, styles2) {
+  constructor(Ui, listVM, createVM, groupForm, styles2, config) {
     this.Ui = Ui;
     this.listVM = listVM;
     this.createVM = createVM;
     this.groupForm = groupForm;
     this.color;
     this.styles = styles2;
+    this.config = config;
   }
   async bindEvents(root = document) {
-    const form = root.querySelector(`.${this.styles.container}`);
-    const group = root.getElementById("group");
-    root.querySelector(".todo__footer--content").addEventListener("click", () => {
-      form.style.display = "flex";
+    this.createVM.subscribe(async (group) => {
+      location.replace(`${this.config.get("routers").list}?key=${group.id}&edit=true`);
     });
-    root.getElementById("cancel").addEventListener("click", () => {
-      form.style.display = "none";
-    });
-    this.createVM.subscribe(async () => {
-      form.style.display = "none";
-      await this.Ui.renderGroups(document.querySelector(".home__group"));
-    });
-    root.getElementById("create").addEventListener("click", async () => {
-      this.createVM.create(group.value.trim(), this.color, Array.from(document.querySelector(".icon").classList).slice(0, 2).join(" "));
-    });
-    document.querySelectorAll(`.${this.styles.colorContent}`).forEach((color) => {
-      color.addEventListener("click", (event) => {
-        this.color = event.target.dataset.color;
-        document.querySelectorAll(`.${this.styles.colorContent}`).forEach((colorContent) => {
-          colorContent.classList.remove("is-selected");
-        });
-        event.target.classList.add("is-selected");
-      });
+    root.querySelector(".todo__footer").addEventListener("click", async () => {
+      this.createVM.create("", "", "fa-solid fa-list-ul");
     });
   }
   async render(root = document) {
     const main_content = document.querySelector(".main-content");
     const header2 = h(AccountHeader, { user: JSON.parse(localStorage.getItem("userCached")) });
     main_content.prepend(header2);
-    const form = /* @__PURE__ */ h(this.groupForm, { method: "post" });
-    main_content.prepend(form);
     this.bindEvents(root);
-    await this.Ui.renderGroups(document.querySelector(".home__group"));
+    this.Ui.renderGroups(document.querySelector(".home__group"));
   }
 }
 const scriptRel = "modulepreload";
@@ -301,6 +283,6 @@ const groupRepository = packingDependecyTask("group");
 const homeListViewModel = new ListViewModel(groupRepository);
 const homeCreateViewModel = new GroupCreateViewModel(groupFactory, groupRepository);
 const homeUi = new HomeUi(homeListViewModel);
-const view = new homeView(homeUi, homeListViewModel, homeCreateViewModel, GroupForm, styles$1);
+const view = new homeView(homeUi, homeListViewModel, homeCreateViewModel, GroupForm, styles$1, configService);
 view.render(document);
-//# sourceMappingURL=main-BzOFFfwy.js.map
+//# sourceMappingURL=main-DoDaWawJ.js.map

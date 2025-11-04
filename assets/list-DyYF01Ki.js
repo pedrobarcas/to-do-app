@@ -1,8 +1,8 @@
-import { O as Observable, o as onAuthStateChanged, a as auth, q as queryParams, b as packingDependecyTaskFirestore, p as packingDependecyTask, s as service, c as configService } from "./index-CszmcCWL.js";
+import { O as Observable, o as onAuthStateChanged, a as auth, q as queryParams, b as packingDependecyTaskFirestore, p as packingDependecyTask, s as service, c as configService } from "./index-CEjhPFPf.js";
 /* empty css                */
 /* empty css               */
-import "./private-check-CyHAhL7g.js";
-import { T as TaskCard, a as TaskDetailViewModel } from "./taskDetailViewModel-E6dn99uf.js";
+import "./private-check-CHlmduoZ.js";
+import { T as TaskCard, a as TaskDetailViewModel } from "./taskDetailViewModel-CskNvAVh.js";
 import { h } from "./h-DjMzbvrD.js";
 import { v as v4, D as DateFormat, s as styles, G as GroupForm } from "./groupForm-DMEoLfJa.js";
 const must = (el, name) => {
@@ -66,8 +66,9 @@ class FormUi {
     UiElements.main_form.style.display = "none";
   }
 }
-class TaskUi {
+class TaskUi extends Observable {
   constructor(listViewModel, detailViewModel) {
+    super();
     this.listViewModel = listViewModel;
     this.detailViewModel = detailViewModel;
   }
@@ -89,20 +90,21 @@ class TaskUi {
    * ----------------
    * Renderiza todas as tasks do grupo, separando concluídas e ativas.
    */
-  async renderTask(key2, groupId) {
+  async renderTask(key2, groupId, cached = false) {
     UiElements.main_tasks.innerHTML = "";
     UiElements.completed_tasks.innerHTML = "";
-    const tasks = await this.listViewModel.load(groupId);
+    const tasks = await this.listViewModel.load(groupId, cached);
     tasks.forEach((task) => {
       this.createTemplateTask(task, task.completed, key2, groupId);
     });
+    this.notify();
   }
   /**
    * createTemplateTask(task, completed, key)
    * ----------------
    * Cria o card da task e adiciona eventos.
    */
-  createTemplateTask(task, completed = false, key2, groupId) {
+  createTemplateTask(task, completed = false, key2, groupId, cached = false) {
     const taskCard = /* @__PURE__ */ h(TaskCard, { task, key: key2 });
     const taskButton = taskCard.querySelector(".task-checkbox");
     if (!completed) UiElements.main_tasks.appendChild(taskCard);
@@ -113,7 +115,7 @@ class TaskUi {
         const audio = new Audio("./completedTaskSound.mp3");
         audio.play();
       }
-      this.renderTask(key2, groupId);
+      this.renderTask(key2, groupId, cached, true);
     });
   }
 }
@@ -188,8 +190,9 @@ function copyListTasks(tasks, title) {
   sendCopy(tasksCopy);
 }
 class ListTaskView {
-  constructor(group2, { viewModels = {}, uis = {}, components = {}, styles: styles2 = {}, config }) {
+  constructor(group2, edit2, { viewModels = {}, uis = {}, components = {}, styles: styles2 = {}, config }) {
     this.viewModels = viewModels;
+    this.edit = edit2;
     this.uis = uis;
     this.components = components;
     this.config = config;
@@ -253,7 +256,7 @@ class ListTaskView {
       );
     });
     this.viewModels.taskCreateVM.subscribe(() => {
-      this.uis.taskUI.renderTask(key2, this.group.id);
+      this.uis.taskUI.renderTask(key2, this.group.id, true);
     });
     this.uis.UiElements.send_task.addEventListener("click", async () => {
       this.uis.UiElements.settings.setAttribute("disabled", "false");
@@ -281,6 +284,9 @@ class ListTaskView {
     if (this.config.get("mainGroups").includes(key2)) {
       dropDown = /* @__PURE__ */ h(this.components.DropDown, null);
     }
+    if (this.edit) {
+      document.querySelector(`.${this.styles.groupForm.container}`).style.display = "flex";
+    }
     const header = /* @__PURE__ */ h(this.components.Header, { title: this.group?.name, dropDown, href: this.config.get("routers").home });
     this.uis.UiElements.main_content.appendChild(header);
     this.uis.UiElements.main_content.appendChild(this.components.ButtonAddTask());
@@ -290,10 +296,13 @@ class ListTaskView {
     if (document.querySelector(".icon") && this.group) {
       document.querySelector(".icon").classList = `${this.group.icon} icon`;
     }
+    document.getElementById("group").value = this.group.name;
     this.bindViewModelsEvents(key2);
     this.bindUiEvents();
-    await this.uis.taskUI.renderTask(key2, this.group.id);
-    this.uis.linesRenderer();
+    this.uis.taskUI.subscribe(() => {
+      this.uis.linesRenderer();
+    });
+    this.uis.taskUI.renderTask(key2, this.group.id);
   }
 }
 class GroupViewModel extends Observable {
@@ -383,8 +392,8 @@ class ListTasksViewModel extends Observable {
     super();
     this.repository = repository;
   }
-  async load(group_id) {
-    const objects = await this.repository.load(group_id);
+  async load(group_id, cached = false) {
+    const objects = await this.repository.load(group_id, cached);
     this.notify();
     return objects;
   }
@@ -534,9 +543,9 @@ function theme(key2, color) {
   }
 }
 const key = queryParams.getQueryParams("key");
+const edit = queryParams.getQueryParams("edit");
 const taskRepository = packingDependecyTaskFirestore("task");
 const groupRepository = packingDependecyTask("group");
-packingDependecyTask("relation");
 const taskListViewModel = new ListTasksViewModel(taskRepository);
 const taskDetailViewModel = new TaskDetailViewModel(taskRepository, queryParams);
 const taskCreateViewModel = new CreateTaskViewModel(TaskFactory, taskRepository);
@@ -545,6 +554,7 @@ const group = await groupVM.find(key);
 const taskUi = new TaskUi(taskListViewModel, taskDetailViewModel);
 const listTaskView = new ListTaskView(
   group,
+  edit,
   {
     viewModels: {
       groupVM,
@@ -575,4 +585,4 @@ const listTaskView = new ListTaskView(
   }
 );
 listTaskView.render(key);
-//# sourceMappingURL=list-BRvZSwRm.js.map
+//# sourceMappingURL=list-DyYF01Ki.js.map

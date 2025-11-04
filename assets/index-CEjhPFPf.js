@@ -24667,12 +24667,30 @@ async function __PRIVATE_ensureOfflineComponents(e) {
 async function __PRIVATE_ensureOnlineComponents(e) {
   return e._onlineComponents || (e._uninitializedComponentsProvider ? (__PRIVATE_logDebug(on, "Using user provided OnlineComponentProvider"), await __PRIVATE_setOnlineComponentProvider(e, e._uninitializedComponentsProvider._online)) : (__PRIVATE_logDebug(on, "Using default OnlineComponentProvider"), await __PRIVATE_setOnlineComponentProvider(e, new OnlineComponentProvider()))), e._onlineComponents;
 }
+function __PRIVATE_getLocalStore(e) {
+  return __PRIVATE_ensureOfflineComponents(e).then(((e2) => e2.localStore));
+}
 function __PRIVATE_getSyncEngine(e) {
   return __PRIVATE_ensureOnlineComponents(e).then(((e2) => e2.syncEngine));
 }
 async function __PRIVATE_getEventManager(e) {
   const t = await __PRIVATE_ensureOnlineComponents(e), n = t.eventManager;
   return n.onListen = __PRIVATE_syncEngineListen.bind(null, t.syncEngine), n.onUnlisten = __PRIVATE_syncEngineUnlisten.bind(null, t.syncEngine), n.onFirstRemoteStoreListen = __PRIVATE_triggerRemoteStoreListen.bind(null, t.syncEngine), n.onLastRemoteStoreUnlisten = __PRIVATE_triggerRemoteStoreUnlisten.bind(null, t.syncEngine), n;
+}
+function __PRIVATE_firestoreClientGetDocumentFromLocalCache(e, t) {
+  const n = new __PRIVATE_Deferred();
+  return e.asyncQueue.enqueueAndForget((async () => (async function __PRIVATE_readDocumentFromCache(e2, t2, n2) {
+    try {
+      const r = await (function __PRIVATE_localStoreReadDocument(e3, t3) {
+        const n3 = __PRIVATE_debugCast(e3);
+        return n3.persistence.runTransaction("read document", "readonly", ((e4) => n3.localDocuments.getDocument(e4, t3)));
+      })(e2, t2);
+      r.isFoundDocument() ? n2.resolve(r) : r.isNoDocument() ? n2.resolve(null) : n2.reject(new FirestoreError(N.UNAVAILABLE, "Failed to get document from cache. (However, this document may exist on the server. Run again without setting 'source' in the GetOptions to attempt to retrieve the document from the server.)"));
+    } catch (e3) {
+      const r = __PRIVATE_wrapInUserErrorIfRecoverable(e3, `Failed to get document '${t2} from cache`);
+      n2.reject(r);
+    }
+  })(await __PRIVATE_getLocalStore(e), t, n))), n.promise;
 }
 function __PRIVATE_firestoreClientGetDocumentViaSnapshotListener(e, t, n = {}) {
   const r = new __PRIVATE_Deferred();
@@ -24699,6 +24717,27 @@ function __PRIVATE_firestoreClientGetDocumentViaSnapshotListener(e, t, n = {}) {
     });
     return __PRIVATE_eventManagerListen(e2, o);
   })(await __PRIVATE_getEventManager(e), e.asyncQueue, t, n, r))), r.promise;
+}
+function __PRIVATE_firestoreClientGetDocumentsFromLocalCache(e, t) {
+  const n = new __PRIVATE_Deferred();
+  return e.asyncQueue.enqueueAndForget((async () => (async function __PRIVATE_executeQueryFromCache(e2, t2, n2) {
+    try {
+      const r = await __PRIVATE_localStoreExecuteQuery(
+        e2,
+        t2,
+        /* usePreviousResults= */
+        true
+      ), i = new __PRIVATE_View(t2, r.Qs), s = i.ru(r.documents), o = i.applyChanges(
+        s,
+        /* limboResolutionEnabled= */
+        false
+      );
+      n2.resolve(o.snapshot);
+    } catch (e3) {
+      const r = __PRIVATE_wrapInUserErrorIfRecoverable(e3, `Failed to execute query '${t2} against cache`);
+      n2.reject(r);
+    }
+  })(await __PRIVATE_getLocalStore(e), t, n))), n.promise;
 }
 function __PRIVATE_firestoreClientGetDocumentsViaSnapshotListener(e, t, n = {}) {
   const r = new __PRIVATE_Deferred();
@@ -26568,10 +26607,24 @@ class __PRIVATE_ExpUserDataWriter extends AbstractUserDataWriter {
     );
   }
 }
+function getDocFromCache(e) {
+  e = __PRIVATE_cast(e, DocumentReference);
+  const t = __PRIVATE_cast(e.firestore, Firestore$2), n = ensureFirestoreConfigured(t), r = new __PRIVATE_ExpUserDataWriter(t);
+  return __PRIVATE_firestoreClientGetDocumentFromLocalCache(n, e._key).then(((n2) => new DocumentSnapshot(t, r, e._key, n2, new SnapshotMetadata(
+    null !== n2 && n2.hasLocalMutations,
+    /* fromCache= */
+    true
+  ), e.converter)));
+}
 function getDocs(e) {
   e = __PRIVATE_cast(e, Query);
   const t = __PRIVATE_cast(e.firestore, Firestore$2), n = ensureFirestoreConfigured(t), r = new __PRIVATE_ExpUserDataWriter(t);
   return __PRIVATE_validateHasExplicitOrderByForLimitToLast(e._query), __PRIVATE_firestoreClientGetDocumentsViaSnapshotListener(n, e._query).then(((n2) => new QuerySnapshot(t, r, e, n2)));
+}
+function getDocsFromCache(e) {
+  e = __PRIVATE_cast(e, Query);
+  const t = __PRIVATE_cast(e.firestore, Firestore$2), n = ensureFirestoreConfigured(t), r = new __PRIVATE_ExpUserDataWriter(t);
+  return __PRIVATE_firestoreClientGetDocumentsFromLocalCache(n, e._query).then(((n2) => new QuerySnapshot(t, r, e, n2)));
 }
 function setDoc(e, t, n) {
   e = __PRIVATE_cast(e, DocumentReference);
@@ -27050,8 +27103,12 @@ class Firestore2 {
    * @returns {Array} lista de objetos do banco de dados
    * @async
    */
-  async load() {
+  async load(cached = false) {
     const q2 = query(this.colRef(), where("user_id", "==", this.userCached.uid));
+    if (cached) {
+      const snapshot2 = await getDocsFromCache(q2);
+      return snapshot2.docs.map((d) => ({ id: d.id, ...d.data() }));
+    }
     const snapshot = await getDocs(q2);
     return snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
   }
@@ -27120,8 +27177,13 @@ class Firestore2 {
    */
   async find(id) {
     const ref = this.docRef(id);
-    const snap = await getDoc(ref);
-    return snap.exists() ? { id: snap.id, ...snap.data() } : null;
+    let snapshot;
+    try {
+      snapshot = await getDocFromCache(ref);
+    } catch {
+      snapshot = await getDoc(ref);
+    }
+    return snapshot.exists() ? { id: snapshot.id, ...snapshot.data() } : null;
   }
 }
 class TaskFirestore extends Firestore2 {
@@ -27144,10 +27206,15 @@ class TaskFirestore extends Firestore2 {
    * @param {UUID} group_id - Identificaodr único de um grupo
    * @returns {Array} - Lista com todas as tarefas do grupo
    */
-  async load(group_id) {
-    const q2 = query(this.colRef(), where("group_id", "==", group_id));
-    const snapshot = await getDocs(q2);
-    return snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+  //async load(group_id, cached = false) {
+  //  const q = query(this.colRef(), where("group_id", "==", group_id));
+  //  const snapshot = await getDocs(q);
+  //  return snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+  //}
+  async load(group_id, cached = false) {
+    const snapshot = await super.load(cached);
+    const filteredDocs = snapshot.filter((doc2) => doc2.group_id === group_id);
+    return filteredDocs.map((d) => ({ id: d.id, ...d }));
   }
 }
 const service = new TaskService([], [], []);
@@ -27173,4 +27240,4 @@ export {
   queryParams as q,
   service as s
 };
-//# sourceMappingURL=index-CszmcCWL.js.map
+//# sourceMappingURL=index-CEjhPFPf.js.map

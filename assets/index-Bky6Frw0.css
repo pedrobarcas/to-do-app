@@ -19,6 +19,7 @@ body {
   font-family: var(--main-font);
   color: var(--secondary-color);
   background-color: var(--main-background);
+  font-weight: 500;
 }
 
 h1,

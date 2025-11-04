@@ -1,4 +1,4 @@
-import { d as signInWithEmailAndPassword, a as auth, c as configService } from "./index-CszmcCWL.js";
+import { d as signInWithEmailAndPassword, a as auth, c as configService } from "./index-CEjhPFPf.js";
 /* empty css               */
 /* empty css                */
 /* empty css               */
@@ -12,4 +12,4 @@ button.addEventListener("click", () => {
     console.log(error);
   });
 });
-//# sourceMappingURL=login-WQ4eaGZj.js.map
+//# sourceMappingURL=login-DPWmuOEl.js.map

@@ -1,4 +1,4 @@
-import { o as onAuthStateChanged, c as configService, a as auth } from "./index-CszmcCWL.js";
+import { o as onAuthStateChanged, c as configService, a as auth } from "./index-CEjhPFPf.js";
 onAuthStateChanged(auth, (user) => {
   if (!user) {
     window.location.replace(configService.get("routers").login);
@@ -6,4 +6,4 @@ onAuthStateChanged(auth, (user) => {
     console.log("Acesso liberado para:", user.email);
   }
 });
-//# sourceMappingURL=private-check-CyHAhL7g.js.map
+//# sourceMappingURL=private-check-CHlmduoZ.js.map

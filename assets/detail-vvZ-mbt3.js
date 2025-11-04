@@ -1,7 +1,7 @@
-import { O as Observable, p as packingDependecyTask, q as queryParams, s as service, c as configService } from "./index-CszmcCWL.js";
+import { O as Observable, p as packingDependecyTask, q as queryParams, s as service, c as configService } from "./index-CEjhPFPf.js";
 /* empty css               */
-import "./private-check-CyHAhL7g.js";
-import { a as TaskDetailViewModel, T as TaskCard } from "./taskDetailViewModel-E6dn99uf.js";
+import "./private-check-CHlmduoZ.js";
+import { a as TaskDetailViewModel, T as TaskCard } from "./taskDetailViewModel-CskNvAVh.js";
 import { h } from "./h-DjMzbvrD.js";
 import { H as Header } from "./header-D6v_BbzM.js";
 class EditViewModel extends Observable {
@@ -126,4 +126,4 @@ const view = new TaskDetailView(
 );
 const container = document.querySelector(".container");
 view.render(container);
-//# sourceMappingURL=detail-FUuAMNHA.js.map
+//# sourceMappingURL=detail-vvZ-mbt3.js.map

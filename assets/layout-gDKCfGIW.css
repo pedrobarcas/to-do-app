@@ -16,11 +16,17 @@ header {
 }
 
 .todo__footer--content {
+  margin-left: 0.5rem;
   display: flex;
   gap: 1rem;
   width: 90%;
   font-size: 1.25rem;
   background-color: var(--main-background);
+  color: gray;
+}
+
+.todo__footer--content span {
+  font-size: 1.5rem;
 }
 
 .main-header {

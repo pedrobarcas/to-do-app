@@ -1,5 +1,5 @@
 import { h } from "./h-DjMzbvrD.js";
-import { O as Observable } from "./index-CszmcCWL.js";
+import { O as Observable } from "./index-CEjhPFPf.js";
 function TaskCard({ task, forEdition = false, key }) {
   let button = /* @__PURE__ */ h("button", { className: "task-checkbox" });
   let name = /* @__PURE__ */ h("a", { className: "task-name", href: `./detail.html?task_id=${task.id}&key=${key}` }, task.name);
@@ -42,4 +42,4 @@ export {
   TaskCard as T,
   TaskDetailViewModel as a
 };
-//# sourceMappingURL=taskDetailViewModel-E6dn99uf.js.map
+//# sourceMappingURL=taskDetailViewModel-CskNvAVh.js.map
