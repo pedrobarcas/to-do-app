@@ -30,6 +30,9 @@
     }
   },
   "dependencies": {
+    "@capacitor/android": "^7.4.4",
+    "@capacitor/cli": "^7.4.4",
+    "@capacitor/core": "^7.4.4",
     "firebase": "^12.4.0",
     "vite-plugin-pwa": "^1.1.0"
   }

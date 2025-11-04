@@ -34,9 +34,15 @@ export class TaskFirestore extends Firestore {
    * @returns {Array} - Lista com todas as tarefas do grupo
    */
 
-  async load(group_id) {
-    const q = query(this.colRef(), where("group_id", "==", group_id));
-    const snapshot = await getDocs(q);
-    return snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+  //async load(group_id, cached = false) {
+  //  const q = query(this.colRef(), where("group_id", "==", group_id));
+  //  const snapshot = await getDocs(q);
+  //  return snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+  //}
+
+  async load(group_id, cached = false) {
+    const snapshot = await super.load(cached);
+    const filteredDocs = snapshot.filter((doc) => doc.group_id === group_id);
+    return filteredDocs.map((d) => ({ id: d.id, ...d }));
   }
 }

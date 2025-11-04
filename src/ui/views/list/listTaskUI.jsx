@@ -1,5 +1,6 @@
 import { UiElements } from "./elements";
 import { TaskCard } from "../../components/task";
+import { Observable } from "../../../domain/Observable";
 import { h } from "../../../h";
 
 /**
@@ -35,8 +36,9 @@ export class FormUi {
  * Responsável por renderizar tasks, tanto ativas quanto concluídas,
  * e ligar eventos de checkbox para completar tarefas.
  */
-export class TaskUi {
+export class TaskUi extends Observable {
   constructor(listViewModel, detailViewModel) {
+    super();
     this.listViewModel = listViewModel;
     this.detailViewModel = detailViewModel;
   }
@@ -60,15 +62,17 @@ export class TaskUi {
    * ----------------
    * Renderiza todas as tasks do grupo, separando concluídas e ativas.
    */
-  async renderTask(key, groupId) {
+  async renderTask(key, groupId, cached=false) {
     UiElements.main_tasks.innerHTML = "";
     UiElements.completed_tasks.innerHTML = "";
 
-    const tasks = await this.listViewModel.load(groupId)
+    const tasks = await this.listViewModel.load(groupId, cached)
     
     tasks.forEach((task) => {
       this.createTemplateTask(task, task.completed, key, groupId);
     });
+
+    this.notify()
   }
 
   /**
@@ -76,7 +80,7 @@ export class TaskUi {
    * ----------------
    * Cria o card da task e adiciona eventos.
    */
-  createTemplateTask(task, completed = false, key, groupId) {
+  createTemplateTask(task, completed = false, key, groupId, cached=false) {
     const taskCard = <TaskCard task={task} key={key}/>;
     const taskButton = taskCard.querySelector(".task-checkbox");
 
@@ -89,7 +93,7 @@ export class TaskUi {
         const audio = new Audio("./completedTaskSound.mp3")
         audio.play()
       }
-      this.renderTask(key, groupId); // Atualiza toda a lista de forma fluida
+      this.renderTask(key, groupId, cached, true); // Atualiza toda a lista de forma fluida
     });
   }
 }

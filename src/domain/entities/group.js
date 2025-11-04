@@ -1,8 +1,9 @@
 /**
  * Entidade Group: representa um agrupamento de tarefas ou categorias.
  * Essa classe define apenas os dados essenciais, sem regras de negócio.
- * 
+ *
  * @example new Group(id, name, create_date... )
+ * @module domínio/entidades/grupo
  */
 
 export class Group {
@@ -13,7 +14,7 @@ export class Group {
    * @property {string} color - Cor do grupo
    * @property {string} icon - Icone expresso em classes Awesome
    * @property {UUID} user_id - Id do usuário
-   * 
+   *
    * @constructor
    */
   constructor(id, name, create_date, color, icon, user_id) {

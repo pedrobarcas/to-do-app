@@ -46,10 +46,10 @@ import styles from "../../components/styles/groupForm.module.css"
 
 // Recupera a key da lista
 const key = queryParams.getQueryParams("key");
+const edit = queryParams.getQueryParams("edit")
 // Repositories
 const taskRepository = packingDependecyTaskFirestore("task");
 const groupRepository = packingDependecyTask("group");
-const relationRepository = packingDependecyTask("relation")
 
 // ViewModels
 const taskListViewModel = new ListTasksViewModel(taskRepository);
@@ -62,7 +62,8 @@ const group = await groupVM.find(key)
 const taskUi = new TaskUiClass(taskListViewModel, taskDetailViewModel);
 
 const listTaskView = new ListTaskView(
-  group, {
+  group,
+  edit, {
   viewModels: {
     groupVM,
     taskCreateVM: taskCreateViewModel,

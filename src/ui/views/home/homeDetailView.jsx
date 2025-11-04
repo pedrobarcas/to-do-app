@@ -24,49 +24,25 @@ import { h } from "../../../h";
 import { AccountHeader } from "../../components/accountHeader";
 
 export class homeView{
-    constructor(Ui, listVM, createVM, groupForm, styles){
+    constructor(Ui, listVM, createVM, groupForm, styles, config){
         this.Ui = Ui;
         this.listVM = listVM;
         this.createVM = createVM;
         this.groupForm = groupForm;
         this.color;
         this.styles = styles;
+        this.config = config
 
     }
 
     async bindEvents(root = document){
-
-        const form = root.querySelector(`.${this.styles.container}`);
-
-        const group = root.getElementById('group');
-
-        root.querySelector('.todo__footer--content').addEventListener('click', () => {
-            form.style.display = 'flex'
+        this.createVM.subscribe(async (group) => {
+            location.replace(`${this.config.get("routers").list}?key=${group.id}&edit=true`)
         })
 
-        root.getElementById('cancel').addEventListener('click', () => {
-            form.style.display = 'none'
+        root.querySelector('.todo__footer').addEventListener('click', async () => {
+            this.createVM.create("", "", "fa-solid fa-list-ul")
         })
-
-        this.createVM.subscribe(async () => {
-            form.style.display = 'none'
-            await this.Ui.renderGroups(document.querySelector('.home__group'))
-        })
-
-        root.getElementById('create').addEventListener('click', async () => {
-            this.createVM.create(group.value.trim(), this.color, Array.from(document.querySelector(".icon").classList).slice(0, 2).join(" "))
-        })
-        
-        document.querySelectorAll(`.${this.styles.colorContent}`).forEach(color => {
-            color.addEventListener('click', (event) => {
-            this.color = event.target.dataset.color;
-            document.querySelectorAll(`.${this.styles.colorContent}`).forEach(colorContent => {
-                colorContent.classList.remove('is-selected');
-            })
-            event.target.classList.add('is-selected');
-
-      })
-    })
     }
 
     async render(root = document){
@@ -75,13 +51,9 @@ export class homeView{
 
         main_content.prepend(header)
 
-        
-        const form = <this.groupForm method={'post'}/>
-        main_content.prepend(form)
-
         this.bindEvents(root)
 
-        await this.Ui.renderGroups(document.querySelector('.home__group'))
+        this.Ui.renderGroups(document.querySelector('.home__group'))
 
     }
 }

@@ -20,6 +20,8 @@ import { GroupCreateViewModel } from "../../viewmodels/createGroupViewModel";
 import { GroupFactory } from "../../../domain/factorys/groupFactory";
 import { packingDependecyTask } from "../..";
 
+import { configService } from "../..";
+
 import { ListViewModel } from "../../viewmodels/ListViewModel";
 
 import { GroupForm } from "../../components/groupForm";
@@ -52,7 +54,7 @@ const homeListViewModel = new ListViewModel(groupRepository);
 const homeCreateViewModel = new GroupCreateViewModel(groupFactory, groupRepository);
 const homeUi = new HomeUi(homeListViewModel)
 
-const view = new homeView(homeUi, homeListViewModel, homeCreateViewModel, GroupForm, styles)
+const view = new homeView(homeUi, homeListViewModel, homeCreateViewModel, GroupForm, styles, configService)
 
 
 view.render(document)

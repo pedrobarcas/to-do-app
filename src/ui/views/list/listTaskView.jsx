@@ -9,8 +9,9 @@ import { copyListTasks } from "../../../utils/sendTasks";
  */
 
 export class ListTaskView {
-  constructor(group, {viewModels = {}, uis = {}, components = {}, styles={}, config }) {
+  constructor(group, edit, {viewModels = {}, uis = {}, components = {}, styles={}, config }) {
     this.viewModels = viewModels;
+    this.edit = edit
     this.uis = uis;
     this.components = components;
     this.config = config;
@@ -94,7 +95,7 @@ export class ListTaskView {
 
 
     this.viewModels.taskCreateVM.subscribe(() => {
-      this.uis.taskUI.renderTask(key, this.group.id);
+      this.uis.taskUI.renderTask(key, this.group.id, true);
       
     });
     
@@ -132,6 +133,10 @@ export class ListTaskView {
     if (this.config.get("mainGroups").includes(key)) {
       dropDown = <this.components.DropDown />;
     }
+
+    if (this.edit){
+      document.querySelector(`.${this.styles.groupForm.container}`).style.display = "flex";
+    }
     
     const header = <this.components.Header title={this.group?.name} dropDown={dropDown} href={this.config.get("routers").home} />;
     this.uis.UiElements.main_content.appendChild(header);
@@ -142,10 +147,13 @@ export class ListTaskView {
       document.querySelector(".icon").classList = `${this.group.icon} icon`
     }
     
-    
+    document.getElementById("group").value = this.group.name
     this.bindViewModelsEvents(key)
     this.bindUiEvents();
-    await this.uis.taskUI.renderTask(key, this.group.id);
-    this.uis.linesRenderer();
+    this.uis.taskUI.subscribe(() => {
+      this.uis.linesRenderer();
+    })
+    this.uis.taskUI.renderTask(key, this.group.id);
+    
   }
 }

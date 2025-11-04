@@ -4,10 +4,12 @@ import {
   doc,
   setDoc,
   getDoc,
+  getDocFromCache,
   getDocs,
   updateDoc,
   deleteDoc,
   query,
+  getDocsFromCache,
   where,
 } from "firebase/firestore";
 
@@ -64,9 +66,15 @@ export class Firestore {
    * @returns {Array} lista de objetos do banco de dados
    * @async
    */
-  async load() {
+  async load(cached = false) {
     const q = query(this.colRef(), where("user_id", "==", this.userCached.uid));
+    if (cached) {
+      const snapshot = await getDocsFromCache(q);
+      return snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+    }
+
     const snapshot = await getDocs(q);
+
     return snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
   }
 
@@ -142,7 +150,12 @@ export class Firestore {
 
   async find(id) {
     const ref = this.docRef(id);
-    const snap = await getDoc(ref);
-    return snap.exists() ? { id: snap.id, ...snap.data() } : null;
+    let snapshot;
+    try {
+      snapshot = await getDocFromCache(ref);
+    } catch {
+      snapshot = await getDoc(ref);
+    }
+    return snapshot.exists() ? { id: snapshot.id, ...snapshot.data() } : null;
   }
 }

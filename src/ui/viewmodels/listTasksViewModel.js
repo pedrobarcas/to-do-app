@@ -23,8 +23,9 @@ export class ListTasksViewModel extends Observable {
     this.repository = repository;
   }
 
-  async load(group_id) {
-    const objects = await this.repository.load(group_id);
+  async load(group_id, cached = false) {
+    const objects = await this.repository.load(group_id, cached);
+
     this.notify();
     return objects;
   }
