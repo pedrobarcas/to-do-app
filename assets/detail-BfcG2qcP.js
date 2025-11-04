@@ -126,4 +126,4 @@ const view = new TaskDetailView(
 );
 const container = document.querySelector(".container");
 view.render(container);
-//# sourceMappingURL=detail-vvZ-mbt3.js.map
+//# sourceMappingURL=detail-BfcG2qcP.js.map
