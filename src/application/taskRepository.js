@@ -45,6 +45,13 @@ export class TaskRepository extends Repository {
     return resolution;
   }
 
+  async addMyDay(task) {
+    if (task.my_day) task.my_day = false;
+    else task.my_day = true;
+    const resolution = await this.repository.edit(task);
+    return resolution;
+  }
+
   /**
    * Filtra tarefas pertecentes a um determinado grupo
    *

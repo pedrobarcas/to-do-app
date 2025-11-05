@@ -37,4 +37,10 @@ export class TaskDetailViewModel extends DetailViewModel {
     this.notify();
     return favorited;
   }
+
+  async addMyDay(task) {
+    const myDay = await this.repository.addMyDay(task);
+    this.notify();
+    return myDay;
+  }
 }

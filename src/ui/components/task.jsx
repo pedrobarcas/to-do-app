@@ -55,7 +55,7 @@ export function TaskCard({ task, forEdition = false, key}) {
 
   const taskCard = (
     <ol className={`tasks task${task.id} task-card`}>
-        <div>
+        <div className="task-display">
         {button}
         {name}
         </div>

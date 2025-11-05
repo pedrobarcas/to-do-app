@@ -45,7 +45,8 @@ export class TaskDetailView{
             const date = document.getElementById("date");
     
             const button_completed_task = document.querySelector(".task-checkbox");
-            
+            const button_favorite = document.getElementById("favorite");
+            const button_add_my_day = document.getElementById("add-my-day")
             window.addEventListener("input", async () => {
                 await this.taskEditVM.edit(task, {
                 name: name.value,
@@ -53,6 +54,11 @@ export class TaskDetailView{
                 date: date.value
                });
             });
+
+            if (task.my_day){
+                button_add_my_day.textContent = "Adicionado ao meu dia"
+                button_add_my_day.style.color = "var(--main-color)"
+            }
     
             
             this.taskRemoveVM.subscribe(() => {
@@ -68,6 +74,14 @@ export class TaskDetailView{
             
             button_completed_task.addEventListener('click', async () => {
                   await this.taskDetailVM.completedTask(task);
+            })
+
+            button_favorite.addEventListener('click', async () => {
+                  await this.taskDetailVM.favoritedTask(task);
+            })
+
+            button_add_my_day.addEventListener("click", async () => {
+                await this.taskDetailVM.addMyDay(task);
             })
         });
     }

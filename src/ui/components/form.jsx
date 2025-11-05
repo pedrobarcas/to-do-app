@@ -16,7 +16,7 @@ export function Form(props) {
    
       <div className="form-input-box">
         <span className="fa-regular fa-sun"></span>
-        <button className="remember-me-button form-input">Lembrar-me</button>
+        <button className="remember-me-button form-input" id="add-my-day">Adicionar ao meu dia</button>
       </div>
 
       <div>

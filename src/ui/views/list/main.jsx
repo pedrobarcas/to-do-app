@@ -46,6 +46,7 @@ import { ImportantTaskUi } from "./important/importantTaskUi.jsx";
 import { TaskFactory } from "../../../domain/factorys/taskFactory.js";
 import { linesRenderer } from "./linesRenderer.jsx";
 import { theme } from "./theme.jsx";
+import { MyDayTaskUi } from "./myDay/myDayTaskUi.jsx";
 import { ListViewModel } from "../../viewmodels/listViewModel.js";
 
 import styles from "../../components/styles/groupForm.module.css"
@@ -68,7 +69,7 @@ const group = await groupVM.find(key)
 // UIs
 const taskUi = new TaskUi(taskListViewModel, taskDetailViewModel);
 const groupUi = new ImportantTaskUi(listViewModel, taskDetailViewModel)
-
+const myDayUi = new MyDayTaskUi(listViewModel, taskDetailViewModel)
 
 function createView(ViewClass, {
   dropDown,
@@ -118,12 +119,6 @@ const taskView = createView(TaskView, {
   edit
 });
 
-const listTaskView = createView(ListTaskView, {
-  dropDown: GroupSettingsDropDown,
-  taskUi: taskUi,
-  group,
-  edit
-});
 
 const importantTaskView = createView(TaskView, {
   dropDown: SettingsDropDown,
@@ -132,10 +127,23 @@ const importantTaskView = createView(TaskView, {
   edit
 });
 
+const myDayTaskView = createView(TaskView, {
+  dropDown: SettingsDropDown,
+  taskUi: myDayUi,
+  group,
+  edit
+});
+
+
+
 if (key === "Importante"){
   importantTaskView.render(key)
   console.log("aaaaa")
-} 
+}
+
+else if (key === "Meu Dia"){
+  myDayTaskView.render(key)
+}
 
 else{
   taskView.render(key);

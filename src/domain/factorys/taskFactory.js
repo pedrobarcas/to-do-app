@@ -49,6 +49,7 @@ export class TaskFactory {
       null,
       userId,
       groupId,
+      false,
       false
     );
 
@@ -63,6 +64,7 @@ export class TaskFactory {
       user_id: task.user_id,
       group_id: task.group_id,
       favorite: task.favorite,
+      my_day: task.my_day,
     };
   }
 }

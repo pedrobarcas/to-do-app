@@ -26,7 +26,8 @@ export class Task {
     file,
     user_id,
     group_id,
-    favorite
+    favorite,
+    my_day
   ) {
     this.id = id;
     this.name = name;
@@ -38,5 +39,6 @@ export class Task {
     this.user_id = user_id;
     this.group_id = group_id;
     this.favorite = favorite;
+    this.my_day = my_day;
   }
 }
