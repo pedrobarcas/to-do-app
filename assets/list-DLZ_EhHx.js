@@ -1,10 +1,10 @@
-import { O as Observable, o as onAuthStateChanged, a as auth, q as queryParams, b as packingDependecyTaskFirestore, p as packingDependecyTask, s as service, c as configService } from "./index-CEjhPFPf.js";
+import { O as Observable, o as onAuthStateChanged, a as auth, q as queryParams, b as packingDependecyTaskFirestore, p as packingDependecyTask, d as packingDependecyFirestore, s as service, c as configService } from "./index-DaKAbugg.js";
 /* empty css                */
 /* empty css               */
-import "./private-check-CHlmduoZ.js";
-import { T as TaskCard, a as TaskDetailViewModel } from "./taskDetailViewModel-CskNvAVh.js";
+import "./private-check-DBjYSvOy.js";
+import { T as TaskCard, a as TaskDetailViewModel } from "./taskDetailViewModel-BRpk_kPL.js";
 import { h } from "./h-DjMzbvrD.js";
-import { v as v4, D as DateFormat, s as styles, G as GroupForm } from "./groupForm-DMEoLfJa.js";
+import { s as styles, v as v4, D as DateFormat, L as ListViewModel } from "./groupForm.module-BHTGuUxd.js";
 const must = (el, name) => {
   if (!el) throw new Error(`Elemento ${name} não encontrado`);
   return el;
@@ -67,9 +67,9 @@ class FormUi {
   }
 }
 class TaskUi extends Observable {
-  constructor(listViewModel, detailViewModel) {
+  constructor(listViewModel2, detailViewModel) {
     super();
-    this.listViewModel = listViewModel;
+    this.listViewModel = listViewModel2;
     this.detailViewModel = detailViewModel;
   }
   /**
@@ -109,6 +109,11 @@ class TaskUi extends Observable {
     const taskButton = taskCard.querySelector(".task-checkbox");
     if (!completed) UiElements.main_tasks.appendChild(taskCard);
     else UiElements.completed_tasks.appendChild(taskCard);
+    const favorite = taskCard.querySelector("#favorite");
+    favorite.addEventListener("click", () => {
+      this.detailViewModel.favoritedTask(task);
+      this.renderTask(key2, groupId, cached, true);
+    });
     taskButton.addEventListener("click", () => {
       this.detailViewModel.completedTask(task);
       if (task.completed) {
@@ -143,14 +148,88 @@ function MainForm(handle) {
     }
   ))));
 }
-function GroupSettingsDropDown() {
-  return /* @__PURE__ */ h("div", { className: "settings-drop-down" }, /* @__PURE__ */ h("div", { id: "changeThemeButton", className: "drop-down-content" }, /* @__PURE__ */ h(
+function listColor() {
+  return /* @__PURE__ */ h("div", { className: styles.selectColor }, [
+    "#778cdd",
+    "#f2b7c1",
+    "#437d89",
+    "#f4a261",
+    "#e76f51",
+    "#9b5de5"
+  ].map((color) => /* @__PURE__ */ h(
+    "div",
+    {
+      key: color,
+      dataset: { color },
+      className: styles.colorContent,
+      style: { backgroundColor: color }
+    }
+  )));
+}
+function listIcons() {
+  const icons = [
+    "fa-bars",
+    "fa-star",
+    "fa-heart",
+    "fa-gift",
+    "fa-tag",
+    "fa-book",
+    "fa-pen-to-square",
+    "fa-trash",
+    "fa-folder",
+    "fa-code",
+    "fa-thumbtack",
+    "fa-users",
+    "fa-flask",
+    "fa-briefcase",
+    "fa-cart-shopping",
+    "fa-dumbbell",
+    "fa-moon",
+    "fa-sun"
+  ];
+  return /* @__PURE__ */ h("div", { className: styles.listIcons, onClick: selectIcon }, icons.map((icon) => /* @__PURE__ */ h("span", { key: icon, className: `fa-solid ${icon}` })));
+}
+function GroupForm(method) {
+  const isEdit = method && method.method !== "post";
+  const title = isEdit ? "Renomear lista" : "Nova lista";
+  const message = isEdit ? "SALVAR" : "CRIAR LISTA";
+  return /* @__PURE__ */ h("form", { className: styles.container }, /* @__PURE__ */ h("div", { className: styles.content }, /* @__PURE__ */ h("p", { className: styles.title }, title), /* @__PURE__ */ h("div", { className: styles.input }, /* @__PURE__ */ h("label", { htmlFor: "group", role: "button", tabIndex: "0", onClick: showListIcon }, /* @__PURE__ */ h(
     "span",
     {
-      className: "fa-solid fa-palette",
-      "aria-label": "Botão para alterar o tema da lista atual"
+      className: "fa-regular fa-face-smile icon",
+      style: { color: "var(--main-color)" }
     }
-  ), /* @__PURE__ */ h("strong", null, "Alterar tema")), /* @__PURE__ */ h("div", { id: "editGroup", className: "drop-down-content" }, /* @__PURE__ */ h("span", { className: "fa-solid fa-pencil", "aria-label": "Botão para editar as informações do grupo atual" }), /* @__PURE__ */ h("strong", null, "Renomear lista")), /* @__PURE__ */ h("div", { id: "deleteGroup", className: "drop-down-content" }, /* @__PURE__ */ h("span", { className: "fa-solid fa-trash", "aria-label": "Botão para excluir a lista atual" }), /* @__PURE__ */ h("strong", null, "Excluir lista")), /* @__PURE__ */ h("div", { id: "sendCopy", className: "drop-down-content" }, /* @__PURE__ */ h("span", { className: "fa-solid fa-copy", "aria-label": "Botão para enviar uma cópia da lista de tarefas atual" }), /* @__PURE__ */ h("strong", null, "Enviar uma cópia")));
+  )), /* @__PURE__ */ h(
+    "input",
+    {
+      type: "text",
+      name: "group",
+      id: "group",
+      placeholder: "Inserir o título da lista",
+      className: styles.group
+    }
+  )), /* @__PURE__ */ h("div", { className: styles.personalizationContent }, /* @__PURE__ */ h("div", { className: styles.personalization }, "Cor"), listColor()), listIcons(), /* @__PURE__ */ h("div", { className: styles.actions }, /* @__PURE__ */ h("button", { id: "cancel", tabIndex: 1, type: "button", className: styles.button }, "CANCELAR"), /* @__PURE__ */ h("button", { id: "create", tabIndex: 0, type: "button", className: styles.button }, message))));
+}
+function showListIcon() {
+  const personalization = document.querySelector(`.${styles.personalizationContent}`);
+  const list = document.querySelector(`.${styles.listIcons}`);
+  if (personalization.style.display === "flex") {
+    personalization.style.display = "none";
+    list.style.display = "flex";
+  } else {
+    personalization.style.display = "flex";
+    list.style.display = "none";
+  }
+}
+function selectIcon() {
+  const icons = document.querySelector(`.${styles.listIcons}`).querySelectorAll("*");
+  icons.forEach((el) => {
+    el.addEventListener("click", (e) => {
+      icons.forEach((icon) => icon.classList.remove("is-selected"));
+      e.target.classList.add("is-selected");
+      document.querySelector(".icon").classList = `${e.target.classList} icon`;
+    });
+  });
 }
 async function sendCopy(text) {
   if (navigator.share) {
@@ -189,7 +268,7 @@ function copyListTasks(tasks, title) {
   });
   sendCopy(tasksCopy);
 }
-class ListTaskView {
+class TaskView {
   constructor(group2, edit2, { viewModels = {}, uis = {}, components = {}, styles: styles2 = {}, config }) {
     this.viewModels = viewModels;
     this.edit = edit2;
@@ -218,43 +297,16 @@ class ListTaskView {
     this.uis.UiElements.settings.addEventListener("click", () => {
       this.uis.HeaderUi.showDropDown();
     });
-    const form = document.querySelector(`.${this.styles.groupForm.container}`);
-    document.getElementById("cancel")?.addEventListener("click", () => {
-      form.style.display = "none";
-    });
     window.addEventListener("scroll", () => {
       const header = document.querySelector(".main-header");
       if (window.scrollY > 45) header?.classList.add("is-shrink");
       else header?.classList.remove("is-shrink");
     });
     document.getElementById("changeThemeButton")?.addEventListener("click", () => {
-      this.uis.UiElements.main_content.classList.toggle("light-theme");
-    });
-    document.getElementById("editGroup")?.addEventListener("click", () => {
-      form.style.display = "flex";
-    });
-    document.querySelectorAll(`.${this.styles.groupForm.colorContent}`).forEach((colorEl) => {
-      colorEl.addEventListener("click", (event) => {
-        const color = event.target.dataset.color;
-        document.documentElement.style.setProperty("--main-color", color);
-        this.color = color;
-      });
+      throw Error("Not iplemented");
     });
   }
   bindViewModelsEvents(key2) {
-    this.viewModels.groupVM.subscribe(() => {
-      location.reload();
-    });
-    document.getElementById("create")?.addEventListener("click", async () => {
-      this.viewModels.groupVM.edit(
-        this.group,
-        {
-          name: document.getElementById("group").value,
-          color: this.color,
-          icon: Array.from(document.querySelector(".icon").classList).slice(0, 2).join(" ")
-        }
-      );
-    });
     this.viewModels.taskCreateVM.subscribe(() => {
       this.uis.taskUI.renderTask(key2, this.group.id, true);
     });
@@ -263,10 +315,6 @@ class ListTaskView {
       const value = this.uis.UiElements.task.value.trim();
       this.uis.FormUi.hideForm();
       this.viewModels.taskCreateVM.create(value, this.group.id);
-    });
-    document.getElementById("deleteGroup")?.addEventListener("click", async () => {
-      await this.viewModels.groupVM.remove(key2);
-      location.replace(this.config.get("routers").home);
     });
     document?.getElementById("sendCopy")?.addEventListener("click", async () => {
       copyListTasks(await this.viewModels.taskListVM.load(this.group.id), this.group.name);
@@ -278,25 +326,14 @@ class ListTaskView {
    * Renderiza toda a interface da lista.
    */
   async render(key2) {
-    this.uis.theme(key2, this.color);
-    this.uis.UiElements.main_content.prepend(/* @__PURE__ */ h(this.components.groupForm, { method: "put" }));
-    let dropDown = /* @__PURE__ */ h(this.components.groupDropDown, null);
-    if (this.config.get("mainGroups").includes(key2)) {
-      dropDown = /* @__PURE__ */ h(this.components.DropDown, null);
-    }
-    if (this.edit) {
-      document.querySelector(`.${this.styles.groupForm.container}`).style.display = "flex";
-    }
-    const header = /* @__PURE__ */ h(this.components.Header, { title: this.group?.name, dropDown, href: this.config.get("routers").home });
+    this.uis.theme(this.color);
+    let dropDown = /* @__PURE__ */ h(this.components.DropDown, null);
+    const header = /* @__PURE__ */ h(this.components.Header, { title: this.group.name, dropDown, href: this.config.get("routers").home });
     this.uis.UiElements.main_content.appendChild(header);
-    this.uis.UiElements.main_content.appendChild(this.components.ButtonAddTask());
     this.uis.UiElements.main_content.appendChild(this.components.Form((e) => {
       e.preventDefault();
     }));
-    if (document.querySelector(".icon") && this.group) {
-      document.querySelector(".icon").classList = `${this.group.icon} icon`;
-    }
-    document.getElementById("group").value = this.group.name;
+    this.uis.UiElements.main_content.appendChild(this.components.ButtonAddTask());
     this.bindViewModelsEvents(key2);
     this.bindUiEvents();
     this.uis.taskUI.subscribe(() => {
@@ -447,6 +484,45 @@ class CreateTaskViewModel extends Observable {
     return resolution;
   }
 }
+class ImportantTaskUi extends TaskUi {
+  constructor(listViewModel2, detailViewModel) {
+    super(listViewModel2, detailViewModel);
+  }
+  /**
+   * renderTask(key)
+   * ----------------
+   * Renderiza todas as tasks do grupo, separando concluídas e ativas.
+   */
+  async renderTask(key2, cached = false) {
+    UiElements.main_tasks.innerHTML = "";
+    UiElements.completed_tasks.innerHTML = "";
+    const load = await this.listViewModel.load(cached);
+    const tasks = load.filter((task) => task.favorite === true);
+    tasks.forEach((task) => {
+      this.createTemplateTask(task, task.completed, key2, cached);
+    });
+    this.notify();
+  }
+  createTemplateTask(task, completed = false, key2, cached = false) {
+    const taskCard = /* @__PURE__ */ h(TaskCard, { task, key: key2 });
+    const taskButton = taskCard.querySelector(".task-checkbox");
+    if (!completed) UiElements.main_tasks.appendChild(taskCard);
+    else UiElements.completed_tasks.appendChild(taskCard);
+    const favorite = taskCard.querySelector("#favorite");
+    favorite.addEventListener("click", () => {
+      this.detailViewModel.favoritedTask(task);
+      this.renderTask(key2, cached, true);
+    });
+    taskButton.addEventListener("click", () => {
+      this.detailViewModel.completedTask(task);
+      if (task.completed) {
+        const audio = new Audio("./completedTaskSound.mp3");
+        audio.play();
+      }
+      this.renderTask(key2, cached);
+    });
+  }
+}
 class Task {
   /**
    * @property {string|number} id - Identificador único da tarefa.
@@ -456,8 +532,9 @@ class Task {
    * @property {boolean} completed - Indica se a tarefa está concluída.
    * @property {Date|null} date - Data de vencimento/execução (opcional).
    * @property {File|string|null} file - Arquivo associado à tarefa (opcional).
+   * @property {boolean} favorite - Indica se a tarefa é favorita ou não.
    */
-  constructor(id, name, description, create_date, completed, date, file, user_id, group_id) {
+  constructor(id, name, description, create_date, completed, date, file, user_id, group_id, favorite, my_day) {
     this.id = id;
     this.name = name;
     this.description = description;
@@ -467,6 +544,8 @@ class Task {
     this.file = file;
     this.user_id = user_id;
     this.group_id = group_id;
+    this.favorite = favorite;
+    this.my_day = my_day;
   }
 }
 class TaskFactory {
@@ -504,7 +583,9 @@ class TaskFactory {
       null,
       null,
       userId,
-      groupId
+      groupId,
+      false,
+      false
     );
     return {
       id: task.id,
@@ -515,7 +596,9 @@ class TaskFactory {
       date: task.date,
       file: task.file,
       user_id: task.user_id,
-      group_id: task.group_id
+      group_id: task.group_id,
+      favorite: task.favorite,
+      my_day: task.my_day
     };
   }
 }
@@ -531,58 +614,129 @@ function linesRenderer() {
     container.appendChild(/* @__PURE__ */ h("hr", null));
   }
 }
-function theme(key2, color) {
-  const themes = {
-    Importante: "pink-theme",
-    "Meu Dia": "green-theme"
-  };
-  const themeClass = themes[key2];
-  if (themeClass) document.querySelector(".main-content").classList.add(themeClass);
+function theme(color) {
   if (color) {
     document.documentElement.style.setProperty("--main-color", color);
+  }
+}
+class MyDayTaskUi extends TaskUi {
+  constructor(listViewModel2, detailViewModel) {
+    super(listViewModel2, detailViewModel);
+  }
+  /**
+   * renderTask(key)
+   * ----------------
+   * Renderiza todas as tasks do grupo, separando concluídas e ativas.
+   */
+  async renderTask(key2, cached = false) {
+    UiElements.main_tasks.innerHTML = "";
+    UiElements.completed_tasks.innerHTML = "";
+    const load = await this.listViewModel.load(cached);
+    const tasks = load.filter((task) => task.my_day === true);
+    tasks.forEach((task) => {
+      this.createTemplateTask(task, task.completed, key2, cached);
+    });
+    this.notify();
+  }
+  createTemplateTask(task, completed = false, key2, cached = false) {
+    const taskCard = /* @__PURE__ */ h(TaskCard, { task, key: key2 });
+    const taskButton = taskCard.querySelector(".task-checkbox");
+    if (!completed) UiElements.main_tasks.appendChild(taskCard);
+    else UiElements.completed_tasks.appendChild(taskCard);
+    const favorite = taskCard.querySelector("#favorite");
+    favorite.addEventListener("click", () => {
+      this.detailViewModel.favoritedTask(task);
+      this.renderTask(key2, cached, true);
+    });
+    taskButton.addEventListener("click", () => {
+      this.detailViewModel.completedTask(task);
+      if (task.completed) {
+        const audio = new Audio("./completedTaskSound.mp3");
+        audio.play();
+      }
+      this.renderTask(key2, cached);
+    });
   }
 }
 const key = queryParams.getQueryParams("key");
 const edit = queryParams.getQueryParams("edit");
 const taskRepository = packingDependecyTaskFirestore("task");
 const groupRepository = packingDependecyTask("group");
+const groupTaskRepository = packingDependecyFirestore("task");
 const taskListViewModel = new ListTasksViewModel(taskRepository);
+const listViewModel = new ListViewModel(groupTaskRepository);
 const taskDetailViewModel = new TaskDetailViewModel(taskRepository, queryParams);
 const taskCreateViewModel = new CreateTaskViewModel(TaskFactory, taskRepository);
 const groupVM = new GroupViewModel(groupRepository, taskRepository, service);
 const group = await groupVM.find(key);
 const taskUi = new TaskUi(taskListViewModel, taskDetailViewModel);
-const listTaskView = new ListTaskView(
+const groupUi = new ImportantTaskUi(listViewModel, taskDetailViewModel);
+const myDayUi = new MyDayTaskUi(listViewModel, taskDetailViewModel);
+function createView(ViewClass, {
+  dropDown,
+  taskUi: taskUi2,
+  components = {},
+  ...options
+} = {}) {
+  return new ViewClass(
+    options.group,
+    options.edit,
+    {
+      viewModels: {
+        groupVM,
+        taskCreateVM: taskCreateViewModel,
+        taskListVM: taskListViewModel,
+        taskDetailVM: taskDetailViewModel
+      },
+      uis: {
+        taskUI: taskUi2,
+        // agora vem por parâmetro
+        UiElements,
+        FormUi,
+        HeaderUi,
+        linesRenderer,
+        theme
+      },
+      components: {
+        Header: MainHeader,
+        ButtonAddTask: AddTask,
+        Form: MainForm,
+        DropDown: dropDown,
+        groupForm: GroupForm,
+        ...components
+        // permite sobrescrever ou adicionar
+      },
+      styles: {
+        groupForm: styles
+      },
+      config: configService
+    }
+  );
+}
+const taskView = createView(TaskView, {
+  dropDown: SettingsDropDown,
+  taskUi,
   group,
-  edit,
-  {
-    viewModels: {
-      groupVM,
-      taskCreateVM: taskCreateViewModel,
-      taskListVM: taskListViewModel,
-      taskDetailVM: taskDetailViewModel
-    },
-    uis: {
-      taskUI: taskUi,
-      UiElements,
-      FormUi,
-      HeaderUi,
-      linesRenderer,
-      theme
-    },
-    components: {
-      Header: MainHeader,
-      ButtonAddTask: AddTask,
-      Form: MainForm,
-      DropDown: SettingsDropDown,
-      groupDropDown: GroupSettingsDropDown,
-      groupForm: GroupForm
-    },
-    styles: {
-      groupForm: styles
-    },
-    config: configService
-  }
-);
-listTaskView.render(key);
-//# sourceMappingURL=list-DyYF01Ki.js.map
+  edit
+});
+const importantTaskView = createView(TaskView, {
+  dropDown: SettingsDropDown,
+  taskUi: groupUi,
+  group,
+  edit
+});
+const myDayTaskView = createView(TaskView, {
+  dropDown: SettingsDropDown,
+  taskUi: myDayUi,
+  group,
+  edit
+});
+if (key === "Importante") {
+  importantTaskView.render(key);
+  console.log("aaaaa");
+} else if (key === "Meu Dia") {
+  myDayTaskView.render(key);
+} else {
+  taskView.render(key);
+}
+//# sourceMappingURL=list-DLZ_EhHx.js.map

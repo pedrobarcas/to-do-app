@@ -1,8 +1,8 @@
-import { O as Observable, o as onAuthStateChanged, a as auth, p as packingDependecyTask, c as configService } from "./index-CEjhPFPf.js";
+import { O as Observable, o as onAuthStateChanged, a as auth, p as packingDependecyTask, c as configService } from "./index-DaKAbugg.js";
 /* empty css               */
 /* empty css                */
-import "./private-check-CHlmduoZ.js";
-import { v as v4, D as DateFormat, G as GroupForm, s as styles$1 } from "./groupForm-DMEoLfJa.js";
+import "./private-check-DBjYSvOy.js";
+import { v as v4, D as DateFormat, L as ListViewModel, s as styles$1 } from "./groupForm.module-BHTGuUxd.js";
 import { h } from "./h-DjMzbvrD.js";
 class GroupCreateViewModel extends Observable {
   constructor(factory, repository) {
@@ -77,18 +77,6 @@ class GroupFactory {
     };
   }
 }
-class ListViewModel extends Observable {
-  constructor(repository) {
-    super();
-    this.repository = repository;
-  }
-  async load(cached = false) {
-    const objects = await this.repository.load(cached);
-    console.log(objects);
-    this.notify();
-    return objects;
-  }
-}
 function GroupCard(props) {
   let icon = "fa-solid fa-list-ul";
   if (props.group.icon && !props.group.icon.includes("fa-regular")) {
@@ -133,11 +121,10 @@ function AccountHeader({ user }) {
   return /* @__PURE__ */ h("header", { className: styles.header }, /* @__PURE__ */ h("a", { href: "./account.html" }, /* @__PURE__ */ h("div", { className: styles.header_content }, /* @__PURE__ */ h("div", { className: styles.circle_img }, user.email[0].toUpperCase()), /* @__PURE__ */ h("div", { className: styles.header_content_text }, /* @__PURE__ */ h("h1", null, "To do", /* @__PURE__ */ h("span", { className: "fa-solid fa-chevron-down" })), /* @__PURE__ */ h("h2", null, user.email)))));
 }
 class homeView {
-  constructor(Ui, listVM, createVM, groupForm, styles2, config) {
+  constructor(Ui, listVM, createVM, styles2, config) {
     this.Ui = Ui;
     this.listVM = listVM;
     this.createVM = createVM;
-    this.groupForm = groupForm;
     this.color;
     this.styles = styles2;
     this.config = config;
@@ -283,6 +270,6 @@ const groupRepository = packingDependecyTask("group");
 const homeListViewModel = new ListViewModel(groupRepository);
 const homeCreateViewModel = new GroupCreateViewModel(groupFactory, groupRepository);
 const homeUi = new HomeUi(homeListViewModel);
-const view = new homeView(homeUi, homeListViewModel, homeCreateViewModel, GroupForm, styles$1, configService);
+const view = new homeView(homeUi, homeListViewModel, homeCreateViewModel, styles$1, configService);
 view.render(document);
-//# sourceMappingURL=main-DoDaWawJ.js.map
+//# sourceMappingURL=main-NY4v_mCg.js.map

@@ -27045,6 +27045,18 @@ class TaskRepository extends Repository {
     const resolution = await this.repository.edit(task);
     return resolution;
   }
+  async favorited(task) {
+    if (task.favorite) task.favorite = false;
+    else task.favorite = true;
+    const resolution = await this.repository.edit(task);
+    return resolution;
+  }
+  async addMyDay(task) {
+    if (task.my_day) task.my_day = false;
+    else task.my_day = true;
+    const resolution = await this.repository.edit(task);
+    return resolution;
+  }
   /**
    * Filtra tarefas pertecentes a um determinado grupo
    *
@@ -27226,18 +27238,22 @@ function packingDependecyTask(name2) {
 function packingDependecyTaskFirestore(name2) {
   return new TaskRepository(service, new TaskFirestore(db, name2));
 }
+function packingDependecyFirestore(name2) {
+  return new TaskRepository(service, new Firestore2(db, name2));
+}
 export {
   Observable as O,
   auth as a,
   packingDependecyTaskFirestore as b,
   configService as c,
-  signInWithEmailAndPassword as d,
-  createUserWithEmailAndPassword as e,
-  sendEmailVerification as f,
-  signOut as g,
+  packingDependecyFirestore as d,
+  signInWithEmailAndPassword as e,
+  createUserWithEmailAndPassword as f,
+  sendEmailVerification as g,
+  signOut as h,
   onAuthStateChanged as o,
   packingDependecyTask as p,
   queryParams as q,
   service as s
 };
-//# sourceMappingURL=index-CEjhPFPf.js.map
+//# sourceMappingURL=index-DaKAbugg.js.map

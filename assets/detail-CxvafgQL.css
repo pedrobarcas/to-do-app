@@ -23,17 +23,60 @@ body {
 }
 
 .tasks {
+  display: flex;
+  gap: 10px;
+  border-radius: 5px;
+  height: 4rem;
+  max-height: auto;
+  background-color: var(--task-background);
+  width: 100vw;
+  min-height: 2.5rem;
+  font-size: 1rem;
+  margin-bottom: 0;
   box-shadow: none !important;
-  margin-bottom: 10px;
-  margin: 0.5rem !important;
-  padding: 0 !important;
-  background-color: none;
-  font-size: 1.25rem;
-  width: 100%;
+  transition: all 0.3s ease-in-out;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.5rem;
+}
+
+.task-content {
+  display: flex;
+  width: max-content;
+}
+
+.task-display {
+  display: flex;
+  gap: 1rem;
+}
+
+.task-name {
+  max-width: 90%;
+  width: auto;
+  color: var(--secondary-color);
+  opacity: 70%;
+  padding: 1rem;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.tasks button {
+  height: 1.5rem;
+  width: 1.5rem;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  background-color: transparent;
+}
+
+.tasks button:hover {
+  background-color: var(--main-color);
 }
 
 .tasks input {
   color: white;
+  font-size: 1.5rem;
+  font-weight: 500;
   width: 100%;
   padding: 0;
   margin: 0;
