@@ -24,7 +24,6 @@ import { configService } from "../..";
 
 import { ListViewModel } from "../../viewmodels/ListViewModel";
 
-import { GroupForm } from "../../components/groupForm";
 import { HomeUi } from "./homeUI";
 import { homeView } from "./homeDetailView";
 

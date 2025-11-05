@@ -48,7 +48,8 @@ export class TaskFactory {
       null,
       null,
       userId,
-      groupId
+      groupId,
+      false
     );
 
     return {
@@ -61,6 +62,7 @@ export class TaskFactory {
       file: task.file,
       user_id: task.user_id,
       group_id: task.group_id,
+      favorite: task.favorite,
     };
   }
 }

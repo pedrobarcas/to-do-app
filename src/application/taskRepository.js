@@ -38,6 +38,13 @@ export class TaskRepository extends Repository {
     return resolution;
   }
 
+  async favorited(task) {
+    if (task.favorite) task.favorite = false;
+    else task.favorite = true;
+    const resolution = await this.repository.edit(task);
+    return resolution;
+  }
+
   /**
    * Filtra tarefas pertecentes a um determinado grupo
    *

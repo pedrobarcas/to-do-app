@@ -14,6 +14,7 @@ export class Task {
    * @property {boolean} completed - Indica se a tarefa está concluída.
    * @property {Date|null} date - Data de vencimento/execução (opcional).
    * @property {File|string|null} file - Arquivo associado à tarefa (opcional).
+   * @property {boolean} favorite - Indica se a tarefa é favorita ou não.
    */
   constructor(
     id,
@@ -24,7 +25,8 @@ export class Task {
     date,
     file,
     user_id,
-    group_id
+    group_id,
+    favorite
   ) {
     this.id = id;
     this.name = name;
@@ -35,5 +37,6 @@ export class Task {
     this.file = file;
     this.user_id = user_id;
     this.group_id = group_id;
+    this.favorite = favorite;
   }
 }

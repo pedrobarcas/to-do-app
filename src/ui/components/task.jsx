@@ -34,24 +34,37 @@ export function TaskCard({ task, forEdition = false, key}) {
       {task.name}
     </a>
   )
+  
+  let favorite = <span className="fa-regular fa-star"></span>
 
   if (forEdition) {
     name = <input type="text" className="form-input" name="name" id="name" value={task.name}/>
   }
 
   if (task.completed) {
-    name.style.textDecoration = "line-through"
-    button.style.backgroundColor = "var(--main-color)"
-    button.innerHTML = `<span class="fa-solid fa-check"></span>`
-    button.style.border = "none"
+    name.style.textDecoration = "line-through";
+    button.style.backgroundColor = "var(--main-color)";
+    button.innerHTML = `<span class="fa-solid fa-check"></span>`;
+    button.style.border = "none";
   }
 
-  return (
+  if (task.favorite) {
+    favorite.classList = "fa-solid fa-star"
+    favorite.style.color = "var(--main-color)"
+  }
+
+  const taskCard = (
     <ol className={`tasks task${task.id} task-card`}>
-      <div>
+        <div>
         {button}
+        {name}
+        </div>
+        
+      <div id="favorite">
+        {favorite}
       </div>
-      {name}
     </ol>
   )
+
+  return taskCard
 }

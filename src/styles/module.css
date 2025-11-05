@@ -1,8 +1,6 @@
 .tasks {
   display: flex;
-  align-items: center;
   gap: 10px;
-  padding-left: 1rem;
   border-radius: 5px;
   height: 4rem;
   max-height: auto;
@@ -13,10 +11,19 @@
   margin-bottom: 0;
   box-shadow: 0 1px 4px #0004;
   transition: all 0.3s ease-in-out;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.5rem;
+}
+
+.task-content {
+  display: flex;
+  width: max-content;
 }
 
 .task-name {
-  width: 90%;
+  max-width: 90%;
+  width: auto;
   color: var(--secondary-color);
   opacity: 70%;
   padding: 1rem;

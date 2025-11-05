@@ -31,4 +31,10 @@ export class TaskDetailViewModel extends DetailViewModel {
     this.notify();
     return completed;
   }
+
+  async favoritedTask(task) {
+    const favorited = await this.repository.favorited(task);
+    this.notify();
+    return favorited;
+  }
 }
