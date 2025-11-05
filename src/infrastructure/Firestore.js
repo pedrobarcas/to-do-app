@@ -156,6 +156,7 @@ export class Firestore {
     } catch {
       snapshot = await getDoc(ref);
     }
+
     return snapshot.exists() ? { id: snapshot.id, ...snapshot.data() } : null;
   }
 }

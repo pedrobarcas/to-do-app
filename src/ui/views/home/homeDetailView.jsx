@@ -24,11 +24,10 @@ import { h } from "../../../h";
 import { AccountHeader } from "../../components/accountHeader";
 
 export class homeView{
-    constructor(Ui, listVM, createVM, groupForm, styles, config){
+    constructor(Ui, listVM, createVM, styles, config){
         this.Ui = Ui;
         this.listVM = listVM;
         this.createVM = createVM;
-        this.groupForm = groupForm;
         this.color;
         this.styles = styles;
         this.config = config

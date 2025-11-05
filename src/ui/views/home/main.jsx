@@ -53,7 +53,7 @@ const homeListViewModel = new ListViewModel(groupRepository);
 const homeCreateViewModel = new GroupCreateViewModel(groupFactory, groupRepository);
 const homeUi = new HomeUi(homeListViewModel)
 
-const view = new homeView(homeUi, homeListViewModel, homeCreateViewModel, GroupForm, styles, configService)
+const view = new homeView(homeUi, homeListViewModel, homeCreateViewModel, styles, configService)
 
 
 view.render(document)

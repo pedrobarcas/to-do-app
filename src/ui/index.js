@@ -24,3 +24,7 @@ export function packingDependecyTask(name) {
 export function packingDependecyTaskFirestore(name) {
   return new TaskRepository(service, new TaskFirestore(db, name));
 }
+
+export function packingDependecyFirestore(name) {
+  return new TaskRepository(service, new Firestore(db, name));
+}

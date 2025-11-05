@@ -8,10 +8,10 @@ import { copyListTasks } from "../../../utils/sendTasks";
  * manipulando UI, Mockup, Form e Header.
  */
 
-export class ListTaskView {
+export class TaskView {
   constructor(group, edit, {viewModels = {}, uis = {}, components = {}, styles={}, config }) {
     this.viewModels = viewModels;
-    this.edit = edit
+    this.edit = edit;
     this.uis = uis;
     this.components = components;
     this.config = config;
@@ -42,12 +42,6 @@ export class ListTaskView {
       this.uis.HeaderUi.showDropDown();
     });
 
-    const form = document.querySelector(`.${this.styles.groupForm.container}`);
-
-    document.getElementById("cancel")?.addEventListener("click", () => {
-      form.style.display = "none";
-    });
-
     window.addEventListener("scroll", () => {
       const header = document.querySelector(".main-header");
       if (window.scrollY > 45) header?.classList.add("is-shrink");
@@ -57,42 +51,11 @@ export class ListTaskView {
     document
       .getElementById("changeThemeButton")
       ?.addEventListener("click", () => {
-        this.uis.UiElements.main_content.classList.toggle("light-theme");
+        throw Error("Not iplemented")
       });
-
-    document.getElementById("editGroup")?.addEventListener("click", () => {
-      form.style.display = "flex";
-    });
-
-    document.querySelectorAll(`.${this.styles.groupForm.colorContent}`)
-      .forEach((colorEl) => {
-        colorEl.addEventListener("click", (event) => {
-          const color = event.target.dataset.color;
-          document.documentElement.style.setProperty("--main-color", color);
-          this.color = color;
-        });
-      });
-
   }
 
   bindViewModelsEvents(key){
-
-    this.viewModels.groupVM.subscribe(() => {
-      location.reload()
-    })
-    document.getElementById("create")?.addEventListener("click", async () => {
-      this.viewModels.groupVM.edit(
-        this.group,
-        {
-          name: document.getElementById("group").value,
-          color: this.color,
-          icon: Array.from(document.querySelector(".icon").classList)
-                      .slice(0, 2)
-                      .join(" ") 
-        }
-      );
-    });
-
 
     this.viewModels.taskCreateVM.subscribe(() => {
       this.uis.taskUI.renderTask(key, this.group.id, true);
@@ -108,11 +71,6 @@ export class ListTaskView {
     
     });
 
-    document.getElementById("deleteGroup")?.addEventListener("click", async () => {
-      await this.viewModels.groupVM.remove(key);
-      location.replace(this.config.get("routers").home);
-    });
-
     document?.getElementById("sendCopy")?.addEventListener("click", async () => {
       copyListTasks(await this.viewModels.taskListVM.load(this.group.id), this.group.name)
     })
@@ -125,31 +83,18 @@ export class ListTaskView {
    * Renderiza toda a interface da lista.
    */
   async render(key) {
-    this.uis.theme(key, this.color);
+    this.uis.theme(this.color);
     
-    this.uis.UiElements.main_content.prepend(<this.components.groupForm method={"put"} />);
-    
-    let dropDown = <this.components.groupDropDown />;
-    if (this.config.get("mainGroups").includes(key)) {
-      dropDown = <this.components.DropDown />;
-    }
-
-    if (this.edit){
-      document.querySelector(`.${this.styles.groupForm.container}`).style.display = "flex";
-    }
-    
-    const header = <this.components.Header title={this.group?.name} dropDown={dropDown} href={this.config.get("routers").home} />;
+    let dropDown = <this.components.DropDown />;
+    const header = <this.components.Header title={this.group.name} dropDown={dropDown} href={this.config.get("routers").home} />;
     this.uis.UiElements.main_content.appendChild(header);
+     this.uis.UiElements.main_content.appendChild(this.components.Form((e) => {e.preventDefault()}));
     this.uis.UiElements.main_content.appendChild(this.components.ButtonAddTask());
-    this.uis.UiElements.main_content.appendChild(this.components.Form((e) => {e.preventDefault()}));
     
-    if (document.querySelector(".icon")  && this.group){
-      document.querySelector(".icon").classList = `${this.group.icon} icon`
-    }
-    
-    document.getElementById("group").value = this.group.name
+
     this.bindViewModelsEvents(key)
     this.bindUiEvents();
+
     this.uis.taskUI.subscribe(() => {
       this.uis.linesRenderer();
     })
