@@ -148,6 +148,15 @@ function MainForm(handle) {
     }
   ))));
 }
+function GroupSettingsDropDown() {
+  return /* @__PURE__ */ h("div", { className: "settings-drop-down" }, /* @__PURE__ */ h("div", { id: "changeThemeButton", className: "drop-down-content" }, /* @__PURE__ */ h(
+    "span",
+    {
+      className: "fa-solid fa-palette",
+      "aria-label": "Botão para alterar o tema da lista atual"
+    }
+  ), /* @__PURE__ */ h("strong", null, "Alterar tema")), /* @__PURE__ */ h("div", { id: "editGroup", className: "drop-down-content" }, /* @__PURE__ */ h("span", { className: "fa-solid fa-pencil", "aria-label": "Botão para editar as informações do grupo atual" }), /* @__PURE__ */ h("strong", null, "Renomear lista")), /* @__PURE__ */ h("div", { id: "deleteGroup", className: "drop-down-content" }, /* @__PURE__ */ h("span", { className: "fa-solid fa-trash", "aria-label": "Botão para excluir a lista atual" }), /* @__PURE__ */ h("strong", null, "Excluir lista")), /* @__PURE__ */ h("div", { id: "sendCopy", className: "drop-down-content" }, /* @__PURE__ */ h("span", { className: "fa-solid fa-copy", "aria-label": "Botão para enviar uma cópia da lista de tarefas atual" }), /* @__PURE__ */ h("strong", null, "Enviar uma cópia")));
+}
 function listColor() {
   return /* @__PURE__ */ h("div", { className: styles.selectColor }, [
     "#778cdd",
@@ -340,6 +349,57 @@ class TaskView {
       this.uis.linesRenderer();
     });
     this.uis.taskUI.renderTask(key2, this.group.id);
+  }
+}
+class ListTaskView extends TaskView {
+  constructor(group2, edit2, { viewModels = {}, uis = {}, components = {}, styles: styles2 = {}, config }) {
+    super(group2, edit2, { viewModels, uis, components, styles: styles2, config });
+  }
+  bindUiEvents() {
+    super.bindUiEvents();
+    const form = document.querySelector(`.${this.styles.groupForm.container}`);
+    document.getElementById("cancel").addEventListener("click", () => {
+      form.style.display = "none";
+    });
+    document.getElementById("editGroup").addEventListener("click", () => {
+      form.style.display = "flex";
+    });
+    document.querySelectorAll(`.${this.styles.groupForm.colorContent}`).forEach((colorEl) => {
+      colorEl.addEventListener("click", (event) => {
+        const color = event.target.dataset.color;
+        document.documentElement.style.setProperty("--main-color", color);
+        this.color = color;
+      });
+    });
+  }
+  bindViewModelsEvents(key2) {
+    super.bindViewModelsEvents(key2);
+    this.viewModels.groupVM.subscribe(() => {
+      location.reload();
+    });
+    document.getElementById("create").addEventListener("click", async () => {
+      this.viewModels.groupVM.edit(
+        this.group,
+        {
+          name: document.getElementById("group").value,
+          color: this.color,
+          icon: Array.from(document.querySelector(".icon").classList).slice(0, 2).join(" ")
+        }
+      );
+    });
+    document.getElementById("deleteGroup").addEventListener("click", async () => {
+      await this.viewModels.groupVM.remove(key2);
+      location.replace(this.config.get("routers").home);
+    });
+  }
+  async render(key2) {
+    this.uis.UiElements.main_content.prepend(/* @__PURE__ */ h(this.components.groupForm, { method: "put" }));
+    if (this.edit) {
+      document.querySelector(`.${this.styles.groupForm.container}`).style.display = "flex";
+    }
+    document.querySelector(".icon").classList = `${this.group.icon} icon`;
+    document.getElementById("group").value = this.group.name;
+    super.render(key2);
   }
 }
 class GroupViewModel extends Observable {
@@ -719,6 +779,12 @@ const taskView = createView(TaskView, {
   group,
   edit
 });
+const listTaskView = createView(ListTaskView, {
+  dropDown: GroupSettingsDropDown,
+  taskUi,
+  group,
+  edit
+});
 const importantTaskView = createView(TaskView, {
   dropDown: SettingsDropDown,
   taskUi: groupUi,
@@ -736,7 +802,9 @@ if (key === "Importante") {
   console.log("aaaaa");
 } else if (key === "Meu Dia") {
   myDayTaskView.render(key);
-} else {
+} else if (key === "Tarefas") {
   taskView.render(key);
+} else {
+  listTaskView.render(key);
 }
-//# sourceMappingURL=list-DLZ_EhHx.js.map
+//# sourceMappingURL=list-BUYsRQHy.js.map
