@@ -120,6 +120,14 @@ const taskView = createView(TaskView, {
 });
 
 
+const listTaskView = createView(ListTaskView, {
+  dropDown: GroupSettingsDropDown,
+  taskUi: taskUi,
+  group,
+  edit
+});
+
+
 const importantTaskView = createView(TaskView, {
   dropDown: SettingsDropDown,
   taskUi: groupUi,
@@ -145,7 +153,11 @@ else if (key === "Meu Dia"){
   myDayTaskView.render(key)
 }
 
+else if (key === "Tarefas"){
+  taskView.render(key)
+}
+
 else{
-  taskView.render(key);
+  listTaskView.render(key);
 }
 
