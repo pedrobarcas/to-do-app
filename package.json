@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "@babel/preset-env": "^7.27.2",
+    "@capacitor/assets": "^3.0.5",
     "babel-jest": "^30.0.5",
     "gh-pages": "^6.3.0",
     "jest": "^30.0.5",
