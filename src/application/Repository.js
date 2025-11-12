@@ -9,6 +9,7 @@ import { Observable } from "../domain/Observable";
  *
  *
  *@example const repository = new Repository(new Service([], [], []), new Repository())
+ *@module aplicação/Repository
  */
 
 export class Repository extends Observable {

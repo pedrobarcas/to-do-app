@@ -26,13 +26,25 @@ export class HomeUi {
     this.listViewModel = listViewModel
   }
 
-  async renderGroups(root, cached=false) {
-      root.innerHTML = ''
-      const groups = await this.listViewModel.load(cached)
-      groups.forEach((group) => {
-      this.createTemplateGroup(root, group);
-    });
+  async renderGroups(root, cached = false) {
+    const cacheKey = "groups";
+    const localCache = localStorage.getItem(cacheKey);
+
+    if (cached && localCache) {
+      root.innerHTML = "";
+      const groups = JSON.parse(localCache);
+      groups.forEach((group) => this.createTemplateGroup(root, group));
+      return;
+
+    }
+    const groups = await this.listViewModel.load();
+    root.innerHTML = "";
+
+    localStorage.setItem(cacheKey, JSON.stringify(groups));
+
+    groups.forEach((group) => this.createTemplateGroup(root, group));
   }
+
 
   createTemplateGroup(root, group) {
     const groupCard = <GroupCard group={group}/>
