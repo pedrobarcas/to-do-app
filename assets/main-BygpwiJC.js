@@ -96,11 +96,18 @@ class HomeUi {
     this.listViewModel = listViewModel;
   }
   async renderGroups(root, cached = false) {
+    const cacheKey = "groups";
+    const localCache = localStorage.getItem(cacheKey);
+    if (cached && localCache) {
+      root.innerHTML = "";
+      const groups2 = JSON.parse(localCache);
+      groups2.forEach((group) => this.createTemplateGroup(root, group));
+      return;
+    }
+    const groups = await this.listViewModel.load();
     root.innerHTML = "";
-    const groups = await this.listViewModel.load(cached);
-    groups.forEach((group) => {
-      this.createTemplateGroup(root, group);
-    });
+    localStorage.setItem(cacheKey, JSON.stringify(groups));
+    groups.forEach((group) => this.createTemplateGroup(root, group));
   }
   createTemplateGroup(root, group) {
     const groupCard = /* @__PURE__ */ h(GroupCard, { group });
@@ -137,12 +144,14 @@ class homeView {
       this.createVM.create("", "", "fa-solid fa-list-ul");
     });
   }
+  //@Bigtoys-xg12
   async render(root = document) {
     const main_content = document.querySelector(".main-content");
     const header2 = h(AccountHeader, { user: JSON.parse(localStorage.getItem("userCached")) });
     main_content.prepend(header2);
     this.bindEvents(root);
-    this.Ui.renderGroups(document.querySelector(".home__group"));
+    await this.Ui.renderGroups(document.querySelector(".home__group"), true);
+    this.Ui.renderGroups(document.querySelector(".home__group"), false);
   }
 }
 const scriptRel = "modulepreload";
@@ -272,4 +281,4 @@ const homeCreateViewModel = new GroupCreateViewModel(groupFactory, groupReposito
 const homeUi = new HomeUi(homeListViewModel);
 const view = new homeView(homeUi, homeListViewModel, homeCreateViewModel, styles$1, configService);
 view.render(document);
-//# sourceMappingURL=main-NY4v_mCg.js.map
+//# sourceMappingURL=main-BygpwiJC.js.map

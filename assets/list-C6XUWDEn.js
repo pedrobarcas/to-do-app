@@ -91,9 +91,22 @@ class TaskUi extends Observable {
    * Renderiza todas as tasks do grupo, separando concluídas e ativas.
    */
   async renderTask(key2, groupId, cached = false) {
+    const cacheKey = `tasks_${groupId}`;
+    const localCache = localStorage.getItem(cacheKey);
+    if (cached && localCache) {
+      UiElements.main_tasks.innerHTML = "";
+      UiElements.completed_tasks.innerHTML = "";
+      const tasks2 = JSON.parse(localCache);
+      tasks2.forEach((task) => {
+        this.createTemplateTask(task, task.completed, key2, groupId);
+      });
+      this.notify();
+      return;
+    }
+    const tasks = await this.listViewModel.load(groupId);
     UiElements.main_tasks.innerHTML = "";
     UiElements.completed_tasks.innerHTML = "";
-    const tasks = await this.listViewModel.load(groupId, cached);
+    localStorage.setItem(cacheKey, JSON.stringify(tasks));
     tasks.forEach((task) => {
       this.createTemplateTask(task, task.completed, key2, groupId);
     });
@@ -348,7 +361,8 @@ class TaskView {
     this.uis.taskUI.subscribe(() => {
       this.uis.linesRenderer();
     });
-    this.uis.taskUI.renderTask(key2, this.group.id);
+    await this.uis.taskUI.renderTask(key2, this.group.id, true);
+    this.uis.taskUI.renderTask(key2, this.group.id, false);
   }
 }
 class ListTaskView extends TaskView {
@@ -807,4 +821,4 @@ if (key === "Importante") {
 } else {
   listTaskView.render(key);
 }
-//# sourceMappingURL=list-BUYsRQHy.js.map
+//# sourceMappingURL=list-C6XUWDEn.js.map
