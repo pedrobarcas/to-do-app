@@ -2,6 +2,8 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
 
 ul,
@@ -92,6 +94,7 @@ hr {
   --border-color: #ccc;
   --settings-background: #303030;
   --setup-background-color: black;
+  --error-message: #dd7878;
 
   --box-shadow: 0 1px 4px #0004;
   --neutral-color: black;

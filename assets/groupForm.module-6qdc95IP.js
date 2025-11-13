@@ -1,4 +1,4 @@
-import { O as Observable } from "./index-DaKAbugg.js";
+import { O as Observable } from "./index-BPGqw3BG.js";
 class DateFormat {
   static DateFormatBrazilian() {
     const now = /* @__PURE__ */ new Date();
@@ -90,4 +90,4 @@ export {
   styles as s,
   v4 as v
 };
-//# sourceMappingURL=groupForm.module-BHTGuUxd.js.map
+//# sourceMappingURL=groupForm.module-6qdc95IP.js.map

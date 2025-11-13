@@ -1,10 +1,10 @@
-import { O as Observable, o as onAuthStateChanged, a as auth, q as queryParams, b as packingDependecyTaskFirestore, p as packingDependecyTask, d as packingDependecyFirestore, s as service, c as configService } from "./index-DaKAbugg.js";
+import { O as Observable, o as onAuthStateChanged, a as auth, q as queryParams, b as packingDependecyTaskFirestore, p as packingDependecyTask, d as packingDependecyFirestore, s as service, c as configService } from "./index-BPGqw3BG.js";
 /* empty css                */
 /* empty css               */
-import "./private-check-DBjYSvOy.js";
-import { T as TaskCard, a as TaskDetailViewModel } from "./taskDetailViewModel-BRpk_kPL.js";
+import "./private-check-BevK0UrK.js";
+import { T as TaskCard, a as TaskDetailViewModel } from "./taskDetailViewModel-ByYo1uF6.js";
 import { h } from "./h-DjMzbvrD.js";
-import { s as styles, v as v4, D as DateFormat, L as ListViewModel } from "./groupForm.module-BHTGuUxd.js";
+import { s as styles, v as v4, D as DateFormat, L as ListViewModel } from "./groupForm.module-6qdc95IP.js";
 const must = (el, name) => {
   if (!el) throw new Error(`Elemento ${name} não encontrado`);
   return el;
@@ -821,4 +821,4 @@ if (key === "Importante") {
 } else {
   listTaskView.render(key);
 }
-//# sourceMappingURL=list-C6XUWDEn.js.map
+//# sourceMappingURL=list-Cjc2Uzzu.js.map
