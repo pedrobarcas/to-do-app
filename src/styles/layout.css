@@ -1,9 +1,24 @@
-footer {
+html {
+  font-size: 95%;
+}
+
+.main-content {
+  box-sizing: border-box;
+}
+
+.todo {
   display: flex;
-  width: 100vw;
-  position: absolute;
-  row-gap: 1rem;
-  top: 97%;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.groups {
+  height: 95dvh;
+  overflow-y: auto;
+}
+
+.todo__footer {
+  position: relative;
 }
 
 header {
