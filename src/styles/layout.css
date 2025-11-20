@@ -7,9 +7,15 @@ html {
 }
 
 .todo {
+  height: 100dvh;
   display: flex;
+  padding: 0 0.5rem;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.todo hr {
+  border-width: 0.5px;
 }
 
 .groups {
@@ -28,6 +34,7 @@ header {
   height: 3rem;
   background-color: var(--task-background);
   box-shadow: 0 1px 4px #0004;
+  transition: all 0.3s ease-in-out;
 }
 
 .todo__footer--content {
@@ -81,6 +88,11 @@ header {
   margin: 0.5rem 0 0;
   font-size: 1.25rem;
   font-weight: bold;
+}
+
+.task-display {
+  display: flex;
+  gap: 1rem;
 }
 
 .main-header h1 {
@@ -185,7 +197,7 @@ header {
   display: flex;
   font-size: 1.2rem;
   flex-direction: column;
-  row-gap: 1rem;
+  row-gap: 1.5rem;
   padding: 0.5rem;
   color: var(--secondary-color);
   margin-bottom: 1rem;
@@ -213,4 +225,9 @@ header {
   display: flex;
   flex-direction: column;
   row-gap: 4rem;
+}
+
+#button-completed-tasks {
+  display: flex;
+  gap: 1rem;
 }

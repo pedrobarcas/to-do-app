@@ -29,11 +29,21 @@ export class DetailViewModel extends Observable {
   }
 
   async get(param) {
-    const resolution = await this.repository.find(
-      this.queryParam.getQueryParams(param)
-    );
+    const task_id = this.queryParam.getQueryParams(param);
+    let object = JSON.parse(localStorage.getItem(task_id));
+    console.log(object);
 
-    console.log(this.queryParam.getQueryParams(param));
+    if (!object) {
+      object = await this.repository.find(
+        this.queryParam.getQueryParams(param)
+      );
+
+      console.log(object);
+
+      localStorage.setItem(task_id, JSON.stringify(object));
+    }
+
+    const resolution = object;
 
     return resolution;
   }

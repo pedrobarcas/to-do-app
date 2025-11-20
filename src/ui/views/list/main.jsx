@@ -64,7 +64,15 @@ const listViewModel = new ListViewModel(groupTaskRepository);
 const taskDetailViewModel = new TaskDetailViewModel(taskRepository, queryParams);
 const taskCreateViewModel = new CreateTaskViewModel(TaskFactory, taskRepository);
 const groupVM = new GroupViewModel(groupRepository, taskRepository, service);
-const group = await groupVM.find(key)
+
+
+let group = JSON.parse(localStorage.getItem(key))
+
+if (!group){
+  group = await groupVM.find(key)
+  console.log(group)
+  localStorage.setItem(key, JSON.stringify(group))
+}
 
 // UIs
 const taskUi = new TaskUi(taskListViewModel, taskDetailViewModel);

@@ -11,6 +11,7 @@ function listColor() {
         "#f4a261",
         "#e76f51",
         "#9b5de5",
+        
       ].map((color) => (
         <div
           key={color}
