@@ -62,18 +62,35 @@ export class TaskUi extends Observable {
    * ----------------
    * Renderiza todas as tasks do grupo, separando concluídas e ativas.
    */
-  async renderTask(key, groupId, cached=false) {
+  async renderTask(key, groupId, cached = false) {
+    const cacheKey = `tasks_${groupId}`;
+    const localCache = localStorage.getItem(cacheKey);
+
+    if (cached && localCache) {
+      UiElements.main_tasks.innerHTML = "";
+      UiElements.completed_tasks.innerHTML = "";
+
+      const tasks = JSON.parse(localCache);
+      tasks.forEach((task) => {
+        this.createTemplateTask(task, task.completed, key, groupId);
+      });
+      this.notify();
+      return;
+    }
+
+    const tasks = await this.listViewModel.load(groupId);
     UiElements.main_tasks.innerHTML = "";
     UiElements.completed_tasks.innerHTML = "";
 
-    const tasks = await this.listViewModel.load(groupId, cached)
-    
+    localStorage.setItem(cacheKey, JSON.stringify(tasks));
+
     tasks.forEach((task) => {
       this.createTemplateTask(task, task.completed, key, groupId);
     });
 
-    this.notify()
+    this.notify();
   }
+
 
   /**
    * createTemplateTask(task, completed, key)

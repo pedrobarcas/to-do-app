@@ -44,6 +44,7 @@ export class homeView{
         })
     }
 
+    //@Bigtoys-xg12
     async render(root = document){
         const main_content = document.querySelector(".main-content")
         const header = h(AccountHeader, {user: JSON.parse(localStorage.getItem("userCached"))})
@@ -52,7 +53,7 @@ export class homeView{
 
         this.bindEvents(root)
 
-        this.Ui.renderGroups(document.querySelector('.home__group'))
-
+        await this.Ui.renderGroups(document.querySelector('.home__group'), true)
+        this.Ui.renderGroups(document.querySelector('.home__group'), false)
     }
 }

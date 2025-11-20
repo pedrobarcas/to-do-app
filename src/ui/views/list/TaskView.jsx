@@ -98,7 +98,8 @@ export class TaskView {
     this.uis.taskUI.subscribe(() => {
       this.uis.linesRenderer();
     })
-    this.uis.taskUI.renderTask(key, this.group.id);
+    await this.uis.taskUI.renderTask(key, this.group.id, true);
+    this.uis.taskUI.renderTask(key, this.group.id, false);
     
   }
 }
