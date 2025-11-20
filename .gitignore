@@ -23,3 +23,9 @@ dist/
 *.njsproj
 *.sln
 *.sw?
+
+# Android version
+README.md
+src/config.js
+resources
+icons
