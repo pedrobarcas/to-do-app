@@ -1,12 +1,15 @@
 .header {
   display: flex;
-  padding: 1rem 1.25rem;
+  padding: 0.5rem 1.25rem;
   padding-bottom: 1rem;
+  width: 100%;
   justify-content: space-between;
   background-color: var(--main-background);
-  width: 90%;
   color: white;
   box-sizing: border-box;
+  position: absolute;
+  height: 3.5rem;
+  z-index: 9999;
 }
 
 .header_content {
@@ -21,8 +24,8 @@
 
 .circle_img {
   display: flex;
-  height: 2rem;
-  width: 2rem;
+  height: 2.25rem;
+  width: 2.25rem;
   color: white;
   border-radius: 50%;
   background-color: rebeccapurple;

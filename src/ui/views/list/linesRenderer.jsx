@@ -13,6 +13,6 @@ export function linesRenderer() {
   container.innerHTML = "";
   let lines = 9 - (document.querySelector(".main-tasks").querySelectorAll("ol").length + count);
   for (let i = 0; i < lines; i++) {
-    container.appendChild(<hr />);
+    container.appendChild(<hr/>);
   }
 }

@@ -44,7 +44,7 @@ export class TaskView {
 
     window.addEventListener("scroll", () => {
       const header = document.querySelector(".main-header");
-      if (window.scrollY > 45) header?.classList.add("is-shrink");
+      if (window.scrollY > 5 ) header?.classList.add("is-shrink");
       else header?.classList.remove("is-shrink");
     });
 
@@ -53,13 +53,13 @@ export class TaskView {
       ?.addEventListener("click", () => {
         throw Error("Not iplemented")
       });
+
   }
 
   bindViewModelsEvents(key){
 
     this.viewModels.taskCreateVM.subscribe(() => {
-      this.uis.taskUI.renderTask(key, this.group.id, true);
-      
+      this.uis.taskUI.renderTask(key, this.group.id, false);
     });
     
     this.uis.UiElements.send_task.addEventListener("click", async () => {
@@ -98,8 +98,11 @@ export class TaskView {
     this.uis.taskUI.subscribe(() => {
       this.uis.linesRenderer();
     })
+
+    document
+      .getElementById("settings").addEventListener("click", () => {
+    })
     await this.uis.taskUI.renderTask(key, this.group.id, true);
     this.uis.taskUI.renderTask(key, this.group.id, false);
-    
   }
 }

@@ -8,7 +8,7 @@ import { h } from "../../h";
 
 export function AddTask() {
   return (
-    <section className="add-task">
+    <section className="add-task box-button-activate">
       <button>+</button>
     </section>
   );

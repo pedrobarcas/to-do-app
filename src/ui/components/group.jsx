@@ -27,7 +27,7 @@ export function GroupCard(props){
     }
     
     return (
-        <a className="content-box" href={`list.html?key=${props.group.id}`}>
+        <a className="content-box box-animated" href={`list.html?key=${props.group.id}`}>
         <span
           className={icon}
           aria-label="Imagem ilustrativa de uma casa"

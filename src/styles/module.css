@@ -1,42 +1,64 @@
 .tasks {
   display: flex;
-  gap: 10px;
-  border-radius: 5px;
-  height: 4rem;
-  max-height: auto;
-  background-color: var(--task-background);
-  width: 97%;
-  min-height: 2.5rem;
-  font-size: 1rem;
-  margin-bottom: 0;
-  box-shadow: 0 1px 4px #0004;
-  transition: all 0.3s ease-in-out;
   align-items: center;
   justify-content: space-between;
-  padding: 0 0.5rem;
+
+  gap: 1rem;
+  padding: 1.5rem 1rem;
+
+  width: 97%;
+  min-height: 2.5rem;
+  height: auto;
+
+  background-color: var(--task-background);
+  border-radius: 5px;
+  box-shadow: 0 1px 4px #0004;
+  transition: all 0.3s ease-in-out;
+
+  list-style: none; /* já que está dentro de <li> */
 }
 
+/* Agrupa o botão + texto */
 .task-content {
   display: flex;
-  width: max-content;
+  align-items: center;
+  gap: 0.8rem;
+  flex: 1; /* 👈 garante que esse conteúdo ocupe o máximo possível */
+  overflow: hidden; /* 👈 impede estourar o card */
 }
 
+/* Nome da tarefa */
 .task-name {
-  max-width: 90%;
-  width: auto;
   color: var(--secondary-color);
-  opacity: 70%;
+  opacity: 0.7;
+
+  display: block;
   white-space: normal;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  height: max-content;
+
+  max-width: 100%;
+  text-align: left; /* OU center se preferir */
 }
 
+/* Botão circular */
 .tasks button {
   height: 1.5rem;
   width: 1.5rem;
+  min-width: 1.5rem; /* 👈 impede que ele seja esmagado */
   border: 2px solid #7e7e7e;
   border-radius: 50%;
   background-color: transparent;
+}
+
+/* Favorito do lado direito */
+.favorite {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 2rem;
 }
 
 .circle-button {
@@ -62,6 +84,7 @@
 
 .main-settings {
   position: relative;
+  cursor: pointer;
 }
 
 #settings {
@@ -69,23 +92,28 @@
   font-size: 1.5rem;
   width: 10px;
   height: 10px;
+  cursor: pointer;
+  z-index: 1000;
+  border-radius: 50%;
 }
 
 .settings-drop-down {
-  display: none;
+  display: flex;
   flex-direction: column;
-  margin-right: 0.5rem;
-  padding: 10px;
+  margin-right: 1rem;
   position: absolute;
-  top: 100%;
+  top: 150%;
   right: 0;
   row-gap: 1rem;
   color: var(--secondary-color);
-  width: 50%;
+  width: 12.5rem;
   height: auto;
   font-size: 1rem;
   border-radius: 5px;
   background-color: var(--settings-background);
+  overflow: visible;
+  z-index: 999;
+  padding: 1rem;
 }
 
 .add-task {
@@ -105,12 +133,12 @@
   font-size: 2.5rem;
   background-color: var(--main-color);
   font-family: var(--font-rubik);
-  font-weight: 350;
+  font-weight: 300;
   color: var(--setup-background-color);
 }
 
 .content-box {
-  padding: 0 1rem;
+  padding: 1rem 1rem;
   display: flex;
   gap: 1.2rem;
 }

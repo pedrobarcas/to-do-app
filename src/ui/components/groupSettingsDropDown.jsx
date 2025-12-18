@@ -2,7 +2,7 @@ import { h } from "../../h";
 
 export function GroupSettingsDropDown(){
     return (
-        <div className="settings-drop-down">
+        <div className="settings-drop-down is-close">
             <div id="changeThemeButton" className="drop-down-content">
             <span
                 className="fa-solid fa-palette"

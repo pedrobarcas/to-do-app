@@ -49,51 +49,55 @@
     <title>Microsoft to-do</title>
   </head>
 
-  <body>
-    <main class="main-content todo">
-      <div class="groups">
-        <section class="home__main-groups">
-          <a class="content-box" href="list.html?key=Meu%20Dia">
-            <span
-              class="fa-regular fa-sun"
-              aria-label="Imagem ilustrativa do Sol"
-              style="color: #929292"
-            ></span>
-            <p>Meu Dia</p>
-          </a>
-
-          <a class="content-box" href="list.html?key=Importante">
-            <span
-              class="fa-regular fa-star"
-              aria-label="Imagem ilustrativa de uma estrela"
-              style="color: var(--pink)"
-            ></span>
-            <p>Importante</p>
-          </a>
-
-          <a class="content-box" href="list.html?key=Tarefas">
-            <span
-              class="fa-solid fa-home"
-              aria-label="Imagem ilustrativa de uma casa"
-              style="color: var(--main-color)"
-            ></span>
-            <p>Tarefas</p>
-          </a>
-        </section>
-
-        <hr />
-        <section class="home__group home__main-groups"></section>
+  <body class="theme-ios">
+    <div id="app" class="app">
+      <div class="view view-main">
+        <main class="main-content todo">
+          <div class="groups">
+            <section class="home__main-groups">
+              <a class="content-box box-animated" href="list.html?key=Meu%20Dia">
+                <span
+                  class="fa-regular fa-sun"
+                  aria-label="Imagem ilustrativa do Sol"
+                  style="color: #929292"
+                ></span>
+                <p>Meu Dia</p>
+              </a>
+    
+              <a class="content-box box-animated" href="list.html?key=Importante">
+                <span
+                  class="fa-regular fa-star"
+                  aria-label="Imagem ilustrativa de uma estrela"
+                  style="color: var(--pink)"
+                ></span>
+                <p>Importante</p>
+              </a>
+    
+              <a class="content-box box-animated" href="list.html?key=Tarefas">
+                <span
+                  class="fa-solid fa-home"
+                  aria-label="Imagem ilustrativa de uma casa"
+                  style="color: var(--main-color)"
+                ></span>
+                <p>Tarefas</p>
+              </a>
+            </section>
+    
+            <hr />
+            <section class="home__group home__main-groups"></section>
+          </div>
+    
+          <footer class="todo__footer">
+            <div class="todo__footer--content">
+              <span class="fa-solid fa-plus"></span>
+              <p>Nova lista</p>
+            </div>
+          </footer>
+        </main>
+        <script type="module" src="src/ui/private-check.js"></script>
+        <script src="./src/ui/views/home/main.jsx" type="module"></script>
+        <script type="module" src="src/app.js"></script>
+      </body>
       </div>
-
-      <footer class="todo__footer">
-        <div class="todo__footer--content">
-          <span class="fa-solid fa-plus"></span>
-          <p>Nova lista</p>
-        </div>
-      </footer>
-    </main>
-
-    <script type="module" src="src/ui/private-check.js"></script>
-    <script src="./src/ui/views/home/main.jsx" type="module"></script>
-  </body>
+    </div>
 </html>

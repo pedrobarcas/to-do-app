@@ -19,7 +19,7 @@ import { h } from "../../h"
 export function Header({title, href}){
     return (
         <header className="main-header">
-            <a className="fa-solid fa-arrow-left" href={href}></a>
+            <a className="fa-solid fa-arrow-left header-icon" href={href}></a>
             <h1>{title}</h1>
         </header>
     )

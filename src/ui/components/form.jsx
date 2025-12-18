@@ -14,14 +14,14 @@ export function Form(props) {
   return (
     <section className="main-infos-task" id="main-infos-task">
    
-      <div className="form-input-box">
+      <div className="form-input-box box-animated">
         <span className="fa-regular fa-sun"></span>
         <button className="remember-me-button form-input" id="add-my-day">Adicionar ao meu dia</button>
       </div>
 
       <div>
         <hr />
-        <div className="form-input-box">
+        <div className="form-input-box box-animated">
           <label htmlFor="date" className="fa-regular fa-calendar"></label>
           <input
             type="date"
@@ -35,7 +35,7 @@ export function Form(props) {
         <hr />
       </div>
 
-      <div className="form-input-box">
+      <div className="form-input-box box-animated">
         <label htmlFor="archive" className="fa-solid fa-paperclip"></label>
         <label htmlFor="archive"> Adicionar um arquivo</label>
         <input
@@ -49,6 +49,7 @@ export function Form(props) {
       <textarea
         name="anotations"
         id="anotations"
+        className="box-animated"
         placeholder="Adicionar anotações"
         value={props.task.description}
       ></textarea>

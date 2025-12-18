@@ -9,7 +9,6 @@ html {
 .todo {
   height: 100dvh;
   display: flex;
-  padding: 0 0.5rem;
   flex-direction: column;
   justify-content: space-between;
 }
@@ -19,11 +18,12 @@ html {
 }
 
 .groups {
-  height: 95dvh;
+  height: auto;
   overflow-y: auto;
 }
 
 .todo__footer {
+  padding: 1rem;
   position: relative;
 }
 
@@ -57,7 +57,8 @@ header {
   grid-template-rows: auto auto; /* duas linhas: ícones e título */
   align-items: center;
   justify-content: space-between;
-  padding: 0 1rem;
+  row-gap: 1rem;
+  padding: 1rem 1rem;
   height: auto;
   width: 100%;
   position: fixed;
@@ -66,13 +67,14 @@ header {
   color: var(--main-color);
   z-index: 1000;
   font-family: var(--main-font);
-  margin-top: 0.5rem;
+  overflow: visible;
 }
 
 .main-header a {
   grid-column: 1;
   grid-row: 1;
   font-size: 1.25rem;
+  z-index: 999;
 }
 
 .main-header #settings {
@@ -126,6 +128,7 @@ header {
   background-color: var(--main-background);
   width: 100vw;
   row-gap: 2.5px;
+  margin-top: 7.15rem !important;
   margin-bottom: 30px;
   transition: all 0.3s ease-in-out;
 }
@@ -137,18 +140,21 @@ header {
 .drop-down-task {
   display: none;
   flex-direction: column;
-  row-gap: 5px;
+  margin-top: 0 !important;
 }
 
 .main-form {
-  display: none;
   position: fixed;
   top: 0;
   left: 0;
   height: 100%;
   width: 100vw;
+  opacity: 0;
+  transform: translateY(-10px);
+  max-height: 0;
   background: var(--form-background);
   z-index: 9999;
+  transition: opacity 200ms ease, transform 200ms ease;
 }
 
 .content-form {
@@ -193,14 +199,12 @@ header {
 }
 
 .home__main-groups {
-  margin-top: 4rem;
+  margin-top: 2.5rem;
   display: flex;
   font-size: 1.2rem;
   flex-direction: column;
-  row-gap: 1.5rem;
   padding: 0.5rem;
   color: var(--secondary-color);
-  margin-bottom: 1rem;
 }
 
 .home__group {

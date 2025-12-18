@@ -25,6 +25,8 @@ dist/
 *.sw?
 
 # Android version
+*android/
+android/
 README.md
 src/config.js
 resources

@@ -77,5 +77,59 @@ button {
 }
 
 hr {
-  border: 1px solid var(--hr-color);
+  border: 1px solid #7e7e7e;
+  opacity: 15%;
+}
+
+@media (max-width: 468px) {
+  html {
+    font-size: 87.5%;
+  }
+}
+
+.box-animated {
+  position: relative;
+  overflow: hidden;
+}
+
+.box-button-activate {
+  position: relative;
+  overflow: visible;
+}
+
+.box-button-activate::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(126, 126, 126, 0.3);
+  transition: opacity 300ms ease-in-out;
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.box-button-activate:hover::after {
+  opacity: 0.2;
+}
+
+.box-button-activate:active::after {
+  opacity: 1;
+}
+
+.box-animated::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(126, 126, 126, 0.3);
+  opacity: 0;
+  transition: opacity 300ms ease-in-out;
+  pointer-events: none;
+}
+
+.box-animated:hover::after {
+  opacity: 0.2;
+}
+
+.box-animated:active::after {
+  opacity: 1;
 }

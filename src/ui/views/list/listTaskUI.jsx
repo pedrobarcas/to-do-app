@@ -10,7 +10,7 @@ import { h } from "../../../h";
  */
 export class HeaderUi {
   static showDropDown() {
-    UiElements.settings_drop_down.classList.toggle("is-active");
+    UiElements.settings_drop_down.classList.toggle("is-open-dropdown");
   }
 }
 
@@ -18,15 +18,17 @@ export class HeaderUi {
  * FormUi
  * ----------------
  * Classe estática para manipular o formulário de criação de tarefa
+ * 
+ * @deprecated
  */
 export class FormUi {
   static showForm() {
     UiElements.add_task.style.display = "none";
-    UiElements.main_form.style.display = "flex";
+    UiElements.main_form.classList.add("is-open")
   }
   static hideForm() {
     UiElements.add_task.style.display = "flex";
-    UiElements.main_form.style.display = "none";
+    UiElements.main_form.classList.remove("is-open")
   }
 }
 

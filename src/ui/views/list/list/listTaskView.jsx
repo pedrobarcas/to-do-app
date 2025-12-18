@@ -21,6 +21,8 @@ export class ListTaskView extends TaskView {
       form.style.display = "none";
     });
 
+    console.log(this.group)
+
 
     document.getElementById("editGroup").addEventListener("click", () => {
       form.style.display = "flex";
@@ -41,6 +43,7 @@ export class ListTaskView extends TaskView {
     super.bindViewModelsEvents(key)
 
     this.viewModels.groupVM.subscribe(() => {
+      localStorage.removeItem(this.group.id)
       location.reload()
     })
     document.getElementById("create").addEventListener("click", async () => {
@@ -54,6 +57,7 @@ export class ListTaskView extends TaskView {
                       .join(" ") 
         }
       );
+
     });
 
     document.getElementById("deleteGroup").addEventListener("click", async () => {

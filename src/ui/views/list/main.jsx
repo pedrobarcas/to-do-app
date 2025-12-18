@@ -169,3 +169,7 @@ else{
   listTaskView.render(key);
 }
 
+
+window.addEventListener("click", (e) => {
+  console.log(e.target)
+})

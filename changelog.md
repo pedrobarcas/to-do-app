@@ -1,16 +1,14 @@
-# Changelog 2.0.2 - 2/11/2025
+# Changelog 2.0.3 - 18/12/2025
 
 ## Adicionado:
 
-- Documentação
-
-## Removido:
-
-- Relações entre grupos e tarefas
+- Transições limpas e suaves
+- Maior iteratividade para apps mobile
 
 ## Corrigido:
 
-- Alteração do banco de dados - destinado ao servidor de São Paulo
+- Problemas com a edição de grupos relacionadas ao cache
+- Problemas de reação ao adicionar tarefas
 
 ## Para o futuro:
 
