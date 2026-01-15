@@ -68,20 +68,7 @@ export class TaskDetailView{
                 await this.taskRemoveVM.remove(task);
             })
             
-            this.taskDetailVM.subscribe(() => {
-                location.reload()
-            })
             
-            button_completed_task.addEventListener('click', async () => {
-                  console.log("aaaa")
-                  await this.taskDetailVM.completedTask(task);
-            })
-
-            button_favorite.addEventListener('click', async () => {
-                  console.log("aaaa")
-                  await this.taskDetailVM.favoritedTask(task);
-            })
-
             button_add_my_day.addEventListener("click", async () => {
                 await this.taskDetailVM.addMyDay(task);
             })

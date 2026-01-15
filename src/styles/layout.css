@@ -116,12 +116,12 @@ header {
 .drop-down-task.main-tasks,
 .drop-down-task {
   display: flex;
-  margin: 0.5rem;
   flex-direction: column;
   justify-content: center;
   background-color: var(--main-background);
   width: 100vw;
   row-gap: 2.5px;
+  padding: 0 0.5rem;
   margin-top: 7.15rem !important;
   margin-bottom: 30px;
   transition: all 0.3s ease-in-out;
@@ -242,4 +242,13 @@ header {
   cursor: pointer;
   z-index: 1000;
   border-radius: 50%;
+}
+
+.circle-button {
+  height: 1.5rem;
+  width: 1.5rem;
+  min-width: 1.5rem;
+  border: 2px solid #7e7e7e;
+  border-radius: 50%;
+  background-color: transparent;
 }

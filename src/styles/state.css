@@ -23,7 +23,7 @@
 
 .is-close {
   opacity: 0;
-  transform: translateY(-10px);
+  transform: translateY(-1000000000px);
   max-height: 0;
   transition: opacity 300ms ease;
 }
