@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");* {
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -22,6 +22,24 @@ body {
   color: var(--secondary-color);
   background-color: var(--main-background);
   font-weight: 500;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: var(--font-body);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.app {
+  height: 100%;
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
 h1,
@@ -77,8 +95,63 @@ button {
 }
 
 hr {
-  border: 1px solid var(--hr-color);
+  border: 1px solid #7e7e7e;
+  opacity: 15%;
 }
+
+@media (max-width: 468px) {
+  html {
+    font-size: 87.5%;
+  }
+}
+
+.box-animated {
+  position: relative;
+  overflow: hidden;
+}
+
+.box-button-activate {
+  position: relative;
+  overflow: visible;
+}
+
+.box-button-activate::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(126, 126, 126, 0.3);
+  transition: opacity 300ms ease-in-out;
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.box-button-activate:hover::after {
+  opacity: 0.2;
+}
+
+.box-button-activate:active::after {
+  opacity: 1;
+}
+
+.box-animated::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(126, 126, 126, 0.3);
+  opacity: 0;
+  transition: opacity 300ms ease-in-out;
+  pointer-events: none;
+}
+
+.box-animated:hover::after {
+  opacity: 0.2;
+}
+
+.box-animated:active::after {
+  opacity: 1;
+}
+
 
 
 
@@ -106,6 +179,7 @@ hr {
   --main-font: "Roboto", sans-serif;
   --font-playfair: "Playfair Display", serif;
   --open-sans: "Open Sans", sans-serif;
+  --font-rubik: "Rubik", sans-serif;
 }
 .light-theme {
   --main-background: #f9f9f9;

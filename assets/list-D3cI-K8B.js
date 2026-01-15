@@ -1,10 +1,10 @@
-import { O as Observable, o as onAuthStateChanged, a as auth, q as queryParams, b as packingDependecyTaskFirestore, p as packingDependecyTask, d as packingDependecyFirestore, s as service, c as configService } from "./index-BPGqw3BG.js";
+import { O as Observable, o as onAuthStateChanged, a as auth, q as queryParams, b as packingDependecyTaskFirestore, p as packingDependecyTask, d as packingDependecyFirestore, s as service, c as configService } from "./index-ChufUB_s.js";
 /* empty css                */
 /* empty css               */
-import "./private-check-BevK0UrK.js";
-import { T as TaskCard, a as TaskDetailViewModel } from "./taskDetailViewModel-ByYo1uF6.js";
+import "./private-check-e8s1RHyo.js";
+import { T as TaskCard, a as TaskDetailViewModel } from "./taskDetailViewModel-B1IlJko8.js";
 import { h } from "./h-DjMzbvrD.js";
-import { s as styles, v as v4, D as DateFormat, L as ListViewModel } from "./groupForm.module-6qdc95IP.js";
+import { s as styles$2, v as v4, D as DateFormat, L as ListViewModel } from "./groupForm.module-qEB7G5qW.js";
 const must = (el, name) => {
   if (!el) throw new Error(`Elemento ${name} não encontrado`);
   return el;
@@ -26,7 +26,7 @@ const Elements = (root = document) => ({
     return must(root.querySelector(".main-tasks"), "Lista de tarefas ativas");
   },
   get add_task() {
-    return must(root.querySelector(".add-task"), "Botão de adicionar tarefa");
+    return must(root.querySelector(".fab"), "Botão de adicionar tarefa");
   },
   get main_form() {
     return must(root.querySelector(".main-form"), "Formulário principal");
@@ -53,17 +53,17 @@ const Elements = (root = document) => ({
 const UiElements = Elements();
 class HeaderUi {
   static showDropDown() {
-    UiElements.settings_drop_down.classList.toggle("is-active");
+    UiElements.settings_drop_down.classList.toggle("is-open-dropdown");
   }
 }
 class FormUi {
   static showForm() {
     UiElements.add_task.style.display = "none";
-    UiElements.main_form.style.display = "flex";
+    UiElements.main_form.classList.add("is-open");
   }
   static hideForm() {
     UiElements.add_task.style.display = "flex";
-    UiElements.main_form.style.display = "none";
+    UiElements.main_form.classList.remove("is-open");
   }
 }
 class TaskUi extends Observable {
@@ -122,7 +122,7 @@ class TaskUi extends Observable {
     const taskButton = taskCard.querySelector(".task-checkbox");
     if (!completed) UiElements.main_tasks.appendChild(taskCard);
     else UiElements.completed_tasks.appendChild(taskCard);
-    const favorite = taskCard.querySelector("#favorite");
+    const favorite = taskCard.querySelector(".favorite");
     favorite.addEventListener("click", () => {
       this.detailViewModel.favoritedTask(task);
       this.renderTask(key2, groupId, cached, true);
@@ -137,20 +137,30 @@ class TaskUi extends Observable {
     });
   }
 }
+const dropDown = "_dropDown_1bn80_1";
+const dropDownContent = "_dropDownContent_1bn80_41";
+const styles$1 = {
+  dropDown,
+  dropDownContent
+};
 function SettingsDropDown() {
-  return /* @__PURE__ */ h("div", { className: "settings-drop-down" }, /* @__PURE__ */ h("div", { id: "changeThemeButton", className: "drop-down-content" }, /* @__PURE__ */ h(
+  return /* @__PURE__ */ h("div", { className: `${styles$1.dropDown} settings-drop-down is-close` }, /* @__PURE__ */ h("div", { id: "changeThemeButton", className: styles$1.dropDownContent }, /* @__PURE__ */ h(
     "span",
     {
       className: "fa-solid fa-palette",
       "aria-label": "Botão para alterar o tema da lista atual"
     }
-  ), /* @__PURE__ */ h("strong", null, "Alterar tema")), /* @__PURE__ */ h("div", { id: "sendCopy", className: "drop-down-content" }, /* @__PURE__ */ h("span", { className: "fa-solid fa-copy", "aria-label": "Botão para enviar uma cópia da lista de tarefas atual" }), /* @__PURE__ */ h("strong", null, "Enviar uma cópia")));
+  ), /* @__PURE__ */ h("strong", null, "Alterar tema")), /* @__PURE__ */ h("div", { id: "sendCopy", className: styles$1.dropDownContent }, /* @__PURE__ */ h("span", { className: "fa-solid fa-copy", "aria-label": "Botão para enviar uma cópia da lista de tarefas atual" }), /* @__PURE__ */ h("strong", null, "Enviar uma cópia")));
 }
-function MainHeader({ title, dropDown, href }) {
-  return /* @__PURE__ */ h("header", { className: "main-header" }, /* @__PURE__ */ h("a", { className: "fa-solid fa-arrow-left", href }), /* @__PURE__ */ h("h1", null, title), /* @__PURE__ */ h("div", { id: "settings", className: "fa-solid fa-ellipsis-vertical" }), /* @__PURE__ */ h("div", { className: "main-settings" }), dropDown);
+function MainHeader({ title, dropDown: dropDown2, href }) {
+  return /* @__PURE__ */ h("header", { className: "main-header box-animated" }, /* @__PURE__ */ h("a", { className: "fa-solid fa-arrow-left", href }), /* @__PURE__ */ h("h1", null, title), /* @__PURE__ */ h("a", { id: "settings", className: "fa-solid fa-ellipsis-vertical" }), /* @__PURE__ */ h("div", { className: "main-settings" }, dropDown2));
 }
-function AddTask() {
-  return /* @__PURE__ */ h("section", { className: "add-task" }, /* @__PURE__ */ h("button", null, "+"));
+const fab = "_fab_1wqef_1";
+const styles = {
+  fab
+};
+function Fab() {
+  return /* @__PURE__ */ h("section", { className: `${styles.fab} fab box-button-activate` }, /* @__PURE__ */ h("button", null, "+"));
 }
 function MainForm(handle) {
   return /* @__PURE__ */ h("form", { className: "main-form", onSubmit: handle }, /* @__PURE__ */ h("div", { className: "content-form" }, /* @__PURE__ */ h("button", { className: "circle-button" }), /* @__PURE__ */ h("input", { type: "text", placeholder: "Sua tarefa", id: "task" }), /* @__PURE__ */ h("button", { title: "Botão de adicionar tarefa", id: "send-task", className: "send-button", type: "submit" }, /* @__PURE__ */ h(
@@ -162,16 +172,16 @@ function MainForm(handle) {
   ))));
 }
 function GroupSettingsDropDown() {
-  return /* @__PURE__ */ h("div", { className: "settings-drop-down" }, /* @__PURE__ */ h("div", { id: "changeThemeButton", className: "drop-down-content" }, /* @__PURE__ */ h(
+  return /* @__PURE__ */ h("div", { className: `${styles$1.dropDown} settings-drop-down is-close` }, /* @__PURE__ */ h("div", { id: "changeThemeButton", className: styles$1.dropDownContent }, /* @__PURE__ */ h(
     "span",
     {
       className: "fa-solid fa-palette",
       "aria-label": "Botão para alterar o tema da lista atual"
     }
-  ), /* @__PURE__ */ h("strong", null, "Alterar tema")), /* @__PURE__ */ h("div", { id: "editGroup", className: "drop-down-content" }, /* @__PURE__ */ h("span", { className: "fa-solid fa-pencil", "aria-label": "Botão para editar as informações do grupo atual" }), /* @__PURE__ */ h("strong", null, "Renomear lista")), /* @__PURE__ */ h("div", { id: "deleteGroup", className: "drop-down-content" }, /* @__PURE__ */ h("span", { className: "fa-solid fa-trash", "aria-label": "Botão para excluir a lista atual" }), /* @__PURE__ */ h("strong", null, "Excluir lista")), /* @__PURE__ */ h("div", { id: "sendCopy", className: "drop-down-content" }, /* @__PURE__ */ h("span", { className: "fa-solid fa-copy", "aria-label": "Botão para enviar uma cópia da lista de tarefas atual" }), /* @__PURE__ */ h("strong", null, "Enviar uma cópia")));
+  ), /* @__PURE__ */ h("strong", null, "Alterar tema")), /* @__PURE__ */ h("div", { id: "editGroup", className: styles$1.dropDownContent }, /* @__PURE__ */ h("span", { className: "fa-solid fa-pencil", "aria-label": "Botão para editar as informações do grupo atual" }), /* @__PURE__ */ h("strong", null, "Renomear lista")), /* @__PURE__ */ h("div", { id: "deleteGroup", className: styles$1.dropDownContent }, /* @__PURE__ */ h("span", { className: "fa-solid fa-trash", "aria-label": "Botão para excluir a lista atual" }), /* @__PURE__ */ h("strong", null, "Excluir lista")), /* @__PURE__ */ h("div", { id: "sendCopy", className: styles$1.dropDownContent }, /* @__PURE__ */ h("span", { className: "fa-solid fa-copy", "aria-label": "Botão para enviar uma cópia da lista de tarefas atual" }), /* @__PURE__ */ h("strong", null, "Enviar uma cópia")));
 }
 function listColor() {
-  return /* @__PURE__ */ h("div", { className: styles.selectColor }, [
+  return /* @__PURE__ */ h("div", { className: styles$2.selectColor }, [
     "#778cdd",
     "#f2b7c1",
     "#437d89",
@@ -183,7 +193,7 @@ function listColor() {
     {
       key: color,
       dataset: { color },
-      className: styles.colorContent,
+      className: styles$2.colorContent,
       style: { backgroundColor: color }
     }
   )));
@@ -209,13 +219,13 @@ function listIcons() {
     "fa-moon",
     "fa-sun"
   ];
-  return /* @__PURE__ */ h("div", { className: styles.listIcons, onClick: selectIcon }, icons.map((icon) => /* @__PURE__ */ h("span", { key: icon, className: `fa-solid ${icon}` })));
+  return /* @__PURE__ */ h("div", { className: styles$2.listIcons, onClick: selectIcon }, icons.map((icon) => /* @__PURE__ */ h("span", { key: icon, className: `fa-solid ${icon}` })));
 }
 function GroupForm(method) {
   const isEdit = method && method.method !== "post";
   const title = isEdit ? "Renomear lista" : "Nova lista";
   const message = isEdit ? "SALVAR" : "CRIAR LISTA";
-  return /* @__PURE__ */ h("form", { className: styles.container }, /* @__PURE__ */ h("div", { className: styles.content }, /* @__PURE__ */ h("p", { className: styles.title }, title), /* @__PURE__ */ h("div", { className: styles.input }, /* @__PURE__ */ h("label", { htmlFor: "group", role: "button", tabIndex: "0", onClick: showListIcon }, /* @__PURE__ */ h(
+  return /* @__PURE__ */ h("form", { className: styles$2.container }, /* @__PURE__ */ h("div", { className: styles$2.content }, /* @__PURE__ */ h("p", { className: styles$2.title }, title), /* @__PURE__ */ h("div", { className: styles$2.input }, /* @__PURE__ */ h("label", { htmlFor: "group", role: "button", tabIndex: "0", onClick: showListIcon }, /* @__PURE__ */ h(
     "span",
     {
       className: "fa-regular fa-face-smile icon",
@@ -228,13 +238,13 @@ function GroupForm(method) {
       name: "group",
       id: "group",
       placeholder: "Inserir o título da lista",
-      className: styles.group
+      className: styles$2.group
     }
-  )), /* @__PURE__ */ h("div", { className: styles.personalizationContent }, /* @__PURE__ */ h("div", { className: styles.personalization }, "Cor"), listColor()), listIcons(), /* @__PURE__ */ h("div", { className: styles.actions }, /* @__PURE__ */ h("button", { id: "cancel", tabIndex: 1, type: "button", className: styles.button }, "CANCELAR"), /* @__PURE__ */ h("button", { id: "create", tabIndex: 0, type: "button", className: styles.button }, message))));
+  )), /* @__PURE__ */ h("div", { className: styles$2.personalizationContent }, /* @__PURE__ */ h("div", { className: styles$2.personalization }, "Cor"), listColor()), listIcons(), /* @__PURE__ */ h("div", { className: styles$2.actions }, /* @__PURE__ */ h("button", { id: "cancel", tabIndex: 1, type: "button", className: styles$2.button }, "CANCELAR"), /* @__PURE__ */ h("button", { id: "create", tabIndex: 0, type: "button", className: styles$2.button }, message))));
 }
 function showListIcon() {
-  const personalization = document.querySelector(`.${styles.personalizationContent}`);
-  const list = document.querySelector(`.${styles.listIcons}`);
+  const personalization = document.querySelector(`.${styles$2.personalizationContent}`);
+  const list = document.querySelector(`.${styles$2.listIcons}`);
   if (personalization.style.display === "flex") {
     personalization.style.display = "none";
     list.style.display = "flex";
@@ -244,7 +254,7 @@ function showListIcon() {
   }
 }
 function selectIcon() {
-  const icons = document.querySelector(`.${styles.listIcons}`).querySelectorAll("*");
+  const icons = document.querySelector(`.${styles$2.listIcons}`).querySelectorAll("*");
   icons.forEach((el) => {
     el.addEventListener("click", (e) => {
       icons.forEach((icon) => icon.classList.remove("is-selected"));
@@ -321,7 +331,7 @@ class TaskView {
     });
     window.addEventListener("scroll", () => {
       const header = document.querySelector(".main-header");
-      if (window.scrollY > 45) header?.classList.add("is-shrink");
+      if (window.scrollY > 5) header?.classList.add("is-shrink");
       else header?.classList.remove("is-shrink");
     });
     document.getElementById("changeThemeButton")?.addEventListener("click", () => {
@@ -330,7 +340,7 @@ class TaskView {
   }
   bindViewModelsEvents(key2) {
     this.viewModels.taskCreateVM.subscribe(() => {
-      this.uis.taskUI.renderTask(key2, this.group.id, true);
+      this.uis.taskUI.renderTask(key2, this.group.id, false);
     });
     this.uis.UiElements.send_task.addEventListener("click", async () => {
       this.uis.UiElements.settings.setAttribute("disabled", "false");
@@ -349,8 +359,8 @@ class TaskView {
    */
   async render(key2) {
     this.uis.theme(this.color);
-    let dropDown = /* @__PURE__ */ h(this.components.DropDown, null);
-    const header = /* @__PURE__ */ h(this.components.Header, { title: this.group.name, dropDown, href: this.config.get("routers").home });
+    let dropDown2 = /* @__PURE__ */ h(this.components.DropDown, null);
+    const header = /* @__PURE__ */ h(this.components.Header, { title: this.group.name, dropDown: dropDown2, href: this.config.get("routers").home });
     this.uis.UiElements.main_content.appendChild(header);
     this.uis.UiElements.main_content.appendChild(this.components.Form((e) => {
       e.preventDefault();
@@ -360,6 +370,8 @@ class TaskView {
     this.bindUiEvents();
     this.uis.taskUI.subscribe(() => {
       this.uis.linesRenderer();
+    });
+    document.getElementById("settings").addEventListener("click", () => {
     });
     await this.uis.taskUI.renderTask(key2, this.group.id, true);
     this.uis.taskUI.renderTask(key2, this.group.id, false);
@@ -375,6 +387,7 @@ class ListTaskView extends TaskView {
     document.getElementById("cancel").addEventListener("click", () => {
       form.style.display = "none";
     });
+    console.log(this.group);
     document.getElementById("editGroup").addEventListener("click", () => {
       form.style.display = "flex";
     });
@@ -389,6 +402,7 @@ class ListTaskView extends TaskView {
   bindViewModelsEvents(key2) {
     super.bindViewModelsEvents(key2);
     this.viewModels.groupVM.subscribe(() => {
+      localStorage.removeItem(this.group.id);
       location.reload();
     });
     document.getElementById("create").addEventListener("click", async () => {
@@ -742,12 +756,17 @@ const listViewModel = new ListViewModel(groupTaskRepository);
 const taskDetailViewModel = new TaskDetailViewModel(taskRepository, queryParams);
 const taskCreateViewModel = new CreateTaskViewModel(TaskFactory, taskRepository);
 const groupVM = new GroupViewModel(groupRepository, taskRepository, service);
-const group = await groupVM.find(key);
+let group = JSON.parse(localStorage.getItem(key));
+if (!group) {
+  group = await groupVM.find(key);
+  console.log(group);
+  localStorage.setItem(key, JSON.stringify(group));
+}
 const taskUi = new TaskUi(taskListViewModel, taskDetailViewModel);
 const groupUi = new ImportantTaskUi(listViewModel, taskDetailViewModel);
 const myDayUi = new MyDayTaskUi(listViewModel, taskDetailViewModel);
 function createView(ViewClass, {
-  dropDown,
+  dropDown: dropDown2,
   taskUi: taskUi2,
   components = {},
   ...options
@@ -773,15 +792,15 @@ function createView(ViewClass, {
       },
       components: {
         Header: MainHeader,
-        ButtonAddTask: AddTask,
+        ButtonAddTask: Fab,
         Form: MainForm,
-        DropDown: dropDown,
+        DropDown: dropDown2,
         groupForm: GroupForm,
         ...components
         // permite sobrescrever ou adicionar
       },
       styles: {
-        groupForm: styles
+        groupForm: styles$2
       },
       config: configService
     }
@@ -821,4 +840,7 @@ if (key === "Importante") {
 } else {
   listTaskView.render(key);
 }
-//# sourceMappingURL=list-Cjc2Uzzu.js.map
+window.addEventListener("click", (e) => {
+  console.log(e.target);
+});
+//# sourceMappingURL=list-D3cI-K8B.js.map

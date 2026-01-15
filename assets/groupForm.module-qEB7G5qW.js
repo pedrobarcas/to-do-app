@@ -1,4 +1,4 @@
-import { O as Observable } from "./index-BPGqw3BG.js";
+import { O as Observable } from "./index-ChufUB_s.js";
 class DateFormat {
   static DateFormatBrazilian() {
     const now = /* @__PURE__ */ new Date();
@@ -58,18 +58,18 @@ class ListViewModel extends Observable {
     return objects;
   }
 }
-const container = "_container_pchua_1";
-const button = "_button_pchua_23";
-const group = "_group_pchua_35";
-const personalizationContent = "_personalizationContent_pchua_49";
-const personalization = "_personalization_pchua_49";
-const content = "_content_pchua_77";
-const title = "_title_pchua_103";
-const input = "_input_pchua_113";
-const selectColor = "_selectColor_pchua_125";
-const colorContent = "_colorContent_pchua_135";
-const actions = "_actions_pchua_149";
-const listIcons = "_listIcons_pchua_163";
+const container = "_container_xw1ie_1";
+const button = "_button_xw1ie_25";
+const group = "_group_xw1ie_37";
+const personalizationContent = "_personalizationContent_xw1ie_51";
+const personalization = "_personalization_xw1ie_51";
+const content = "_content_xw1ie_79";
+const title = "_title_xw1ie_105";
+const input = "_input_xw1ie_115";
+const selectColor = "_selectColor_xw1ie_127";
+const colorContent = "_colorContent_xw1ie_137";
+const actions = "_actions_xw1ie_151";
+const listIcons = "_listIcons_xw1ie_165";
 const styles = {
   container,
   button,
@@ -90,4 +90,4 @@ export {
   styles as s,
   v4 as v
 };
-//# sourceMappingURL=groupForm.module-6qdc95IP.js.map
+//# sourceMappingURL=groupForm.module-qEB7G5qW.js.map

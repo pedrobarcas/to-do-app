@@ -42,61 +42,62 @@
     />
 
     <title>Microsoft to-do</title>
-    <script type="module" crossorigin src="/to-do-app/assets/main-B37x793q.js"></script>
-    <link rel="modulepreload" crossorigin href="/to-do-app/assets/index-BPGqw3BG.js">
-    <link rel="modulepreload" crossorigin href="/to-do-app/assets/private-check-BevK0UrK.js">
-    <link rel="modulepreload" crossorigin href="/to-do-app/assets/groupForm.module-6qdc95IP.js">
-    <link rel="modulepreload" crossorigin href="/to-do-app/assets/h-DjMzbvrD.js">
-    <link rel="stylesheet" crossorigin href="/to-do-app/assets/index-AbxTqQfk.css">
-    <link rel="stylesheet" crossorigin href="/to-do-app/assets/groupForm-LEWTBNJQ.css">
-    <link rel="stylesheet" crossorigin href="/to-do-app/assets/main-BtxScgLz.css">
-    <link rel="stylesheet" crossorigin href="/to-do-app/assets/state-tub_QNrp.css">
-    <link rel="stylesheet" crossorigin href="/to-do-app/assets/layout-LRdUfIQi.css">
-  <link rel="manifest" href="/to-do-app/manifest.webmanifest"></head>
+    <script type="module" crossorigin src="./assets/main-BZT9ru-k.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/index-ChufUB_s.js">
+    <link rel="modulepreload" crossorigin href="./assets/private-check-e8s1RHyo.js">
+    <link rel="modulepreload" crossorigin href="./assets/groupForm.module-qEB7G5qW.js">
+    <link rel="modulepreload" crossorigin href="./assets/h-DjMzbvrD.js">
+    <link rel="stylesheet" crossorigin href="./assets/index-BCIBm2R6.css">
+    <link rel="stylesheet" crossorigin href="./assets/groupForm-BqAK_4uV.css">
+    <link rel="stylesheet" crossorigin href="./assets/main-CCASIS8m.css">
+    <link rel="stylesheet" crossorigin href="./assets/state-BR8tH9Dj.css">
+    <link rel="stylesheet" crossorigin href="./assets/layout-CVqYQtZC.css">
+  <link rel="manifest" href="./manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="./registerSW.js"></script></head>
 
   <body>
-    <main class="main-content todo">
-      <div class="groups">
-        <section class="home__main-groups">
-          <a class="content-box" href="list.html?key=Meu%20Dia">
-            <span
-              class="fa-regular fa-sun"
-              aria-label="Imagem ilustrativa do Sol"
-              style="color: #929292"
-            ></span>
-            <p>Meu Dia</p>
-          </a>
+    <div id="app" class="app">
+      <main class="main-content todo">
+        <div class="groups">
+          <section class="home__main-groups">
+            <a class="content-box box-animated" href="list.html?key=Meu%20Dia">
+              <span
+                class="fa-regular fa-sun"
+                aria-label="Imagem ilustrativa do Sol"
+                style="color: #929292"
+              ></span>
+              <p>Meu Dia</p>
+            </a>
 
-          <a class="content-box" href="list.html?key=Importante">
-            <span
-              class="fa-regular fa-star"
-              aria-label="Imagem ilustrativa de uma estrela"
-              style="color: var(--pink)"
-            ></span>
-            <p>Importante</p>
-          </a>
+            <a class="content-box box-animated" href="list.html?key=Importante">
+              <span
+                class="fa-regular fa-star"
+                aria-label="Imagem ilustrativa de uma estrela"
+                style="color: var(--pink)"
+              ></span>
+              <p>Importante</p>
+            </a>
 
-          <a class="content-box" href="list.html?key=Tarefas">
-            <span
-              class="fa-solid fa-home"
-              aria-label="Imagem ilustrativa de uma casa"
-              style="color: var(--main-color)"
-            ></span>
-            <p>Tarefas</p>
-          </a>
-        </section>
+            <a class="content-box box-animated" href="list.html?key=Tarefas">
+              <span
+                class="fa-solid fa-home"
+                aria-label="Imagem ilustrativa de uma casa"
+                style="color: var(--main-color)"
+              ></span>
+              <p>Tarefas</p>
+            </a>
+          </section>
 
-        <hr />
-        <section class="home__group home__main-groups"></section>
-      </div>
-
-      <footer class="todo__footer">
-        <div class="todo__footer--content">
-          <span class="fa-solid fa-plus"></span>
-          <p>Nova lista</p>
+          <hr />
+          <section class="home__group home__main-groups"></section>
         </div>
-      </footer>
-    </main>
-
+
+        <footer class="todo__footer">
+          <div class="todo__footer--content">
+            <span class="fa-solid fa-plus"></span>
+            <p>Nova lista</p>
+          </div>
+        </footer>
+      </main>
+    </div>
   </body>
 </html>

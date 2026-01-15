@@ -1,0 +1,68 @@
+._task_fb9rw_1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 1rem;
+  padding: 1.5rem 1rem;
+
+  min-height: 2.5rem;
+  height: auto;
+
+  background-color: var(--task-background);
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+  color: #7e7e7e;
+
+  list-style: none;
+}
+
+._task_display_fb9rw_39 {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+._task_content_fb9rw_51 {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+  overflow: hidden;
+}
+
+._task_name_fb9rw_67 {
+  color: var(--secondary-color);
+  opacity: 0.7;
+
+  display: block;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  height: max-content;
+
+  max-width: 100%;
+  text-align: left;
+}
+
+._task_fb9rw_1 button {
+  height: 1.5rem;
+  width: 1.5rem;
+  min-width: 1.5rem;
+  border: 2px solid #7e7e7e;
+  border-radius: 50%;
+  background-color: transparent;
+}
+
+._tasks_fb9rw_113 button:hover {
+  background-color: var(--main-color);
+}
+
+#_button-completed-tasks_fb9rw_1 {
+  margin-left: 1rem;
+  background-color: transparent;
+  color: var(--main-color);
+  border: none;
+  font-size: 1rem;
+  margin-bottom: 2.5rem;
+}

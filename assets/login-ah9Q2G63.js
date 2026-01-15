@@ -1,4 +1,4 @@
-import { e as signInWithEmailAndPassword, a as auth, c as configService } from "./index-BPGqw3BG.js";
+import { e as signInWithEmailAndPassword, a as auth, c as configService } from "./index-ChufUB_s.js";
 /* empty css               */
 /* empty css                */
 import { a as authExceptions } from "./exceptions-iRS8a2Aj.js";
@@ -16,4 +16,4 @@ button.addEventListener("click", () => {
     button.style.backgroundColor = "var(--error-message)";
   });
 });
-//# sourceMappingURL=login-Cael6p0s.js.map
+//# sourceMappingURL=login-ah9Q2G63.js.map

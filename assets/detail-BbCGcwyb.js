@@ -1,9 +1,9 @@
-import { O as Observable, p as packingDependecyTask, q as queryParams, s as service, c as configService } from "./index-BPGqw3BG.js";
+import { O as Observable, p as packingDependecyTask, q as queryParams, s as service, c as configService } from "./index-ChufUB_s.js";
 /* empty css               */
-import "./private-check-BevK0UrK.js";
-import { a as TaskDetailViewModel, T as TaskCard } from "./taskDetailViewModel-ByYo1uF6.js";
+import "./private-check-e8s1RHyo.js";
+import { a as TaskDetailViewModel, T as TaskCard } from "./taskDetailViewModel-B1IlJko8.js";
 import { h } from "./h-DjMzbvrD.js";
-import { H as Header } from "./header-D6v_BbzM.js";
+import { H as Header } from "./header-CrVFQ-FA.js";
 class EditViewModel extends Observable {
   constructor(repository, service2) {
     super();
@@ -37,7 +37,7 @@ function Footer(content) {
   return /* @__PURE__ */ h("footer", { className: "main-footer" }, /* @__PURE__ */ h("hr", null), /* @__PURE__ */ h("div", { className: "footer-content" }, /* @__PURE__ */ h("time", { className: "task-date", title: content.content }, content.content), /* @__PURE__ */ h("div", { className: "task-actions" }, /* @__PURE__ */ h("span", { className: "fa-solid fa-trash" }))));
 }
 function Form(props) {
-  return /* @__PURE__ */ h("section", { className: "main-infos-task", id: "main-infos-task" }, /* @__PURE__ */ h("div", { className: "form-input-box" }, /* @__PURE__ */ h("span", { className: "fa-regular fa-sun" }), /* @__PURE__ */ h("button", { className: "remember-me-button form-input", id: "add-my-day" }, "Adicionar ao meu dia")), /* @__PURE__ */ h("div", null, /* @__PURE__ */ h("hr", null), /* @__PURE__ */ h("div", { className: "form-input-box" }, /* @__PURE__ */ h("label", { htmlFor: "date", className: "fa-regular fa-calendar" }), /* @__PURE__ */ h(
+  return /* @__PURE__ */ h("section", { className: "main-infos-task", id: "main-infos-task" }, /* @__PURE__ */ h("div", { className: "form-input-box box-animated" }, /* @__PURE__ */ h("span", { className: "fa-regular fa-sun" }), /* @__PURE__ */ h("button", { className: "remember-me-button form-input", id: "add-my-day" }, "Adicionar ao meu dia")), /* @__PURE__ */ h("div", null, /* @__PURE__ */ h("hr", null), /* @__PURE__ */ h("div", { className: "form-input-box box-animated" }, /* @__PURE__ */ h("label", { htmlFor: "date", className: "fa-regular fa-calendar" }), /* @__PURE__ */ h(
     "input",
     {
       type: "date",
@@ -47,7 +47,7 @@ function Form(props) {
       id: "date",
       value: props.task.date
     }
-  )), /* @__PURE__ */ h("hr", null)), /* @__PURE__ */ h("div", { className: "form-input-box" }, /* @__PURE__ */ h("label", { htmlFor: "archive", className: "fa-solid fa-paperclip" }), /* @__PURE__ */ h("label", { htmlFor: "archive" }, " Adicionar um arquivo"), /* @__PURE__ */ h(
+  )), /* @__PURE__ */ h("hr", null)), /* @__PURE__ */ h("div", { className: "form-input-box box-animated" }, /* @__PURE__ */ h("label", { htmlFor: "archive", className: "fa-solid fa-paperclip" }), /* @__PURE__ */ h("label", { htmlFor: "archive" }, " Adicionar um arquivo"), /* @__PURE__ */ h(
     "input",
     {
       type: "file",
@@ -60,13 +60,14 @@ function Form(props) {
     {
       name: "anotations",
       id: "anotations",
+      className: "box-animated",
       placeholder: "Adicionar anotações",
       value: props.task.description
     }
   ));
 }
 function taskDetail(task, components = {}, href) {
-  return /* @__PURE__ */ h("main", { className: "main-content" }, /* @__PURE__ */ h(components.Header, { title: "Tarefas", href }), /* @__PURE__ */ h("div", { className: "main-task tasks" }, /* @__PURE__ */ h(components.TaskCard, { task, forEdition: true })), /* @__PURE__ */ h(components.Form, { task }), /* @__PURE__ */ h(components.Footer, { content: task.create_date }));
+  return /* @__PURE__ */ h("main", { className: "main-content" }, /* @__PURE__ */ h(components.Header, { title: "Tarefas", href }), /* @__PURE__ */ h("div", { className: " tasks" }, /* @__PURE__ */ h(components.TaskCard, { task, forEdition: true })), /* @__PURE__ */ h(components.Form, { task }), /* @__PURE__ */ h(components.Footer, { content: task.create_date }));
 }
 class TaskDetailView {
   constructor(viewModels, components, config) {
@@ -84,7 +85,7 @@ class TaskDetailView {
       const anotations = document.getElementById("anotations");
       const date = document.getElementById("date");
       const button_completed_task = document.querySelector(".task-checkbox");
-      const button_favorite = document.getElementById("favorite");
+      const button_favorite = document.querySelector(".favorite");
       const button_add_my_day = document.getElementById("add-my-day");
       window.addEventListener("input", async () => {
         await this.taskEditVM.edit(task, {
@@ -107,9 +108,11 @@ class TaskDetailView {
         location.reload();
       });
       button_completed_task.addEventListener("click", async () => {
+        console.log("aaaa");
         await this.taskDetailVM.completedTask(task);
       });
       button_favorite.addEventListener("click", async () => {
+        console.log("aaaa");
         await this.taskDetailVM.favoritedTask(task);
       });
       button_add_my_day.addEventListener("click", async () => {
@@ -138,4 +141,4 @@ const view = new TaskDetailView(
 );
 const container = document.querySelector(".container");
 view.render(container);
-//# sourceMappingURL=detail-DyW8eQKU.js.map
+//# sourceMappingURL=detail-BbCGcwyb.js.map

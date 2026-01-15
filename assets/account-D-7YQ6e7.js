@@ -1,4 +1,4 @@
-import { h as signOut, c as configService, a as auth } from "./index-BPGqw3BG.js";
+import { h as signOut, c as configService, a as auth } from "./index-ChufUB_s.js";
 /* empty css               */
 /* empty css                */
 const email = document.getElementById("email");
@@ -12,4 +12,4 @@ logout.addEventListener("click", () => {
   signOut(auth);
   location.replace(configService.get("routers").login);
 });
-//# sourceMappingURL=account-MsDGcPXE.js.map
+//# sourceMappingURL=account-D-7YQ6e7.js.map

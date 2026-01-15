@@ -1,4 +1,4 @@
-import { f as createUserWithEmailAndPassword, a as auth, g as sendEmailVerification, c as configService } from "./index-BPGqw3BG.js";
+import { f as createUserWithEmailAndPassword, a as auth, g as sendEmailVerification, c as configService } from "./index-ChufUB_s.js";
 /* empty css               */
 /* empty css                */
 import { a as authExceptions } from "./exceptions-iRS8a2Aj.js";
@@ -20,4 +20,4 @@ button.addEventListener("click", async () => {
     button.style.backgroundColor = "var(--error-message)";
   }
 });
-//# sourceMappingURL=register-sNfnoMPA.js.map
+//# sourceMappingURL=register-xwTjeWJK.js.map

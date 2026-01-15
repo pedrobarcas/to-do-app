@@ -12,12 +12,17 @@ html {
   justify-content: space-between;
 }
 
+.todo hr {
+  border-width: 0.5px;
+}
+
 .groups {
-  height: 95dvh;
+  height: auto;
   overflow-y: auto;
 }
 
 .todo__footer {
+  padding: 1rem 0;
   position: relative;
 }
 
@@ -28,14 +33,15 @@ header {
   height: 3rem;
   background-color: var(--task-background);
   box-shadow: 0 1px 4px #0004;
+  transition: all 0.3s ease-in-out;
 }
 
 .todo__footer--content {
-  margin-left: 0.5rem;
   display: flex;
   gap: 1rem;
-  width: 90%;
+  width: 100%;
   font-size: 1.25rem;
+  padding: 0 1rem;
   background-color: var(--main-background);
   color: gray;
 }
@@ -50,7 +56,8 @@ header {
   grid-template-rows: auto auto; /* duas linhas: ícones e título */
   align-items: center;
   justify-content: space-between;
-  padding: 0 1rem;
+  row-gap: 1rem;
+  padding: 1rem 1rem;
   height: auto;
   width: 100%;
   position: fixed;
@@ -59,13 +66,14 @@ header {
   color: var(--main-color);
   z-index: 1000;
   font-family: var(--main-font);
-  margin-top: 0.5rem;
+  overflow: visible;
 }
 
 .main-header a {
   grid-column: 1;
   grid-row: 1;
   font-size: 1.25rem;
+  z-index: 999;
 }
 
 .main-header #settings {
@@ -114,6 +122,7 @@ header {
   background-color: var(--main-background);
   width: 100vw;
   row-gap: 2.5px;
+  margin-top: 7.15rem !important;
   margin-bottom: 30px;
   transition: all 0.3s ease-in-out;
 }
@@ -125,18 +134,21 @@ header {
 .drop-down-task {
   display: none;
   flex-direction: column;
-  row-gap: 5px;
+  margin-top: 0 !important;
 }
 
 .main-form {
-  display: none;
   position: fixed;
   top: 0;
   left: 0;
   height: 100%;
   width: 100vw;
+  opacity: 0;
+  transform: translateY(-10px);
+  max-height: 0;
   background: var(--form-background);
   z-index: 9999;
+  transition: opacity 200ms ease, transform 200ms ease;
 }
 
 .content-form {
@@ -181,18 +193,14 @@ header {
 }
 
 .home__main-groups {
-  margin-top: 4rem;
   display: flex;
   font-size: 1.2rem;
   flex-direction: column;
-  row-gap: 1rem;
-  padding: 0.5rem;
   color: var(--secondary-color);
-  margin-bottom: 1rem;
 }
 
-.home__group {
-  margin-top: 2rem !important;
+.home__main-groups:first-child {
+  border-bottom: 2px solid var(--hr-color);
 }
 
 .home__header {
@@ -213,4 +221,25 @@ header {
   display: flex;
   flex-direction: column;
   row-gap: 4rem;
+}
+
+#button-completed-tasks {
+  margin-left: 1rem;
+  background-color: transparent;
+  color: var(--main-color);
+  border: none;
+  font-size: 1rem;
+  margin-bottom: 2.5rem;
+  display: flex;
+  gap: 1rem;
+}
+
+#settings {
+  position: relative;
+  font-size: 1.5rem;
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
+  z-index: 1000;
+  border-radius: 50%;
 }
