@@ -84,8 +84,8 @@ class TaskDetailView {
       const name = document.getElementById("name");
       const anotations = document.getElementById("anotations");
       const date = document.getElementById("date");
-      const button_completed_task = document.querySelector(".task-checkbox");
-      const button_favorite = document.querySelector(".favorite");
+      document.querySelector(".task-checkbox");
+      document.querySelector(".favorite");
       const button_add_my_day = document.getElementById("add-my-day");
       window.addEventListener("input", async () => {
         await this.taskEditVM.edit(task, {
@@ -103,17 +103,6 @@ class TaskDetailView {
       });
       document.querySelector(".fa-trash").addEventListener("click", async () => {
         await this.taskRemoveVM.remove(task);
-      });
-      this.taskDetailVM.subscribe(() => {
-        location.reload();
-      });
-      button_completed_task.addEventListener("click", async () => {
-        console.log("aaaa");
-        await this.taskDetailVM.completedTask(task);
-      });
-      button_favorite.addEventListener("click", async () => {
-        console.log("aaaa");
-        await this.taskDetailVM.favoritedTask(task);
       });
       button_add_my_day.addEventListener("click", async () => {
         await this.taskDetailVM.addMyDay(task);
@@ -141,4 +130,4 @@ const view = new TaskDetailView(
 );
 const container = document.querySelector(".container");
 view.render(container);
-//# sourceMappingURL=detail-BbCGcwyb.js.map
+//# sourceMappingURL=detail-9GQ7sq4S.js.map

@@ -164,4 +164,4 @@ const homeCreateViewModel = new GroupCreateViewModel(groupFactory, groupReposito
 const homeUi = new HomeUi(homeListViewModel);
 const view = new homeView(homeUi, homeListViewModel, homeCreateViewModel, styles$1, configService);
 view.render(document);
-//# sourceMappingURL=main-BZT9ru-k.js.map
+//# sourceMappingURL=main-By2lDAP3.js.map

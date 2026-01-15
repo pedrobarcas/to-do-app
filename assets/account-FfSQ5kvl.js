@@ -12,4 +12,4 @@ logout.addEventListener("click", () => {
   signOut(auth);
   location.replace(configService.get("routers").login);
 });
-//# sourceMappingURL=account-D-7YQ6e7.js.map
+//# sourceMappingURL=account-FfSQ5kvl.js.map

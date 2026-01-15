@@ -20,4 +20,4 @@ button.addEventListener("click", async () => {
     button.style.backgroundColor = "var(--error-message)";
   }
 });
-//# sourceMappingURL=register-xwTjeWJK.js.map
+//# sourceMappingURL=register-DFLk_9Cr.js.map
