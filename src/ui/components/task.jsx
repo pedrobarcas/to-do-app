@@ -1,4 +1,5 @@
 import { h } from "../../h"
+import styles from "./styles/task.module.css"
 
 /**
  * Componente TaskCard
@@ -30,7 +31,7 @@ export function TaskCard({ task, forEdition = false, key}) {
   let button = <button className="task-checkbox"></button>
 
   let name = (
-    <a className="task-name" href={`./detail.html?task_id=${task.id}&key=${key}`}>
+    <a className={styles.task_name} href={`./detail.html?task_id=${task.id}&key=${key}`}>
       {task.name}
     </a>
   )
@@ -54,13 +55,13 @@ export function TaskCard({ task, forEdition = false, key}) {
   }
 
   const taskCard = (
-    <ol className={`tasks task${task.id} task-card box-animated`}>
-        <div className="task-display">
-        {button}
-        {name}
+    <ol className={`${styles.task} task${task.id} box-animated`}>
+        <div className={styles.task_display}>
+          {button}
+          {name}
         </div>
         
-      <div id="favorite">
+      <div className={`${styles.favorite} favorite`}>
         {favorite}
       </div>
     </ol>

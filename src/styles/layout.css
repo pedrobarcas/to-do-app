@@ -7,7 +7,6 @@ html {
 }
 
 .todo {
-  height: 100dvh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -23,7 +22,7 @@ html {
 }
 
 .todo__footer {
-  padding: 1rem;
+  padding: 1rem 0;
   position: relative;
 }
 
@@ -38,11 +37,11 @@ header {
 }
 
 .todo__footer--content {
-  margin-left: 0.5rem;
   display: flex;
   gap: 1rem;
-  width: 90%;
+  width: 100%;
   font-size: 1.25rem;
+  padding: 0 1rem;
   background-color: var(--main-background);
   color: gray;
 }
@@ -90,11 +89,6 @@ header {
   margin: 0.5rem 0 0;
   font-size: 1.25rem;
   font-weight: bold;
-}
-
-.task-display {
-  display: flex;
-  gap: 1rem;
 }
 
 .main-header h1 {
@@ -199,16 +193,14 @@ header {
 }
 
 .home__main-groups {
-  margin-top: 2.5rem;
   display: flex;
   font-size: 1.2rem;
   flex-direction: column;
-  padding: 0.5rem;
   color: var(--secondary-color);
 }
 
-.home__group {
-  margin-top: 2rem !important;
+.home__main-groups:first-child {
+  border-bottom: 2px solid var(--hr-color);
 }
 
 .home__header {
@@ -232,6 +224,22 @@ header {
 }
 
 #button-completed-tasks {
+  margin-left: 1rem;
+  background-color: transparent;
+  color: var(--main-color);
+  border: none;
+  font-size: 1rem;
+  margin-bottom: 2.5rem;
   display: flex;
   gap: 1rem;
+}
+
+#settings {
+  position: relative;
+  font-size: 1.5rem;
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
+  z-index: 1000;
+  border-radius: 50%;
 }

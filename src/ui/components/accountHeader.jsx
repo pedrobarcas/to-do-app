@@ -11,7 +11,10 @@ export function AccountHeader({user}){
             <div className={`${styles.header_content}`}>
                 <div className={styles.circle_img}>{user.email[0].toUpperCase()}</div>
                 <div className={styles.header_content_text}>
-                    <h1>To do<span className="fa-solid fa-chevron-down"></span></h1>
+                    <h1>
+                        To do
+                        <span className={`fa-solid fa-chevron-down ${styles.chevron}`}></span>
+                    </h1>
                     <h2>{user.email}</h2>
                 </div>
             </div>

@@ -5,10 +5,11 @@
  * @returns {HTMLElement} Seção com botão "+".
  */
 import { h } from "../../h";
+import styles from "./styles/fab.module.css"
 
-export function AddTask() {
+export function Fab() {
   return (
-    <section className="add-task box-button-activate">
+    <section className={`${styles.fab} fab box-button-activate`}>
       <button>+</button>
     </section>
   );

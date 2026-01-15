@@ -27,7 +27,7 @@ import { UiElements } from "./elements";
 import { FormUi, HeaderUi, TaskUi as TaskUiClass } from "./listTaskUI";
 
 import { MainHeader } from "../../components/mainHeader";
-import { AddTask } from "../../components/buttonAddTask";
+import { Fab } from "../../components/fab";
 import { MainForm } from "../../components/mainForm";
 import { SettingsDropDown } from "../../components/settingsDropDown.jsx";
 import { GroupSettingsDropDown } from "../../components/groupSettingsDropDown.jsx";
@@ -105,7 +105,7 @@ function createView(ViewClass, {
       },
       components: {
         Header: MainHeader,
-        ButtonAddTask: AddTask,
+        ButtonAddTask: Fab,
         Form: MainForm,
         DropDown: dropDown,
         groupForm: GroupForm,

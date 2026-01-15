@@ -106,7 +106,7 @@ export class TaskUi extends Observable {
     if (!completed) UiElements.main_tasks.appendChild(taskCard);
     else UiElements.completed_tasks.appendChild(taskCard);
 
-    const favorite = taskCard.querySelector("#favorite")
+    const favorite = taskCard.querySelector(".favorite")
     favorite.addEventListener("click", () => {
       this.detailViewModel.favoritedTask(task);
       this.renderTask(key, groupId, cached, true);

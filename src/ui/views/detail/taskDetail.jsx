@@ -38,7 +38,7 @@ export function taskDetail(task, components = {}, href){
         
 
         <components.Header title="Tarefas" href={href}/>
-        <div className="main-task tasks">
+        <div className=" tasks">
             <components.TaskCard task={task} forEdition={true} />
         </div>
         <components.Form task={task}/>

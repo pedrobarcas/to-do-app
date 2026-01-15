@@ -1,146 +1,7 @@
-.tasks {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  gap: 1rem;
-  padding: 1.5rem 1rem;
-
-  width: 97%;
-  min-height: 2.5rem;
-  height: auto;
-
-  background-color: var(--task-background);
-  border-radius: 5px;
-  box-shadow: 0 1px 4px #0004;
-  transition: all 0.3s ease-in-out;
-
-  list-style: none; /* já que está dentro de <li> */
-}
-
-/* Agrupa o botão + texto */
-.task-content {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  flex: 1; /* 👈 garante que esse conteúdo ocupe o máximo possível */
-  overflow: hidden; /* 👈 impede estourar o card */
-}
-
-/* Nome da tarefa */
-.task-name {
-  color: var(--secondary-color);
-  opacity: 0.7;
-
-  display: block;
-  white-space: normal;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  height: max-content;
-
-  max-width: 100%;
-  text-align: left; /* OU center se preferir */
-}
-
-/* Botão circular */
-.tasks button {
-  height: 1.5rem;
-  width: 1.5rem;
-  min-width: 1.5rem; /* 👈 impede que ele seja esmagado */
-  border: 2px solid #7e7e7e;
-  border-radius: 50%;
-  background-color: transparent;
-}
-
-/* Favorito do lado direito */
-.favorite {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  min-width: 2rem;
-}
-
-.circle-button {
-  height: 1.5rem;
-  width: 1.5rem;
-  border: 2px solid #ccc;
-  border-radius: 50%;
-  background-color: transparent;
-}
-
-.tasks button:hover {
-  background-color: var(--main-color);
-}
-
-#button-completed-tasks {
-  margin-left: 1rem;
-  background-color: transparent;
-  color: var(--main-color);
-  border: none;
-  font-size: 1rem;
-  margin-bottom: 2.5rem;
-}
-
-.main-settings {
-  position: relative;
-  cursor: pointer;
-}
-
-#settings {
-  position: relative;
-  font-size: 1.5rem;
-  width: 10px;
-  height: 10px;
-  cursor: pointer;
-  z-index: 1000;
-  border-radius: 50%;
-}
-
-.settings-drop-down {
-  display: flex;
-  flex-direction: column;
-  margin-right: 1rem;
-  position: absolute;
-  top: 150%;
-  right: 0;
-  row-gap: 1rem;
-  color: var(--secondary-color);
-  width: 12.5rem;
-  height: auto;
-  font-size: 1rem;
-  border-radius: 5px;
-  background-color: var(--settings-background);
-  overflow: visible;
-  z-index: 999;
-  padding: 1rem;
-}
-
-.add-task {
-  position: fixed;
-  bottom: 1rem;
-  right: 3vw;
-  display: flex;
-  z-index: 20;
-}
-
-.add-task button {
-  font-family: "Arial", sans-serif;
-  width: 3.7rem;
-  height: 3.7rem;
-  border: none;
-  border-radius: 50%;
-  font-size: 2.5rem;
-  background-color: var(--main-color);
-  font-family: var(--font-rubik);
-  font-weight: 300;
-  color: var(--setup-background-color);
-}
-
 .content-box {
   padding: 1rem 1rem;
   display: flex;
-  gap: 1.2rem;
+  gap: 1rem;
 }
 
 .content-box span {
@@ -148,7 +9,6 @@
 }
 
 .form-input-box {
-  padding: 0 1rem;
   display: flex;
   gap: 1rem;
   color: #929292;
@@ -158,26 +18,8 @@
   outline: none;
 }
 
-#favorite {
-  color: #7e7e7e;
-}
-
 .form-input {
   border: none;
   background-color: transparent;
   color: #7e7e7e;
-}
-
-.drop-down-content {
-  display: flex;
-  cursor: pointer;
-  gap: 0.5rem;
-  opacity: 100%;
-  width: 100rem;
-  font-family: "Arial";
-  font-weight: lighter;
-}
-
-.drop-down-content:hover {
-  opacity: 80%;
 }

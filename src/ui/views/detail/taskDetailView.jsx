@@ -45,7 +45,7 @@ export class TaskDetailView{
             const date = document.getElementById("date");
     
             const button_completed_task = document.querySelector(".task-checkbox");
-            const button_favorite = document.getElementById("favorite");
+            const button_favorite = document.querySelector(".favorite");
             const button_add_my_day = document.getElementById("add-my-day")
             window.addEventListener("input", async () => {
                 await this.taskEditVM.edit(task, {
@@ -73,10 +73,12 @@ export class TaskDetailView{
             })
             
             button_completed_task.addEventListener('click', async () => {
+                  console.log("aaaa")
                   await this.taskDetailVM.completedTask(task);
             })
 
             button_favorite.addEventListener('click', async () => {
+                  console.log("aaaa")
                   await this.taskDetailVM.favoritedTask(task);
             })
 

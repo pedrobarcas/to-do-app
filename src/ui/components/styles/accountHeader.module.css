@@ -1,13 +1,12 @@
 .header {
   display: flex;
-  padding: 0.5rem 1.25rem;
-  padding-bottom: 1rem;
+  padding: 0.5rem 1rem;
   width: 100%;
   justify-content: space-between;
   background-color: var(--main-background);
   color: white;
   box-sizing: border-box;
-  position: absolute;
+  position: sticky;
   height: 3.5rem;
   z-index: 9999;
 }
@@ -36,9 +35,15 @@
 
 h2 {
   color: gray;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 0;
 }
 
-span {
-  color: gray;
-  font-size: 1rem;
+h1 {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.chevron {
+  font-size: 0.75rem;
 }

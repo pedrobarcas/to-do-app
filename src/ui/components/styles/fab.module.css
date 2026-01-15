@@ -1,0 +1,20 @@
+.fab {
+  position: fixed;
+  bottom: 1rem;
+  right: 3vw;
+  display: flex;
+  z-index: 20;
+}
+
+.fab button {
+  font-family: "Arial", sans-serif;
+  width: 3.7rem;
+  height: 3.7rem;
+  border: none;
+  border-radius: 50%;
+  font-size: 2.5rem;
+  background-color: var(--main-color);
+  font-family: var(--font-rubik);
+  font-weight: 300;
+  color: var(--setup-background-color);
+}

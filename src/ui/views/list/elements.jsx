@@ -33,7 +33,7 @@ const Elements = (root = document) => ({
   get main_completed_tasks() { return must(root.querySelector(".main-drop-down-task"), "Seção principal de tarefas concluídas"); },
   get completed_tasks() { return must(root.querySelector(".drop-down-task"), "Lista de tarefas concluídas"); },
   get main_tasks() { return must(root.querySelector(".main-tasks"), "Lista de tarefas ativas"); },
-  get add_task() { return must(root.querySelector(".add-task"), "Botão de adicionar tarefa"); },
+  get add_task() { return must(root.querySelector(".fab"), "Botão de adicionar tarefa"); },
   get main_form() { return must(root.querySelector(".main-form"), "Formulário principal"); },
   get send_task() { return must(root.getElementById("send-task"), "Botão de envio da tarefa"); },
   get button_completed_tasks() { return must(root.getElementById("button-completed-tasks"), "Botão de exibir tarefas concluídas"); },
